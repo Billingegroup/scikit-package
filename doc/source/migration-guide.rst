@@ -247,7 +247,7 @@ Here, you will create a new Python project using ``scikit-package``. Then you wi
 
 #. Type ``git checkout -b setup-CI`` to create a new branch.
 
-#. Notice there is a ``requirements`` folder containing ``pip.txt``, ``tests.test``, ``docs``, ``conda.txt``. Follow the instructions prvided in ``requirements/README.txt``.
+#. Notice there is a ``requirements`` folder containing ``pip.txt``, ``tests.txt``, ``docs.txt``, ``conda.txt``. Follow the instructions prvided in ``requirements/README.txt``.
 
 #. Type ``git add requirements && git commit -m "skpkg: create requirements folder"``.
 
