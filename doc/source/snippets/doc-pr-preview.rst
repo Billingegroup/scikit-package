@@ -1,3 +1,17 @@
+#. Visit https://app.readthedocs.org/.
+
+#. Click :guilabel:`Log in using GitHub`.
+
+#. If your repository is under a GitHub organization, follow the extra steps below:
+
+    #. Visit https://github.com/settings/applications
+
+    #. Click the :guilabel:`Read the Docs Community` application.
+
+    #. Click the :guilabel:`Request` button for the organization under :guilabel:`Organization Access`,
+
+    #. Done. Now, Read the Docs can import repositories in the GitHub organization.
+
 #. Visit https://app.readthedocs.org/dashboard/import/.
 
 #. Enter the :guilabel:`Repository name`.
@@ -13,7 +27,6 @@
 #. Enable :guilabel:`Build pull requests for this project`.
 
 #. Click :guilabel:`Update`.
-
 
     .. image:: ../img/doc-pr-preview-setup.png
       :alt: doc-pr-preview-setup

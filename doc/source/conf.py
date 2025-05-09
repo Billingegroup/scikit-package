@@ -15,12 +15,11 @@
 
 import sys
 import time
+from importlib.metadata import version
 from pathlib import Path
 
 # Attempt to import the version dynamically from GitHub tag.
 try:
-    from importlib.metadata import version
-
     fullversion = version("scikit_package")
 except Exception:
     fullversion = "No version found"
