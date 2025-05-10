@@ -142,7 +142,7 @@ Release
 How can I change who is authorized to release a package?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In ``.github/workflows/build-wheel-release-upload.yml``, modify ``github_admin_username`` to the desired GitHub username. This username will be able to authorize the release by pushing the tag as instructed in :ref:`release-pypi-github`.
+In ``.github/workflows/build-wheel-release-upload.yml``, modify ``maintainer_github_username`` to the desired GitHub username. This username will be able to authorize the release by pushing the tag as instructed in :ref:`release-pypi-github`.
 
 How is the package version set and retrieved?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -487,9 +487,39 @@ What are ``docs.txt``, ``test.txt``, ``build.txt``, and ``conda.txt`` files unde
 
 :build.txt: list all conda packages required for building the package in GitHub CI, including those specified in the build section of meta.yaml (conda-recipe).
 
+.. _faq-conda-ecosystem:
+
+What is conda-forge?
+^^^^^^^^^^^^^^^^^^^^
+
+``conda-forge`` is a community-driven platform that provides a review process for creating, building, and hosting conda packages online. It also serves as a repository of conda packages, which can be installed using the command:
+
+.. code-block:: bash
+
+  $ conda config --add channels conda-forge
+  $ conda install scikit-package
+
+In the above command, the first command adds the ``conda-forge`` channel to the conda configuration, allowing users to install packages from this channel. The second command installs the ``scikit-package`` package from the ``conda-forge`` channel. https://anaconda.org/conda-forge/scikit-package
+
+What are Miniconda, Anaconda, and Miniforge?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+While conda is an environment and package manager, it is itself a piece of software that must be installed locally. Several installers are available for this purpose:
+
+- **Miniconda**: A minimal installer that includes only the necessary components to manage packages and environments. In ``scikit-package`` reusable GitHub workflows, we set up ``Miniconda`` as the default installer.
+
+- **Anaconda**: A much larger installer that not only installs conda but also provides a pre-configured environment with Python and commonly used packages such as ``numpy``, ``pandas``, and ``Jupyter Notebook``. This comprehensive solution is often used for educational purposes, as students do not need to manually install additional packages.
+
+- **Miniforge**: Another installer that includes conda, ``mamba``, and Python, with the ``conda-forge`` channel pre-configured. See the next section for more information on what ``mamba`` is.
+
+Why do some people use mamba instead of conda?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Recall that conda is a dependency manager that uses sophisticated algorithms to identify compatible software versions. As the number of dependencies increases, the solving process can become computationally expensive.
+
+To address this, ``mamba`` was developed. ``mamba`` is a drop-in replacement for conda, using the same commands and configuration options, but featuring a faster dependency-solving algorithm written in C++. ``mamba`` is also compatible with existing conda environments (e.g., ``environment.yml``) and continues to rely on the conda ecosystem for package distribution, using channels like ``conda-forge`` or ``defaults``.
 
 .. _faq-pip-conda-both-provided:
-
 
 Why are both ``pip.txt`` and ``conda.txt`` provided?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
