@@ -1,5 +1,3 @@
-:tocdepth: -1
-
 .. index:: frequently-asked-questions
 
 .. _frequently-asked-questions:
@@ -74,7 +72,7 @@ To solve this problem, run ``git add <file>`` on the files modified by ``pre-com
 How do I ignore words/lines/files in automatic spelling checks in pre-commit?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. include:: snippets/codespell-ignore.rst
+.. include:: ../snippets/codespell-ignore.rst
 
 Project setup
 -------------
@@ -144,7 +142,7 @@ Release
 How can I change who is authorized to release a package?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In ``.github/workflows/build-wheel-release-upload.yml``, modify ``github_admin_username`` to the desired GitHub username. This username will be able to authorize the release by pushing the tag as instructed :ref:`here <release-instructions-project-maintainer>`.
+In ``.github/workflows/build-wheel-release-upload.yml``, modify ``github_admin_username`` to the desired GitHub username. This username will be able to authorize the release by pushing the tag as instructed in :ref:`release-pypi-github`.
 
 How is the package version set and retrieved?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -185,14 +183,13 @@ We decided to include test files in the PyPI source distribution to facilitate u
 
 The conda-forge CI uses the source code distributed via PyPI to build a Conda package. After building the package, we want to run pytest to ensure all unit tests pass before release. Therefore, test files must be included in the source code. In contrast, no documentation is distributed with the package, as it is already accessible from the GitHub repository and does not serve a practical purpose in the distribution package itself.
 
-
 Documentation
 -------------
 
-How can I preview ``Sphinx`` documentation in real-time?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How can I preview the documentation in real-time?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. include:: snippets/doc-local-build.rst
+.. include:: ../snippets/doc-local-build.rst
 
 .. _faq-doc-api-standard:
 
@@ -337,6 +334,13 @@ If you are using a namespace import, ``sphinx-apidoc`` will not work. We have de
 
     Once you enter the project directory, run ``api`` in the terminal to generate the API documentation automatically so that you don't have to type the full command every time!
 
+.. _faq-doc-pr-preview:
+
+How can I preview the documentation in each pull request?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: ../snippets/doc-pr-preview.rst
+
 How do I re-deploy online documentation without another release?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -344,18 +348,37 @@ Visit the following URL of your package: ``https://github.com/<org-name>/<packag
 
 Click ``Run workflow`` and select the ``main`` branch. Your online documentation will be updated with the latest changes without a new release.
 
+.. _faq-doc-favicon-logo:
+
+How do I add a favicon and logo to the documentation?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In ``doc/source/conf.py``, add the following lines:
+
+.. code-block:: python
+
+  html_theme_options = {
+    "navigation_with_keys": True,
+    "logo_only": True,
+  }
+
+  html_favicon = "<path-to-favicon>"
+  html_logo = "<path-to-logo>"
+
+The clickable logo will be displayed above the menu bar on the left side of the page.
+
 conda-forge
 -----------
 
 How do I add a new admin to the conda-forge feedstock?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please refer to the admin section in the conda-forge release guide :ref:`here <conda-forge-add-admin>`.
+Please refer to the :ref:`Add a new admin <conda-forge-add-admin>` section.
 
 How do I do pre-release for conda-forge?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please read our pre-release section in the conda-forge release guide :ref:`here <conda-forge-pre-release>`.
+Please refer to the :ref:`How do I do pre-release? <conda-forge-pre-release>` section.
 
 GitHub Actions
 --------------
@@ -415,7 +438,7 @@ In Level 5, what are the workflows running in each pull request?
 
 #. The third workflow uses the ``Codecov`` app, which adds a comment to the PR summarizing the changes in code coverage as part of the ``.github/workflows/tests-on-pr.yml`` workflow. This workflow fails if no tests are provided for the new code or if the test coverage percentage decreases below the acceptable threshold. The threshold can be adjusted in the ``.codecov.yml`` file located in the project root directory.
 
-#. The fourth workflow checks for a news file in the PR using ``.github/workflows/check-news-item.yml``. If no news item is included for the proposed changes, this workflow fails and leaves a comment prompting the contributor to submit a new PR with the appropriate news file. Please refer to the best practices section on news items :ref:`here <news-item-practice>`.
+#. The fourth workflow checks for a news file in the PR using ``.github/workflows/check-news-item.yml``. If no news item is included for the proposed changes, this workflow fails and leaves a comment prompting the contributor to submit a new PR with the appropriate news file. Please refer to the best practices section on :ref:`news items <news-item-practice>`.
 
 In Level 5, I see that another workflow is running once a PR is merged to ``main``. What is it?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -452,7 +475,7 @@ Dependency management
 .. _faq-dependency-files:
 
 What are ``docs.txt``, ``test.txt``, ``build.txt``, and ``conda.txt`` files under ``\requirements`` in Level 4 and Level 5?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 :pip.txt: list all PyPI packages required to install the package via `pip install <package-name>`.
 

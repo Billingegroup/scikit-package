@@ -142,7 +142,7 @@ The Billinge Group's ``scikit-package`` has been modified from the NSLS-II scien
    :hidden:
    :caption: PROGRAMMING GUIDES
 
-   billinge-group-standards
+   programming-guides/billinge-group-standards
 
 .. toctree::
    :maxdepth: 2
@@ -156,7 +156,7 @@ The Billinge Group's ``scikit-package`` has been modified from the NSLS-II scien
    :hidden:
    :caption: SUPPORT
 
-   frequently-asked-questions
+   support/frequently-asked-questions
 
 .. toctree::
    :maxdepth: 2

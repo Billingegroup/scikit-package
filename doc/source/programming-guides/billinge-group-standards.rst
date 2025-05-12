@@ -59,9 +59,9 @@ Pull request practices
 
 #. A PR should close an issue on GitHub. If there is no issue, make one. If the issue is big, consider breaking it down into smaller issues.
 
-#. Review your own PR. Start as a draft PR, visit “Files changed”, add comments, and then request a review. In-line comments are needed if the changes are not obvious for the reviewer. See https://github.com/Billingegroup/scikit-package/pull/310.
+#. Review your own PR. Start as a draft PR, click :guilabel:`Files changed`, add comments, and then request a review. In-line comments are needed if the changes are not obvious for the reviewer. See https://github.com/Billingegroup/scikit-package/pull/310.
 
-#. If another commit was pushed after “ready for review”, write another comment “ready for review after fixing ____” so that the reviewer is directed to the PR, not the file changes by the new commit.
+#. If *another commit* was pushed after “@username ready for review”, write another comment *“@username ready for review after fixing ____”* so that the reviewer is directed to the PR, not the file changes by the new commit.
 
 #. PR from a new branch if it contains a meaningless commit history.
 
@@ -80,7 +80,7 @@ Pull request practices
 .. _news-item-practice:
 
 
-.. include:: snippets/news-file-format.rst
+.. include:: ../snippets/news-file-format.rst
 
 Unit tests
 ----------

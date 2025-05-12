@@ -139,8 +139,7 @@ Build documentation locally
 
 ``/doc`` is the the Sphinx documentation folder. The documentation will be built locally first and then automatically built and hosted on GitHub Pages when a new release is created.
 
-.. include:: snippets/doc-local-build.rst
-
+.. include:: ../snippets/doc-local-build.rst
 
 Upload your code to GitHub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -275,6 +274,11 @@ Congratulations! You are done with migrating your package from Level 4 to Level 
     .. important::
 
         For writing great news items, Python docstrings, tests, and commit messages, check the Billinge research group's guidelines :ref:`here<billinge-group-standards>`.
+
+(Optional) Preview documentation in each pull request
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Please refer to :ref:`faq-doc-pr-preview`
 
 (Optional) Build API reference documentation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
