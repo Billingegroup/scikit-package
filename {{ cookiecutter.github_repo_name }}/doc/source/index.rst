@@ -6,7 +6,7 @@
 
 ``{{ cookiecutter.project_name }}`` - {{ cookiecutter.project_short_description }}
 
-| Software version |release|.
+| Software version |release|
 | Last updated |today|.
 
 ===============
@@ -35,7 +35,7 @@ file included with the distribution.
 Acknowledgements
 ================
 
-``{{ cookiecutter.github_repo_name }}`` is built and maintained with `scikit-package <https://billingegroup.github.io/scikit-package/>`_.
+``{{ cookiecutter.github_repo_name }}`` is built and maintained with `scikit-package <https://scikit-package.github.io/scikit-package/>`_.
 
 =================
 Table of contents

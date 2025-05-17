@@ -5,7 +5,7 @@ We want to write good ``CHANGELOG.rst`` for each release version. These news ite
 
 We can streamline the process of writing ``CHANGELOG.rst`` for each release by compiling the news items from the ``news`` directory.
 
-Here is an example ``CHANGELOG.rst`` https://github.com/Billingegroup/scikit-package/blob/main/CHANGELOG.rst
+Here is an example ``CHANGELOG.rst`` https://github.com/scikit-package/scikit-package/blob/main/CHANGELOG.rst
 
 How do I write good a news item?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

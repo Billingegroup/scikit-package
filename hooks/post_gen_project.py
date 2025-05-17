@@ -132,7 +132,7 @@ def wrapper_setup():
 
 def update_workflow():
     """Generate GitHub workflow .yml files with user input."""
-    CENTRAL_REPO_ORG = "Billingegroup"
+    CENTRAL_REPO_ORG = "scikit-package"
     CENTRAL_REPO_NAME = "release-scripts"
     CENTRAL_WORKFLOW_DIR = ".github/workflows/templates"
     LOCAL_WORKFLOW_DIR = ROOT / ".github" / "workflows"
@@ -144,7 +144,7 @@ def update_workflow():
                       "VERSION": "v0"}
 
     def get_central_workflows():
-        """Get GitHub workflows from Billingegroup/release-scripts."""
+        """Get GitHub workflows from scikit-package/release-scripts."""
         base_url = f"https://api.github.com/repos/{CENTRAL_REPO_ORG}/{CENTRAL_REPO_NAME}/contents/{CENTRAL_WORKFLOW_DIR}"
         response = requests.get(base_url, timeout=5)
         if response.status_code != 200:
@@ -172,7 +172,7 @@ def update_workflow():
 
     def update_local_workflows(central_workflows):
         """Replace existing GitHub workflow files with latest from
-        Billingegroup/release-scripts."""
+        scikit-package/release-scripts."""
         local_workflows = set(f.name for f in LOCAL_WORKFLOW_DIR.glob("*.yml"))
         central_workflow_names = set(central_workflows.keys())
 
@@ -206,16 +206,13 @@ def main():
     Congratulations! A new Python project is created!
     Enter the directory with `cd {{cookiecutter.project_name}}`.
 
-    Are you starting a new project? Build your project and docs next:
-    https://billingegroup.github.io/scikit-package/new-project-guide.html#build-project
-
-    Are you migrating an existing project? Move files to the new directory next:
-    https://billingegroup.github.io/scikit-package/migration-guide.html#move-files
+    Are you starting a new project or Are you migrating an existing project?
+    Visit https://scikit-package.github.io/scikit-package/overview.html for more!
 
     If you have any additional questions, please read our FAQ section or leave issues below:
 
-    FAQ: https://billingegroup.github.io/scikit-package/frequently-asked-questions
-    GitHub issues: https://github.com/Billingegroup/scikit-package/issues
+    FAQ: https://scikit-package.github.io/scikit-package/frequently-asked-questions
+    GitHub issues: https://github.com/scikit-package/scikit-package/issues
     """)
 
     # Dynamically check if the user has selected a non-default Python version
@@ -227,7 +224,7 @@ def main():
         print(
             "ACTION REQUIRED (non-default Python versions): You've entered Python versions outside of the default according to "
             "https://scientific-python.org/specs/spec-0000/. Please consider specifying Python versions following the instructions in the link below:\n"
-            "\nFAQ: https://Billingegroup.github.io/cookiecutter/frequently-asked-questions.html#github-actions\n"
+            "\nFAQ: https://scikit-package.github.io/cookiecutter/frequently-asked-questions.html#github-actions\n"
         )
 
 if __name__ == '__main__':

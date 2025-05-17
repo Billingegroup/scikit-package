@@ -127,7 +127,7 @@ In Level 5, why do we adopt ``README.rst`` instead of ``README.md``?
 We adopt ``README.rst`` at Level 5 because reStructuredText (``.rst``) provides a more configurable format and control. One key advantage of ``.rst`` is its native support for advanced formatting, such as precise control over image size and layout: ::
 
   .. |Icon| image:: img/logos/scikit-package-logo-text.png
-      :target: https://Billingegroup.github.io/scikit-package
+      :target: https://scikit-package.github.io/scikit-package
       :height: 150px
 
 Achieving the same result in Markdown often requires raw HTML, which is less readable and may render inconsistently across platforms.
@@ -142,7 +142,7 @@ Release
 How can I change who is authorized to release a package?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In ``.github/workflows/build-wheel-release-upload.yml``, modify ``github_admin_username`` to the desired GitHub username. This username will be able to authorize the release by pushing the tag as instructed in :ref:`release-pypi-github`.
+In ``.github/workflows/build-wheel-release-upload.yml``, modify ``maintainer_github_username`` to the desired GitHub username. This username will be able to authorize the release by pushing the tag as instructed in :ref:`release-pypi-github`.
 
 How is the package version set and retrieved?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -264,7 +264,7 @@ How do I build API .rst files for a Python package with a namespace import?
 
 If you are using a namespace import, ``sphinx-apidoc`` will not work. We have develoepd our own script called ``auto_api.py`` to generate the API documentation.
 
-#. Run ``git clone https://github.com/Billingegroup/release-scripts.git`` into a folder outside of the project directory. Here is the folder structure:
+#. Run ``git clone https://github.com/scikit-package/release-scripts.git`` into a folder outside of the project directory. Here is the folder structure:
 
     .. code-block:: text
 
@@ -396,7 +396,7 @@ Python |PYTHON_MAX_VERSION| is the current default Python version in ``.github/w
 
    jobs:
     tests-on-pr:
-      uses: Billingegroup/release-scripts/.github/workflows/_tests-on-pr.yml@v0
+      uses: scikit-package/release-scripts/.github/workflows/_tests-on-pr.yml@v0
     with:
       project: package-name
       c_extension: false
@@ -411,7 +411,7 @@ Python |PYTHON_MAX_VERSION| is the current default Python version in ``.github/w
 
    jobs:
     docs:
-      uses: Billingegroup/release-scripts/.github/workflows/_tests-on-pr.yml@v0
+      uses: scikit-package/release-scripts/.github/workflows/_tests-on-pr.yml@v0
     with:
       project: package-name
       c_extension: false
@@ -424,7 +424,7 @@ Python |PYTHON_MAX_VERSION| is the current default Python version in ``.github/w
 
    jobs:
     matrix-coverage:
-      uses: Billingegroup/release-scripts/.github/workflows/_matrix-and-codecov-on-merge-to-main.yml@v0
+      uses: scikit-package/release-scripts/.github/workflows/_matrix-and-codecov-on-merge-to-main.yml@v0
     with:
       ...
       python_versions: "3.11, 3.12"
@@ -445,8 +445,14 @@ In Level 5, I see that another workflow is running once a PR is merged to ``main
 
 The workflow ``.github/workflows/matrix-and-codecov-on-merge-to-main.yml`` is triggered. The goal is to ensure the latest code is tested not only on Linux but also across multiple operating systems and Python versions. This workflow runs tests on macOS (both Apple Silicon and Intel chips), Linux, and Windows and against three different Python versions, including the latest configured version. To modify the Python versions used in the workflows, refer to :ref:`github-actions-python-versions`.
 
-.. note:: These workflow files call scripts located at https://github.com/Billingegroup/release-scripts, which are centrally managed by the ``scikit-package`` development team. This centralized approach ensures that individual packages do not need to be updated separately when adding support for new Python versions or operating systems.
+.. note:: These workflow files call scripts located at https://github.com/scikit-package/release-scripts, which are centrally managed by the ``scikit-package`` development team. This centralized approach ensures that individual packages do not need to be updated separately when adding support for new Python versions or operating systems.
 
+I am encountering a 'build' is requesting 'pull-requests: write' error. How do I fix it?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: ../snippets/github-ci-permission.rst
+
+It is an essential step to set up the news CI. For more, please read :ref:`github-news-ci-permission` section in the Level 5 tutorial.
 
 What is the difference between ``pull_request`` and ``pull_request_target``?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -487,14 +493,50 @@ What are ``docs.txt``, ``test.txt``, ``build.txt``, and ``conda.txt`` files unde
 
 :build.txt: list all conda packages required for building the package in GitHub CI, including those specified in the build section of meta.yaml (conda-recipe).
 
+.. _faq-conda-ecosystem:
+
+What is conda-forge?
+^^^^^^^^^^^^^^^^^^^^
+
+conda-forge is an open-source-software community-maintained channel on the conda/Anaconda package server. The structure of the Anaconda server is that packages are hosted and can be installed from user-maintained "channels", and the original vision was that different developers and organizations would put their own code on their own channels.
+
+conda-forge is a community led effort to have a **single channel shared by everyone**. This also allows the community to develop package maintenance tools to help with the ecosystem such as auto tick bots that check when the latest version of a package is not present on conda-forge and alert the maintainers, and GitHub workflows to pre-build wheel files for all platforms and python versions. It also tries to resolve a dependency graph for a package to install the most recent version of every package that satisfies the requirements of all the sub-packages.
+
+**We recommend making use of conda-forge and helping the community** by, where possible, installing from conda-forge and also making sure your package is available on conda-forge so others may install it from conda-forge.
+
+Here is how you can add the conda-forge channel to your conda configuration and install the ``scikit-package`` package from it:
+
+.. code-block:: bash
+
+  $ conda config --add channels conda-forge
+  $ conda install scikit-package
+
+The first command adds the ``conda-forge`` channel to the conda configuration, allowing users to install packages from this channel. The second command installs the ``scikit-package`` package from the ``conda-forge`` channel. https://anaconda.org/conda-forge/scikit-package
+
+What are Miniconda, Anaconda, and Miniforge?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+While conda is an environment and package manager, it is itself a piece of software that must be installed locally. Several installers are available for this purpose:
+
+- **Miniconda**: A minimal installer that includes only the necessary components to manage packages and environments. In ``scikit-package`` reusable GitHub workflows, we set up ``Miniconda`` as the default installer.
+
+- **Anaconda**: A much larger installer that not only installs conda but also provides a pre-configured environment with Python and commonly used packages such as ``numpy``, ``pandas``, and ``Jupyter Notebook``. This comprehensive solution is often used for educational purposes, as students do not need to manually install additional packages.
+
+- **Miniforge**: Another installer that includes conda, ``mamba``, and Python, with the ``conda-forge`` channel pre-configured. See the next section for more information on what ``mamba`` is.
+
+Why do some people use mamba instead of conda?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Recall that conda is a dependency manager that uses sophisticated algorithms to identify compatible software versions. As the number of dependencies increases, the solving process can become computationally expensive.
+
+To address this, ``mamba`` was developed. ``mamba`` uses the same commands and configuration options as conda but features a faster dependency-solving algorithm written in C++. ``mamba`` is also compatible with existing conda environments (e.g., ``environment.yml``) and continues to rely on the conda ecosystem for package distribution, using channels like ``conda-forge``. When you install ``mamba`` using ``Miniforge``, the conda-forge channel is set as the default (and only) channel.
 
 .. _faq-pip-conda-both-provided:
-
 
 Why are both ``pip.txt`` and ``conda.txt`` provided?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Our preferred choice for installing the scikit-packaged package is as a Conda package, as outlined in the template ``README.rst`` file. With Conda, the end user can install all associated dependencies by running ``conda create --name new_env <package-name>``. Additionally, the environment is tested via conda-forge CI before the Conda package is released, which helps ensure the package's compatibility with its dependencies. Hence, we list conda package dependencies in ``conda.txt``.
+Our preferred choice for installing the scikit-packaged package is as a Conda package, as outlined in the template ``README.rst`` file. With Conda, the end user can install all associated dependencies by running ``conda create --name new-env <package-name>``. Additionally, the environment is tested via conda-forge CI before the conda package is released, which helps ensure the package's compatibility with its dependencies. Hence, we list conda package dependencies in ``conda.txt``.
 
 However, we also want to allow users to install the package via ``pip``. To support this, we provide a separate file for pip dependencies, ``pip.txt``. In most cases, the dependencies listed in ``conda.txt`` and ``pip.txt`` will be identical. However, there can be exceptions. For example, ``matplotlib-base`` is preferred for Conda installations, while ``matplotlib`` is used for pip installations.
 
@@ -521,14 +563,14 @@ Then, you will download the forked repository in your GitHub account to your loc
 
 In the cloned repository on your local machine, you will make edits. You want to first add a description for the changes by "committing" with a message describing the changes. Then you will upload these changes to the ``forked`` repository in your account. This process of updating code from the local computer to the repository hosted by GitHub is called ``pushing``.
 
-From the forked repository, you then want to upload changes to the repository under ``github.com/Billingegroup/scikit-package``, for example. This process is done through a process called ``pull request``. The Project Owner reviews this pull request and merges it into the Billinge group's repository. If you are the contributor as well as the Project Owner, you would be the one who reviews your own code and merges your changes.
+From the forked repository, you then want to upload changes to the repository under ``github.com/scikit-package/scikit-package``, for example. This process is done through a process called ``pull request``. The Project Owner reviews this pull request and merges it into the Billinge group's repository. If you are the contributor as well as the Project Owner, you would be the one who reviews your own code and merges your changes.
 
 I have a general understanding of fork, clone, commit, push, and pull request. How do I set up my repository for packaging?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Please be familiar with the terminology such as "fork", "clone", "push", and "pull request" :ref:`above <github-workflow-overview>`.
 
-You may fork the repository using the "Fork" button on the top right corner of the repository page. This will copy the repository to your GitHub account. e.g., ``github.com/Billingegroup/scikit-package`` to ``github.com/sbillinge/scikit-package``.
+You may fork the repository using the "Fork" button on the top right corner of the repository page. This will copy the repository to your GitHub account. e.g., ``github.com/scikit-package/scikit-package`` to ``github.com/sbillinge/scikit-package``.
 
 Then download the forked repository under your account to the local machine by cloning:
 
@@ -544,7 +586,7 @@ Now, you also want to link with the repository of the organization by adding the
 
 .. note::
 
-   What is ``upstream``? The repository that you forked from, e.g. ``Billingegroup/scikit-package`` is referred to as the ``upstream`` repository.
+   What is ``upstream``? The repository that you forked from, e.g. ``scikit-package/scikit-package`` is referred to as the ``upstream`` repository.
 
 Verify that you have the ``upstream`` URL set up as the organization.
 
@@ -556,18 +598,18 @@ Notice that you also have ``origin`` with an URL linking to your forked reposito
 
 .. note::
 
-  What is ``remote``? The term ``remote`` is the opposite of ``local``. In other words, ``remote`` refers to the repository that is hosted by GitHub. e.g., ``github.com/Billingegroup/scikit-package`` or ``github.com/sbillinge``.
+  What is ``remote``? The term ``remote`` is the opposite of ``local``. In other words, ``remote`` refers to the repository that is hosted by GitHub. e.g., ``github.com/scikit-package/scikit-package`` or ``github.com/sbillinge``.
 
 Do you have a general summary of each term used in the GitHub workflow?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:fork: The process of copying a repository from an organization to your GitHub account. e.g., ``github.com/Billingegroup/scikit-package`` to ``github.com/sbillinge/scikit-package``.
+:fork: The process of copying a repository from an organization to your GitHub account. e.g., ``github.com/scikit-package/scikit-package`` to ``github.com/sbillinge/scikit-package``.
 
-:upstream: The repository of the original source code. e.g., ``github.com/Billingegroup/scikit-package``.
+:upstream: The repository of the original source code. e.g., ``github.com/scikit-package/scikit-package``.
 
 :origin: The forked repository under your account. e.g., ``github.com/sbillinge/scikit-package``.
 
-:remote: The repository that is hosted by GitHub. e.g., ``github.com/Billingegroup/scikit-package`` or ``github.com/sbillinge/scikit-package``.
+:remote: The repository that is hosted by GitHub. e.g., ``github.com/scikit-package/scikit-package`` or ``github.com/sbillinge/scikit-package``.
 
 :branch: The branch serves as a folder that contains the files of the repository. The ``main`` branch is the branch that is used for the final version of the code. Many branches can be created for different features or bug fixes that are later merged into the ``main`` branch.
 
@@ -662,7 +704,7 @@ Which files should be modified when there is a new Python version?
 
 When updating Python version support, please modify the following files accordingly:
 
-In https://github.com/Billingegroup/scikit-package:
+In https://github.com/scikit-package/scikit-package:
 
 .. list-table::
    :header-rows: 1
@@ -672,7 +714,7 @@ In https://github.com/Billingegroup/scikit-package:
    * - ``doc/source/conf.py``
      - ``PYTHON_DEFAULT_MAX_VERSION`` and ``PYTHON_DEFAULT_MIN_VERSION``
 
-In https://github.com/Billingegroup/release-scripts:
+In https://github.com/scikit-package/release-scripts:
 
 .. list-table::
    :header-rows: 1

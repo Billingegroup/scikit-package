@@ -2,10 +2,10 @@
 ===============
 
 .. |title| replace:: scikit-package
-.. _title: https://Billingegroup.github.io/scikit-package
+.. _title: https://scikit-package.github.io/scikit-package
 
 .. |Icon| image:: img/logos/scikit-package-logo-text.png
-        :target: https://Billingegroup.github.io/scikit-package
+        :target: https://scikit-package.github.io/scikit-package
         :height: 150px
 
 |PyPi| |Forge| |PythonVersion| |PR|
@@ -15,11 +15,11 @@
 .. |Black| image:: https://img.shields.io/badge/code_style-black-black
         :target: https://github.com/psf/black
 
-.. |CI| image:: https://github.com/Billingegroup/scikit-package/actions/workflows/matrix-and-codecov-on-merge-to-main.yml/badge.svg
-        :target: https://github.com/Billingegroup/scikit-package/actions/workflows/matrix-and-codecov-on-merge-to-main.yml
+.. |CI| image:: https://github.com/scikit-package/scikit-package/actions/workflows/matrix-and-codecov-on-merge-to-main.yml/badge.svg
+        :target: https://github.com/scikit-package/scikit-package/actions/workflows/matrix-and-codecov-on-merge-to-main.yml
 
-.. |Codecov| image:: https://codecov.io/gh/Billingegroup/scikit-package/branch/main/graph/badge.svg
-        :target: https://codecov.io/gh/Billingegroup/scikit-package
+.. |Codecov| image:: https://codecov.io/gh/scikit-package/scikit-package/branch/main/graph/badge.svg
+        :target: https://codecov.io/gh/scikit-package/scikit-package
 
 .. |Forge| image:: https://img.shields.io/conda/vn/conda-forge/scikit-package
         :target: https://anaconda.org/conda-forge/scikit-package
@@ -33,7 +33,7 @@
         :target: https://pypi.org/project/scikit-package/
 
 .. |Tracking| image:: https://img.shields.io/badge/issue_tracking-github-blue
-        :target: https://github.com/Billingegroup/scikit-package/issues
+        :target: https://github.com/scikit-package/scikit-package/issues
 
 ``scikit-package`` offers tools and practices for the scientific community to make better and more reusable Scientific Python packages and applications:
 
@@ -69,16 +69,16 @@ Here is how you can use ``scikit-package`` to create a lightweight Python packag
 Getting started
 ---------------
 
-Are you interested in using ``scikit-package``? Begin with the ``Getting Started`` page in our online documentation at https://Billingegroup.github.io/scikit-package!
+Are you interested in using ``scikit-package``? Begin with the ``Getting Started`` page in our online documentation at https://scikit-package.github.io/scikit-package!
 
 How to cite ``scikit-package``
 ------------------------------
 
 If you use ``scikit-package`` to standardize your Python software, we would like you to cite scikit-package as follows:
 
-   scikit-package, https://github.com/Billingegroup/scikit-package
+   scikit-package, https://github.com/scikit-package/scikit-package
 
 Acknowledgements
 ----------------
 
-This GitHub repository is built and maintained with the help of `scikit-package <https://billingegroup.github.io/scikit-package/>`_ as well.
+This GitHub repository is built and maintained with the help of `scikit-package <https://scikit-package.github.io/scikit-package/>`_ as well.

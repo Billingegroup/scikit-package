@@ -33,8 +33,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Billingegroup/scikit-package/"
-Issues = "https://github.com/Billingegroup/scikit-package/issues/"
+Homepage = "https://github.com/scikit-package/scikit-package/"
+Issues = "https://github.com/scikit-package/scikit-package/issues/"
 
 [tool.setuptools-git-versioning]
 enabled = true

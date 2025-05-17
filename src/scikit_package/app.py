@@ -1,7 +1,7 @@
 import subprocess
 from argparse import ArgumentParser
 
-SKPKG_GITHUB_URL = "https://github.com/Billingegroup/scikit-package"
+SKPKG_GITHUB_URL = "https://github.com/scikit-package/scikit-package"
 
 
 def create(package_type):
