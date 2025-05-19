@@ -1,6 +1,7 @@
 **Added:**
 
-* allow user to set default configs from `.skpkgrc` or other paths.
+* allow user to set default configs from `.skpkgrc`.
+* allow user to change configs path by system variable `SKPKG_CONFIG_FILE`
 
 **Changed:**
 

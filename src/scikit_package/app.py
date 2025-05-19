@@ -3,13 +3,14 @@ import subprocess
 from argparse import ArgumentParser
 
 SKPKG_GITHUB_URL = "https://github.com/Billingegroup/scikit-package"
-SKPKG_CONFIG_FILE = "~/.skpkgrc"
+SKPKG_CONFIG_FILE = "~/.skpkgrc"  # default config path
 try:
-    config_file = os.environ["SKPKG_CONFIG_FILE"]
+    # looking for system variable
+    config_file = os.environ["SKPKG_CONFIG_FILE"]  
 except KeyError:
     config_file = SKPKG_CONFIG_FILE
-config_file = os.path.expanduser(os.path.expandvars(config_file))
-exist_config = os.path.exists(config_file)
+config_file = os.path.expanduser(os.path.expandvars(config_file))  # expand "$HOME" or "~" 
+exist_config = os.path.exists(config_file)  # check if config file exists
 
 
 def create(package_type):
@@ -40,7 +41,7 @@ def run_cookiecutter(repo_url):
                 check=True,
             )
         else:
-            subprocess.run(
+            subprocess.run(  # if config file exists
                 [
                     "cookiecutter",
                     repo_url,
