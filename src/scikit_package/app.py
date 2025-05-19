@@ -6,10 +6,12 @@ SKPKG_GITHUB_URL = "https://github.com/Billingegroup/scikit-package"
 SKPKG_CONFIG_FILE = "~/.skpkgrc"  # default config path
 try:
     # looking for system variable
-    config_file = os.environ["SKPKG_CONFIG_FILE"]  
+    config_file = os.environ["SKPKG_CONFIG_FILE"]
 except KeyError:
     config_file = SKPKG_CONFIG_FILE
-config_file = os.path.expanduser(os.path.expandvars(config_file))  # expand "$HOME" or "~" 
+config_file = os.path.expanduser(
+    os.path.expandvars(config_file)
+)  # expand "$HOME" or "~"
 exist_config = os.path.exists(config_file)  # check if config file exists
 
 
