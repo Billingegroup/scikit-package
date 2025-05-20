@@ -286,9 +286,11 @@ Now that the folder structure is created, let's go through the files and folders
      result = shared_functions.dot_product(a, b)
      print(result)
 
-- ``__init__.py`` files mark directories as Python modules. These are empty by default at this level.
+.. note::
 
-- ``requirements.txt`` lists your project's dependencies. These are Python packages that are used throughout your project(s), which in this case includes ``numpy`` and ``pytest``. Please refer to the section "**Install dependencies**" below for more details on how to install them. You can add any other dependencies you need in this file:
+  - The ``__init__.py`` file, when placed inside a directory, tells Python to treat that directory as a package, which can contain modules. A module can be either a Python script or another package (i.e., a subpackage). The ``__init__.py`` file is empty in the ``workspace`` level.
+
+  - ``requirements.txt`` lists your project's dependencies. These are Python packages that are used throughout your project(s), which in this case includes ``numpy`` and ``pytest``. Please refer to the section "**Install dependencies**" below for more details on how to install them. You can add any other dependencies you need in this file:
 
 .. code-block:: python
 

@@ -15,15 +15,14 @@
 
 import sys
 import time
+from importlib.metadata import version
 from pathlib import Path
 
-# Attempt to import the version dynamically from GitHub tag.
 try:
-    from importlib.metadata import version
 
     fullversion = version("scikit_package")
 except Exception:
-    fullversion = "No version found"
+    fullversion = "No version found. The correct version will appear in the released version."
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -86,7 +85,6 @@ copyright = "%Y, The Trustees of Columbia University in the City of New York"
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 
-fullversion = version(project)
 # The short X.Y version.
 version = "".join(fullversion.split(".post")[:1])
 # The full version, including alpha/beta/rc tags.
@@ -148,7 +146,7 @@ html_theme = "sphinx_rtd_theme"
 
 html_context = {
     "display_github": True,  # Integrate GitHub
-    "github_user": "Billingegroup",  # Username
+    "github_user": "scikit-package",  # Username
     "github_repo": "scikit-package",  # Repo name
     "github_version": "main",  # Branch
     "conf_py_path": "/doc/source/",  # Path in repo to the docs folder

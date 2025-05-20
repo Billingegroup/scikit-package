@@ -8,7 +8,7 @@
         :target: https://{{ cookiecutter.github_username_or_orgname }}.github.io/{{ cookiecutter.github_repo_name }}
         :height: 100px
 
-|PyPi| |Forge| |PythonVersion| |PR|
+|PyPI| |Forge| |PythonVersion| |PR|
 
 |CI| |Codecov| |Black| |Tracking|
 
@@ -26,7 +26,7 @@
 
 .. |PR| image:: https://img.shields.io/badge/PR-Welcome-29ab47ff
 
-.. |PyPi| image:: https://img.shields.io/pypi/v/{{ cookiecutter.conda_pypi_package_dist_name }}
+.. |PyPI| image:: https://img.shields.io/pypi/v/{{ cookiecutter.conda_pypi_package_dist_name }}
         :target: https://pypi.org/project/{{ cookiecutter.conda_pypi_package_dist_name }}/
 
 .. |PythonVersion| image:: https://img.shields.io/pypi/pyversions/{{ cookiecutter.conda_pypi_package_dist_name }}
@@ -124,4 +124,4 @@ For more information on {{ cookiecutter.conda_pypi_package_dist_name }} please v
 Acknowledgements
 ----------------
 
-``{{ cookiecutter.github_repo_name }}`` is built and maintained with `scikit-package <https://billingegroup.github.io/scikit-package/>`_.
+``{{ cookiecutter.github_repo_name }}`` is built and maintained with `scikit-package <https://scikit-package.github.io/scikit-package/>`_.

@@ -6,7 +6,7 @@ on:
 
 jobs:
   tests-on-pr:
-    uses: Billingegroup/release-scripts/.github/workflows/_tests-on-pr.yml@v0
+    uses: scikit-package/release-scripts/.github/workflows/_tests-on-pr.yml@v0
     with:
       project: scikit-package
       c_extension: false

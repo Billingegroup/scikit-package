@@ -18,6 +18,12 @@ import time
 from importlib.metadata import version
 from pathlib import Path
 
+# Attempt to import the version dynamically from GitHub tag.
+try:
+    fullversion = version("{{ cookiecutter.package_dir_name }}")
+except Exception:
+    fullversion = "No version found. The correct version will appear in the released version."
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use Path().resolve() to make it absolute, like shown here.
@@ -69,7 +75,6 @@ copyright = "%Y, {{ cookiecutter.license_holders }}"
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 
-fullversion = version(project)
 # The short X.Y version.
 version = "".join(fullversion.split(".post")[:1])
 # The full version, including alpha/beta/rc tags.

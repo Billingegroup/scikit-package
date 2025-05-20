@@ -33,7 +33,7 @@ Initiate a release process with GitHub issue
 Start pre-release
 ~~~~~~~~~~~~~~~~~
 
-.. _release-instructions-project-maintainer:
+.. _release-instructions-maintainer:
 
 #. Review the release GitHub issue created in the previous step.
 
@@ -44,6 +44,15 @@ Start pre-release
 #. Confirm the ``maintainer_github_username`` section in ``.github/workflows/build-wheel-release-upload.yml`` is that of the project maintainer.
 
 #. In your terminal, run ``git checkout main && git pull upstream main`` to sync with the main branch.
+
+#. (Optional but recommended) Install and run the ``vulture`` tool to identify and manually remove unused or dead code before tagging a release:
+
+   .. code-block:: bash
+
+      $ conda install vulture
+      $ vulture src/ tests/
+
+   Review the output and remove or suppress unused code when it is not needed to keep the release clean and maintainable.
 
 #. Run the following:
 
@@ -60,6 +69,10 @@ Start pre-release
 
 #. For ``pre-release``, it will not update the documentation on GitHub Pages. It will also not update the changelog. See the next section for the full release process.
 
+.. note::
+
+   Did you encounter any errors in the workflow, such as permission issues? Check the solutions provided in :ref:`faq-release-ci-failed`.
+
 Full release after pre-release
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -73,9 +86,11 @@ Full release after pre-release
       $ git tag <version>
       $ git push upstream <version>
 
-#. Notice that the documentation is deployed. It will also update the ``CHANGELOG.rst``.
+#. Notice that ``CHANGELOG.rst`` is also updated with the new release version and the documentation is built under the ``gh-pages`` branch.
 
-#. Now that you have your source code uploaded to ``PyPI``, we will then now provide a conda package as well.
+.. note::
+
+   Did you encounter any errors in the workflow, such as issues related to ``CHANGELOG.rst``? Check the solutions provided in :ref:`faq-release-ci-failed`.
 
 What's next? Create conda package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

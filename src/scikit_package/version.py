@@ -7,7 +7,7 @@
 # File coded by: Billinge Group members and community contributors.
 #
 # See GitHub contributions for a more detailed list of contributors.
-# https://github.com/Billingegroup/scikit-package/graphs/contributors
+# https://github.com/scikit-package/scikit-package/graphs/contributors
 #
 # See LICENSE.rst for license information.
 #

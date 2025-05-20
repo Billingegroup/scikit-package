@@ -1,5 +1,3 @@
-.. _news-file-guide:
-
 Why do I need a news file for each PR?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -7,14 +5,14 @@ We want to write good ``CHANGELOG.rst`` for each release version. These news ite
 
 We can streamline the process of writing ``CHANGELOG.rst`` for each release by compiling the news items from the ``news`` directory.
 
-Here is an example ``CHANGELOG.rst`` https://github.com/Billingegroup/scikit-package/blob/main/CHANGELOG.rst
+Here is an example ``CHANGELOG.rst`` https://github.com/scikit-package/scikit-package/blob/main/CHANGELOG.rst
 
 How do I write good a news item?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Do not remove ``news/TEMPLATE.rst``. Make a copy called ``<branch-name>.rst``.
 - Do not modify other section headers in the rst file. Replace ``* <news item>`` only.
-- For consistency, start with a capital letter and a verb. End with a period. Ex) ``Add automatic linting of .md, .yml, .rst files via prettier hook in pre-commit.``
+- Start with a capital letter and a verb. End with a period, e.g., ``Add automatic linting of .md, .yml, .rst files via a prettier hook in pre-commit.``
 - For trivial changes, still create ``<branch-name>.rst``, but the news item should start with ``* No news:`` so that the news item is not compiled into the ``CHANGELOG.rst`` file during the release process. Here is an example below:
 
     .. code-block:: text
@@ -22,6 +20,8 @@ How do I write good a news item?
         **Added:**
 
         * No news: <brief reason>
+
+- Use the ``rst`` style of backquotes instead of the markdown style of backquotes. For example, use ````scikit-package```` instead of ```scikit-package```.
 
 Where to place the news item in ``<branch-name>.rst``?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
