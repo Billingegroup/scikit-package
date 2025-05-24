@@ -1,10 +1,10 @@
 **Added:**
 
-* <news item>
+* no news added: news already created for overriding default prompts values.
 
 **Changed:**
 
-* Instruct user to install API .rst file generation package from conda-forge instead of PyPI.
+* <news item>
 
 **Deprecated:**
 
