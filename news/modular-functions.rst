@@ -1,6 +1,6 @@
 **Added:**
 
-* Add Billinge group coding standards and workflows as a standalone section in the official scikit-package documentation.
+* Add note to instruct users to keep functions as modular as possible.
 
 **Changed:**
 

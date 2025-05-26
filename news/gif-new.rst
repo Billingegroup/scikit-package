@@ -1,6 +1,6 @@
 **Added:**
 
-* Add logo to documentation header.
+* Include a demo GIF file in the Sphinx documentation.
 
 **Changed:**
 

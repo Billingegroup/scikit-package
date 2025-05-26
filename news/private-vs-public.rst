@@ -1,6 +1,6 @@
 **Added:**
 
-* no news needed: updated documentation for level 3 tutorial
+* Describe the difference between public and private functions in level 2 of the documentation.
 
 **Changed:**
 

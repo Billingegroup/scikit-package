@@ -1,6 +1,6 @@
 **Added:**
 
-* no news added: add overview figure
+* Provide instructions on how to ensure CHANGELOG.rst can be modified during release by bypassing rulesets if there are any.
 
 **Changed:**
 

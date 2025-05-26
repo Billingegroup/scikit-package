@@ -94,6 +94,10 @@ Here is the full content of the ``example_code.py`` file:
     v4 = [7, 8]
     print(dot_product(v3, v4))  # returns 83
 
+.. note::
+     When writing a function, it is best practice to keep its functionality as modular as possible. Functions are most reusable when they do **just one, and not more than one**, thing. More complex tasks can then be handled by chaining functions together.
+
+
 Congratulation! You are now able to reuse code within a file by creating a function. Before we move on to the next level, let's learn about setting up a ``conda`` environment to install packages and run Python code in the following section.
 
 .. _conda-env-setup-simple:
@@ -176,6 +180,31 @@ This is the content of ``file_two.py``:
 .. note::
 
     Notice that in ``file_two.py``, you can import the entire module ``shared_functions`` and use the function ``dot_product`` by prefixing it with the module name. Importing a modele is a good practice when you have multiple functions in the same file. This way, you can avoid name conflicts and make your code more readable.
+
+Private vs. Public functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When reusing functions across modules, it’s helpful to distinguish between **public** and **private** functions. In Python, a function name starting with an underscore (e.g., ``_helper_function()``) is considered private—meant for internal use within the module. This signals to other developers and tools that it’s not part of the public API.
+
+Functions **without** a leading underscore are public and safe to use elsewhere in your project. Public functions are usually well-documented and tested, while private ones are simpler helpers used internally. As a rule of thumb, if a function is reused across modules, it should likely be public.
+
+For example, the following code calculates the distance between two points. The private function ``_calculate_distance()`` does the math, and the public function ``distance_between_points()`` validates inputs and calls it:
+
+.. code-block:: python
+
+    import numpy as np
+
+     # Private function: does the math to compute distance
+     def _calculate_distance(x1, y1, x2, y2):
+          """Compute the Euclidean distance between two 2D points."""
+          return np.sqrt(((x2 - x1)**2 + (y2 - y1)**2))
+
+     # Public function: checks that inputs look okay and calls the private function
+     def distance_between_points(p1, p2):
+          """Calculate distance between two 2D points given as (x, y) pairs."""
+          if len(p1) != 2 or len(p2) != 2:
+               print("Error: Each point must have exactly two values (x and y).")
+               return None
+          return _calculate_distance(p1[0], p1[1], p2[0], p2[1])
 
 Are you having trouble running the code?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -286,9 +315,11 @@ Now that the folder structure is created, let's go through the files and folders
      result = shared_functions.dot_product(a, b)
      print(result)
 
-- ``__init__.py`` files mark directories as Python modules. These are empty by default at this level.
+.. note::
 
-- ``requirements.txt`` lists your project's dependencies. These are Python packages that are used throughout your project(s), which in this case includes ``numpy`` and ``pytest``. Please refer to the section "**Install dependencies**" below for more details on how to install them. You can add any other dependencies you need in this file:
+  - The ``__init__.py`` file, when placed inside a directory, tells Python to treat that directory as a package, which can contain modules. A module can be either a Python script or another package (i.e., a subpackage). The ``__init__.py`` file is empty in the ``workspace`` level.
+
+  - ``requirements.txt`` lists your project's dependencies. These are Python packages that are used throughout your project(s), which in this case includes ``numpy`` and ``pytest``. Please refer to the section "**Install dependencies**" below for more details on how to install them. You can add any other dependencies you need in this file:
 
 .. code-block:: python
 

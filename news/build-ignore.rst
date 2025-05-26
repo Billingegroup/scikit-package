@@ -1,6 +1,6 @@
 **Added:**
 
-* Add a one-liner in README and index that the package is built and maintained using scikit-package.
+* Add ``_build`` to ``.gitignore`` to prevent accidental commit of docs when using ``sphinx-reload``.
 
 **Changed:**
 

@@ -1,10 +1,10 @@
 **Added:**
 
-* no news added: don't mention the specific github username in the GitHub release issue template.
+* <news item>
 
 **Changed:**
 
-* <news item>
+* Instruct user to install API .rst file generation package from conda-forge instead of PyPI.
 
 **Deprecated:**
 

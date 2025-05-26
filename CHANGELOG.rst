@@ -4,6 +4,78 @@ Release notes
 
 .. current developments
 
+0.0.3
+=====
+
+**Added:**
+
+* Added new logo
+* Add a one-liner in README and index that the package is built and maintained using scikit-package.
+* Add package create conda-forge command to create a conda-forge recipe meta.yml file.
+* Add instruction when to use hyphens or underscores for file and folder names under FAQ.
+* Start implementing guilabel in Sphinx for clickable items in tutorials.
+* Add tutorial for migrating Level 4 to Level 5 of sharing code.
+* Add logo for Github social preview.
+* Add reasons we have adopted README.rst in Level 5 under FAQ section.
+* Add Billinge group coding standards and workflows as a standalone section in the official scikit-package documentation.
+* Add PR template to save maintainer's time and to help contributors generate and update public facing documentations.
+* Add .readthedocs.yaml under the template folder to allow preview documentation on each PR.
+* Add instructions on how to use alias shortcut for creating news file in Level 5.
+* Implement package create workspace, package create system, and package create public CLI commands.
+* Add descriptions on conda-forge, conda, and installers like miniconda, miniforge in the FAQ section.
+* Include an example section in the official documentation.
+* Allow preview rendered documentation in each pull request.
+* Provide a starting template for Sphinx on how to reuse .rst file, attach images, and write code snippets in the documentation.
+* Add a figure on pre-commit local and remote setup across Level 3 to 5 under FAQ.
+* Support for copying code-blocks in documentation using sphinx_copybutton extension.
+* Define clear roles for the owner and maintainer. The maintainer has merge and release rights, while the owner oversees the project, similar to a Principal Investigator (PI) in a research group.
+* Add an example piece of code under the src directory to show how to develop new lines of code.
+* Add section dividers in the nav of the scikit-package documentation into getting started, tutorials, release guides, programming guides, examples, support, and reference.
+* Add a guide to use ``.rst`` backquotes for writing news items.
+* Add instructions on how to render API .rst files without forking for standard and include a keyboard shortcut for using auto_api.py to generate API .rst files for package with namespace.
+* Add descriptions for each workflow in Level 5 in a PR.
+* Add an explicit instruction to configure conda-forge channel in Level 4, 5 tutorial instructions.
+* Add instruction on how to avoid pre-commit auto-fix stash problem in the FAQ section.
+* Add instruction on how to migrate .md to .rst file using a tool during Level 4 to 5 migration.
+* Indicate the correction software version will be available in documentation built by readthedoc in each PR.
+* Add "Edit on GitHub" link for each page in the documentation.
+* Add docstrings to the dot_product function used for the demo code within src/calculator.py.
+* Add how to solve CI error encountered with news GitHub CI under FAQ.
+* Add logo to documentation header.
+* Add instructions to use ``vulture`` in Level 5 and before PyPI release.
+* Add a FAQ section on which workflow files to update when there is a new stable Python version.
+* Add '$' for shell script commands in the documentation.
+* Add instrunctions on how to setup write permission in GitHub workflows at the org and repository level.
+* Add instructions on how to set logo and favicon in the documentation.
+* Add step-by-step guides for Level 1 through Level 4 of sharing code.
+
+**Changed:**
+
+* Modified Development Status from 5 to 3 in pyproject.toml.
+* Adopt Semantic Versioning 2.0.0 for pre-release GitHub tag name.
+* Change cookiecuter user input value from github_org to github_username_or_orgname.
+* Transfer repository from billingegroup org to scikit-package org.
+* Change github_admin_username to maintainer_github_username in release workflow to be compatible with skpkg.
+* Change proj_owner to maintainer in Level 5 user inputs in cookiecutter to reflect that any developer including the project owner can help with package maintenance.
+
+**Fixed:**
+
+* Use the latest user prompts from ``package create conda-forge`` for meta.yml creation.
+* Lowercase package directory name under src directory for namespace package.
+* Clarified instructions for the src directory name
+* Update GITHUB_ADMIN_USERNAME to MAINTAINER_GITHUB_USERNAME in post_gen_hook.py to dynamically generate GitHub workflow files.
+* Fixed the problem of a directory folder not being initialized with underscore.
+
+**Removed:**
+
+* CI: Prevent running additional tests-on-PR CI when a PR is merged.
+* Remove hard-coded ``diffpy`` in README.
+* Remove environment.yml in the cookiecutter and skpkg repos since the centralized scripts no longer require it as the conda-forge channel is set in those scripts by default.
+*Fixed:**
+* Remove the import of extend_path from pkgutil in diffpy/__init__.py in post_gen_hook.py when creating a new project with with the project name of <org-name>.<project-name>.
+* Remove requirements/README.txt containing instructions for listing dependencies for the package. The instruction is already provided in the official documentation.
+
+
 0.0.2
 =====
 

@@ -1,6 +1,6 @@
 **Added:**
 
-* no news added: change calculator.py to functions.
+* Provide an instruction when not to follow the file/folder naming convention for configuration files.
 
 **Changed:**
 

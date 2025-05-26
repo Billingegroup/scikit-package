@@ -1,6 +1,6 @@
 **Added:**
 
-* no news added: fix typo in Section 2.3 spotted by Billinge
+* no news added: news already created for overriding default prompts values.
 
 **Changed:**
 

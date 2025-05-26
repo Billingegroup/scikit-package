@@ -5,7 +5,6 @@ Welcome to the ``scikit-package`` official documentation!
 
 ``scikit-package`` offers tools and practices for the scientific community to make better and more reusable Scientific Python packages and applications.
 
-
 How does ``scikit-package`` benefit scientists?
 -----------------------------------------------
 
@@ -38,7 +37,6 @@ The steps are divided into five levels of shareability and complexity, allowing 
 
 - Level 5, ``public``, is the final step, where the source code is uploaded online so that anyone in the world can install the package, sourced from PyPI or conda-forge.
 
-
 Who is using ``scikit-package``?
 ----------------------------------
 
@@ -62,20 +60,30 @@ How do I get started?
 
 Please visit the :ref:`Overview <overview>` page to learn how to navigate the documentation!
 
+Demo
+----
+
+Here is how you can use the ``package create public`` command to create a new Level 5 Python package called ``diffpy.my-project`` in just 1–2 minutes:
+
+.. image:: ../../img/gif/demo.gif
+   :alt: Demo of generating a new Level 5 package using scikit-package
+   :align: center
+
+Of course, you can start a lightweight package (Level 4) using the ``package create system`` command.
+
 What are the full benefits when I reach Level 5?
 -------------------------------------------------
 
-- Set up local and remote ``pre-commit`` hooks to automate linting of code for `PEP8 <https://peps.python.org/pep-0008/>`_, `PEP256 <https://peps.python.org/pep-0256/>`_, static files such as ``.json``, ``.yml``, and ``.md``, as well as spelling checks.
-- Use GitHub ``tags`` to trigger PyPI/GitHub releases, documentation hosting, and CHANGELOG updates with a single command.
-- Generate ``Codecov`` reports for each GitHub pull request (PR).
-- Start with a comprehensive ``README.rst`` template containing badges, installation instructions, support, and contribution guides for your GitHub repository.
-- Host documentation with a public URL using a rich ``Sphinx`` documentation template with live rendering, including API documentation and examples on how to use the documentation.
-- Ensure compatibility with the latest Python versions, adhering to `SPEC0 <https://scientific-python.org/specs/spec-0000/>`_.
-- Verify whether a news file is included for each PR, which will later be used to generate the CHANGELOG during the release process.
+
+- Streamline the release process by pushing a Git tag to trigger a sequence of actions: publishing to PyPI and GitHub, updating hosted documentation, and updating the ``CHANGELOG.rst`` file.
+- Host documentation with a public URL using a ``Sphinx`` template. Include live rendering, API documentation, and previews for each pull request.
+- Provide a rich ``README.rst`` template that includes badges, installation instructions, support contacts, and contribution guidelines for your GitHub repository.
+- Set up both local and remote ``pre-commit`` hooks to automate linting of code. This includes checks for `PEP8 <https://peps.python.org/pep-0008/>`_, `PEP 256 <https://peps.python.org/pep-0256/>`_, and static files such as ``.json``, ``.yml``, and ``.md``. Include spelling checks as well.
+- Run ``pytest`` with the latest Python versions, adhering to the `SPEC0 <https://scientific-python.org/specs/spec-0000/>`_ specification, without requiring manual configuration.
+- Support namespace package imports (e.g., ``import <org-name>.<package-name>``) to maintain branding consistency and avoid name collisions.
 
 For technical users, here are some of the advanced features:
 
-- Namespace package import, e.g., ``import diffpy.utils``.
 - Generate conda-package ``meta.yaml`` with ``package create conda-forge``.
 - Support headless GitHub CI testing for GUI applications.
 - Support non-pure Python package releases with ``cibuildwheel``.
@@ -99,6 +107,7 @@ Authors
 - Sangjoon Lee (sl5400@columbia.edu)
 - Andrew Yang (ay2546@columbia.edu)
 - Caden Myers (cjm2304@columbia.edu)
+- Tieqiong Zhang (tz2600@columbia.edu)
 - Simon Billinge (sb2896@columbia.edu)
 
 ``scikit-package`` is developed by Billinge Group and its community contributors.

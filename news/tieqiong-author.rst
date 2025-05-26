@@ -1,6 +1,6 @@
 **Added:**
 
-* no news added: windows conda installation powershell in level 3 tutorial.
+* no news added: add tieqiong to the author list.
 
 **Changed:**
 

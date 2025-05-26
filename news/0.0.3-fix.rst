@@ -1,10 +1,10 @@
 **Added:**
 
-* Add reasons we have adopted README.rst in Level 5 under FAQ section.
+* <news item>
 
 **Changed:**
 
-* <news item>
+* Update QR code linking to the scikit-package documentation after migrating from Billingegroup.
 
 **Deprecated:**
 

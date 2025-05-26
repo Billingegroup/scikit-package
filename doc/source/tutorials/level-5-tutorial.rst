@@ -142,7 +142,7 @@ Migration code from Level 4 to Level 5
 
   This will generate a report of unused code in the ``src`` and ``tests`` directories. Below is an example of what these outputs might look like. You can then review the report and decide whether to remove the identified unused code.
 
-    .. code-block:: bash::
+    .. code-block:: bash
 
        #### Example outputs after running vulture ####
        $ vulture src/ tests/
@@ -295,6 +295,13 @@ Please refer to :ref:`faq-doc-pr-preview`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: ../snippets/api-reference-doc.rst
+
+(Optional) Set up default prompt values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When creating new projects in level 3, 4 or 5, you will be prompted to enter the values for some variables, like ``maintainer_name``, ``maintainer_email`` and ``maintainer_github_username``. These variables have default values in the package. It can save your time and reduce errors if you can change the default values that are more relevant for your installation of ``scikit-package``.
+
+To set up your own default promprt values, please refer to :ref:`faq-set-default-prompt-value`.
+
 
 Ready for public release?
 ^^^^^^^^^^^^^^^^^^^^^^^^^

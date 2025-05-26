@@ -1,6 +1,6 @@
 **Added:**
 
-* Add how to solve CI error encountered with news GitHub CI under FAQ.
+* no news added: correct level 3 tutorial on the term module and package
 
 **Changed:**
 

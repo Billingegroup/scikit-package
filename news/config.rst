@@ -1,6 +1,7 @@
 **Added:**
 
-* no news added: modify folder structure for level 3 based on SB feedback
+* allow user to set default configs from `.skpkgrc`.
+* allow user to change configs path by system variable `SKPKG_CONFIG_FILE`
 
 **Changed:**
 

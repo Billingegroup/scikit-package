@@ -134,6 +134,59 @@ Achieving the same result in Markdown often requires raw HTML, which is less rea
 
 Switching to ``README.rst`` at Level 5 helps users appreciate the formatting power of ``.rst`` and serves as a stepping stone toward writing full documentation in ``.rst`` as part of the ``scikit-package`` documentation standard.
 
+.. _faq-set-default-prompt-value:
+
+How can I change the default values that appear in the prompt when creating projects in level 3,4,5?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+You can override the existing default values in the prompt by creating and editing a configuration file ``.skpkgrc`` in the user ``home`` directory. In ``bash`` your ``home`` directory is designated by ``~``.
+
+Here are the steps you can follow to override the default values for level 5 usage.
+
+1. Go to ``home`` directory.
+
+.. code-block:: bash
+
+  $ cd ~
+
+2. Create ``.skpkgrc``.
+
+.. code-block:: bash
+
+  $ touch .skpkgrc
+
+3. Edit ``.skpkgrc``. Copy and paste the following snippets to ``.skpkgrc``.
+
+.. code-block:: json
+
+  {
+    "default_context":
+      {
+	"maintainer_name": "<local-default-maintainer-name>",
+	"maintainer_email": "<local-default-maintainer-email>",
+	"maintainer_github_username": "<local-default-maintainer-github-username>",
+	"github_username_or_orgname": "<local-default-github-username-or-orgname>",
+	"contributors": "<local-default-contributors-name>",
+	"license_holders": "<local-default-license-holders-name>",
+	"project_name": "<local-default-project-name>",
+      }
+  }
+
+4. Replace words in angle brackets with values you prefer. These values will be your new default values when you run scikit-package on your local machine. In your ``.skpkgrc`` you may delete any rows that you do not want to modify from the package defaults.
+
+Creating packages in Level 3, 4 and 5 requires different entries. When you create a package at a certain level, only the entries with matched names will be processed. So irrelevant entries have no effect and you can set all the level 3, 4 and 5 default values in ``.skpkgrc``.
+
+
+
+How can I change the location of configuration file?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The scikit-package configuration file is located in ``~/.skpkgrc`` by default. You can use the environment variable ``SKPKG_CONFIG_FILE`` to change its location.
+
+.. code-block:: bash
+
+   $ export SKPKG_CONFIG_FILE=/path/to/config
+
+
 Release
 -------
 
@@ -143,6 +196,28 @@ How can I change who is authorized to release a package?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In ``.github/workflows/build-wheel-release-upload.yml``, modify ``maintainer_github_username`` to the desired GitHub username. This username will be able to authorize the release by pushing the tag as instructed in :ref:`release-pypi-github`.
+
+.. _faq-release-ci-failed:
+
+Release CI failed. What should I do?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pre-release:
+
+- Did you encounter an error under the ``privilege-check`` section in the workflow? Ensure the user performing the release has the GitHub username specified in ``maintainer_github_username`` under ``.github/workflows/build-wheel-release-upload.yml``.
+- Did you encounter an error related to ``PYPI``? Ensure you have ``PAT_TOKEN`` configured at the organization or repository level. Please read :ref:`pypi-token-setup`. Even if ``PYPI_TOKEN`` is already configured, ensure it is the latest token and has not been revoked or expired.
+
+  .. note::
+
+    As the next step, if you created and pushed ``*.*.*-rc.0``, you may simply bump and create a new version tag of ``*.*.*-rc.1`` and push it to the remote repository.
+
+Release:
+
+- Did you encounter an error related to ``fatal: could not read Username``? Ensure you have ``PAT_TOKEN`` configured at the organization or repository level. Please read :ref:`pat-token-setup`. Even if ``PAT_TOKEN`` is already configured, ensure it is the latest token and has not been revoked or expired.
+- Did you encounter any error from ``Rulesets``? In your repository, visit :menuselection:`Settings -> Rules -> Rulesets`. Then click one or more of the rulesets. For each ruleset, under the :guilabel:`Bypass list`, click :guilabel:`Add bypass` and :guilabel:`Organization admin` to the ruleset. The GitHub workflow will use the ``PAT_TOKEN`` to bypass the ruleset.
+
+  .. note::
+    Here, we don't want to bump a new version. As the next step, delete the Git tag in the local by running ``git tag -d <tagname>`` and visit ``https://github.com/<org-or-username>/<package-name>/tags`` to delete it in the remote. Then, follow the same process for a full release by creating a new tag and pushing it to the remote.
 
 How is the package version set and retrieved?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -196,25 +271,25 @@ How can I preview the documentation in real-time?
 How do I build API .rst files automatically for a standard Python package?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can generate ``.rst`` files using the ``sphinx-apidoc`` extension.
+Here is how you can **automate** the process of generating API documentation for a standard Python package located in the ``doc/source/api`` folder.
 
-#. Install ``sphinx-apidoc``:
+.. note::
 
-    .. code-block:: bash
+  Your package is considered a **standard package** if it is imported as ``import <package_name>`` instead of ``import <namespace_name>.<package_name>``.
 
-        pip install sphinx-apidoc
+#. Add ``sphinxcontrib-apidoc`` to the ``requirements/docs.txt`` file.
 
-#. Run the following command to generate ``.rst`` under the ``doc/source/api`` directory:
+    .. code-block:: text
 
-    .. code-block:: bash
+      sphinx
+      sphinx_rtd_theme
+      sphinx-copybutton
+      sphinxcontrib-apidoc
+      ...
 
-        sphinx-apidoc -o doc/source/api src/<package_dir_name>
+#. Run ``conda install --file requirements/docs.txt`` to install the new dependency.
 
-#. Done!
-
-Instead of manually running the ``sphinx-apidoc -o ..`` command from your terminal, here is a recommended way to **automate** the process of generating API documentation:
-
-#. Replace the following code block in your ``doc/source/conf.py`` from
+#. Replace the following code block in your ``doc/source/conf.py`` file from
 
     .. code-block:: python
 
@@ -225,6 +300,7 @@ Instead of manually running the ``sphinx-apidoc -o ..`` command from your termin
             "sphinx.ext.viewcode",
             "sphinx.ext.intersphinx",
             "sphinx_rtd_theme",
+            "sphinx_copybutton",
             "m2r",
         ]
 
@@ -239,6 +315,7 @@ Instead of manually running the ``sphinx-apidoc -o ..`` command from your termin
             "sphinx.ext.viewcode",
             "sphinx.ext.intersphinx",
             "sphinx_rtd_theme",
+            "sphinx_copybutton",
             "m2r",
         ]
 
@@ -249,13 +326,25 @@ Instead of manually running the ``sphinx-apidoc -o ..`` command from your termin
         apidoc_excluded_paths = ['tests']
         apidoc_separate_modules = True
 
-#. Replace ``<package_dir_name>`` with the directory name under ``src``, e.g., ``my_package``.
+#. Next to the ``apidoc_module_dir`` variable above, replace ``<package_dir_name>`` with the directory name under ``src``, e.g., ``my_package``.
 
-#. Run ``sphinx-reload doc``.
+#. Run ``sphinx-reload doc`` to build and host the documentation.
 
-#. Notice that the ``.rst`` files under ``doc/source/api`` are generated whenever the documentation is re-rendered.
+    Notice that the ``.rst`` files under ``doc/source/api`` are generated whenever the documentation is re-rendered.
 
-#. Done! You can ``git add doc/source/api`` and commit the changes.
+#. Add the following block to your ``doc/source/index.rst`` file:
+
+    .. code-block:: text
+
+      .. toctree::
+         :maxdepth: 2
+         :caption: API Reference
+
+          Package API <api/package_dir_name>
+
+#. Now, you should see the :guilabel:`API Package` section in the left menu bar of the documentation. Click on it to see the API documentation.
+
+#. Done! If you have any issues, please feel free to open an issue in the ``scikit-package`` GitHub repository.
 
 .. _faq-doc-api-namespace:
 
