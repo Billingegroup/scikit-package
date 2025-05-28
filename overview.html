@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Overview &mdash; scikit-package 0.0.3 documentation</title>
+  <title>Overview &mdash; scikit-package 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="_static/scikit-package-logo-blank.png"/>
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=7cc827d7"></script>
+      <script src="_static/documentation_options.js?v=f539c95a"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="(Level 1-3) Reuse code within a file, across files and folders" href="tutorials/level-1-2-3-tutorials.html" />
+    <link rel="next" title="(Level 1-3) Reuse code within a file, across files and folders" href="tutorials/tutorial-level-1-2-3.html" />
     <link rel="prev" title="How does scikit-package benefit scientists?" href="index.html" /> 
 </head>
 
@@ -53,9 +53,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">TUTORIALS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/level-1-2-3-tutorials.html">(Level 1-3) Reuse code within a file, across files and folders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/level-4-tutorial.html">(Level 4) Share code as a locally installable Python package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/level-5-tutorial.html">(Level 5) Share code as a publicly installable Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial-level-1-2-3.html">(Level 1-3) Reuse code within a file, across files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial-level-4.html">(Level 4) Share your code as a locally installable Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial-level-5.html">(Level 5) Share your code as a publicly installable package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial-level-4-to-5.html">Migrate your package from Level 4 to Level 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial-level-5-migration.html">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RELEASE GUIDES</span></p>
 <ul>
@@ -65,10 +67,6 @@
 <p class="caption" role="heading"><span class="caption-text">PROGRAMMING GUIDES</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="programming-guides/billinge-group-standards.html">Billinge Group standards</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples/migration.html">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
 <ul>
@@ -126,12 +124,12 @@
 <tr class="row-even"><td><p>1</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">function</span></code></p></td>
 <td><p>Reuse code in the single file.</p></td>
-<td><p><a class="reference internal" href="tutorials/level-1-2-3-tutorials.html#tutorial-level-1"><span class="std std-ref">See Level 1 tutorial</span></a></p></td>
+<td><p><a class="reference internal" href="tutorials/tutorial-level-1-2-3.html#tutorial-level-1"><span class="std std-ref">See Level 1 tutorial</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">module</span></code></p></td>
 <td><p>Reuse code across files.</p></td>
-<td><p><a class="reference internal" href="tutorials/level-1-2-3-tutorials.html#tutorial-level-2"><span class="std std-ref">See Level 2 tutorial</span></a></p></td>
+<td><p><a class="reference internal" href="tutorials/tutorial-level-1-2-3.html#tutorial-level-2"><span class="std std-ref">See Level 2 tutorial</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p>3</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">workspace</span></code></p></td>
@@ -145,22 +143,30 @@
 </tr>
 <tr class="row-even"><td><p>5</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">public</span></code></p></td>
-<td><p>Share code as publicly installable package.</p></td>
+<td><p>Share code as a publicly installable package.</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">package</span> <span class="pre">create</span> <span class="pre">public</span></code></p></td>
 </tr>
 </tbody>
 </table>
-<p>⏩️ Are you here to <strong>start</strong> a new Python project?</p>
+<p>⏩️ Are you here to <strong>start a new Python</strong> project?</p>
 <blockquote>
-<div><p>If you are <strong>new</strong> to programming in general, we recommend you start from Levels 1-3, where you learn to reuse your scripts across files and folders without the need to install anything. Start <a class="reference internal" href="tutorials/level-1-2-3-tutorials.html#level-1-2-3-tutorials"><span class="std std-ref">here</span></a>.</p>
-<p>If you have <strong>experience</strong> in developing scientific code in Python, we recommend you start from Level 4, where you learn to turn your project into a lightweight Python package that can be installed locally. Start <a class="reference internal" href="tutorials/level-4-tutorial.html#level-4-tutorial"><span class="std std-ref">here</span></a>.</p>
+<div><p>If you are <strong>new</strong> to programming, start from Level 1. You will learn how to reuse code across files and folders without needing to install anything. You will also learn how to write unit tests. To get started, visit <a class="reference internal" href="tutorials/tutorial-level-1-2-3.html#level-1-2-3-tutorials"><span class="std std-ref">(Level 1-3) Reuse code within a file, across files and folders</span></a>.</p>
+<p>If you have <strong>experience</strong> developing scientific code in Python, we recommend starting with Level 4, where you will create a lightweight Python package with automatic formatting and unit testing using GitHub Actions. To get started, visit <a class="reference internal" href="tutorials/tutorial-level-4.html#level-4-tutorial"><span class="std std-ref">(Level 4) Share your code as a locally installable Python package</span></a>.</p>
+<p>If you are an <strong>active open-source developer</strong> and familiar with GitHub Actions and forking workflows, we recommend you start from Level 5 so that your code can be shared with the world. To get started, visit <a class="reference internal" href="tutorials/tutorial-level-5.html#level-5-tutorial"><span class="std std-ref">(Level 5) Share your code as a publicly installable package</span></a>.</p>
 </div></blockquote>
-<p>⏩️ Do you want to <strong>release</strong> your code as a fully installable Python package?</p>
+<p>⏩️ Are you here to <strong>migrate</strong> an existing Python project?</p>
 <blockquote>
-<div><p>If your package is already developed with Level 4, and you are ready to release your package, let’s learn to migrate from Level 4 to Level 5 and host documentation and release it to PyPI and conda-forge. Start <a class="reference internal" href="tutorials/level-5-tutorial.html#level-5-tutorial"><span class="std std-ref">here</span></a>.</p>
+<div><p>Do you want to migrate your existing Python project/package to the <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> Level 5 <code class="docutils literal notranslate"><span class="pre">public</span></code> standard? To get started, visit <a class="reference internal" href="tutorials/tutorial-level-5-migration.html#migrate-existing-package-to-level-5"><span class="std std-ref">Migrate your existing package with scikit-package</span></a>.</p>
+<p>Do you want to upgrade from Level 4 to Level 5? To get started, visit <a class="reference internal" href="tutorials/tutorial-level-4-to-5.html#level-4-to-5-tutorial"><span class="std std-ref">Migrate your package from Level 4 to Level 5</span></a>.</p>
 </div></blockquote>
-<p>⏩️ Do you want to explore <strong>best practices</strong> for developing scientific code? Start <a class="reference internal" href="programming-guides/billinge-group-standards.html#billinge-group-standards"><span class="std std-ref">here</span></a>.</p>
-<p>⏩️ Do you want to migrate your existing Python package to the <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> Level 5 <code class="docutils literal notranslate"><span class="pre">public</span></code> standard? Start <a class="reference internal" href="examples/migration.html#migration-guide"><span class="std std-ref">here</span></a>.</p>
+<p>⏩️ Are you here to <strong>release</strong> your package online?</p>
+<blockquote>
+<div><p>Do you want to streamline the release process with GitHub tags and have your package installabe with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>? To get started, visit <a class="reference internal" href="tutorials/tutorial-level-5.html#level-5-tutorial"><span class="std std-ref">(Level 5) Share your code as a publicly installable package</span></a>.</p>
+</div></blockquote>
+<p>⏩️ Do you want to explore <strong>best practices</strong> for developing and publishing scientific code?</p>
+<blockquote>
+<div><p>The documentation covers, among other topics, how to write effective Git commit messages and news entries used for compiling the changelog, as well as a recommended workflow for developing and requesting new features within GitHub’s ecosystem. To get started, visit <a class="reference internal" href="programming-guides/billinge-group-standards.html#billinge-group-standards"><span class="std std-ref">Billinge Group standards</span></a>.</p>
+</div></blockquote>
 </section>
 
 
@@ -168,7 +174,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="How does scikit-package benefit scientists?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tutorials/level-1-2-3-tutorials.html" class="btn btn-neutral float-right" title="(Level 1-3) Reuse code within a file, across files and folders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tutorials/tutorial-level-1-2-3.html" class="btn btn-neutral float-right" title="(Level 1-3) Reuse code within a file, across files and folders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

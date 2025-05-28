@@ -25,5 +25,5 @@
      - ``package create system``
    * - 5
      - ``public``
-     - Share code as publicly installable package.
+     - Share code as a publicly installable package.
      - ``package create public``

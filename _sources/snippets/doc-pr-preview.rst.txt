@@ -40,4 +40,4 @@
 
 .. tip::
 
-  Press the :guilabel:`d` key on your keyboard to view the changes! e.g., https://bobleesjrelease--1.org.readthedocs.build/en/1/
+  Press the :guilabel:`d` key on your keyboard to view the changes!

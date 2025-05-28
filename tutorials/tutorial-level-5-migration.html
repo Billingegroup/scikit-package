@@ -1,0 +1,811 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Migrate your existing package with scikit-package &mdash; scikit-package 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+    <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=cca77546"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Publish on GitHub and to PyPI" href="../release-guides/pypi-github.html" />
+    <link rel="prev" title="Migrate your package from Level 4 to Level 5" href="tutorial-level-4-to-5.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/scikit-package-logo-docs.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TUTORIALS</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial-level-1-2-3.html">(Level 1-3) Reuse code within a file, across files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-level-4.html">(Level 4) Share your code as a locally installable Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-level-5.html">(Level 5) Share your code as a publicly installable package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-level-4-to-5.html">Migrate your package from Level 4 to Level 5</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tips-and-how-to-receive-support">Tips and how to receive support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-scikit-package-with-conda">Install <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> with conda</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-pre-commit-workflow">Step 1. Pre-commit workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#run-black-in-your-codebase">Run <code class="docutils literal notranslate"><span class="pre">black</span></code> in your codebase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apply-pre-commit-auto-fixes-without-manual-edits">Apply pre-commit auto-fixes without manual edits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apply-manual-edits-to-pass-pre-commit-hooks">Apply manual edits to pass <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-pre-commit-ci">Setup pre-commit CI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-migration-workflow">Step 2. Migration workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#move-essential-files-to-run-local-tests">Move essential files to run local tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-repository">Setup repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-github-actions">Setup GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-configuration-files">Add configuration files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#move-documentation-files">Move documentation files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-final-check">Step 3. Final check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ready-for-release">Ready for release?</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RELEASE GUIDES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-guides/pypi-github.html">Publish on GitHub and to PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-guides/conda-forge.html">Create conda package with conda-forge</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">PROGRAMMING GUIDES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../programming-guides/billinge-group-standards.html">Billinge Group standards</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../support/frequently-asked-questions.html">Frequently asked questions (FAQ)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">scikit-package</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/scikit-package/scikit-package/blob/main/doc/source/tutorials/tutorial-level-5-migration.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="migrate-your-existing-package-with-scikit-package">
+<span id="migrate-existing-package-to-level-5"></span><span id="index-0"></span><h1>Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code><a class="headerlink" href="#migrate-your-existing-package-with-scikit-package" title="Link to this heading"></a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>This guide is for developers who have an existing Python package under Git control and want to migrate it to the Level 5 <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> standard.</p>
+<p>We assume you have experience creating a package using <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> Level 4 and 5. We also assume you are familiar with the forking workflow on GitHub.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you are not familiar with contributing via forking, please read <a class="reference internal" href="../support/frequently-asked-questions.html#faq-github-workflow-overview"><span class="std std-ref">What is the general the workflow?</span></a>.</p>
+</div>
+</section>
+<section id="tips-and-how-to-receive-support">
+<h2>Tips and how to receive support<a class="headerlink" href="#tips-and-how-to-receive-support" title="Link to this heading"></a></h2>
+<p>We understand that migration can be challenging. We offer many ways to help you guide through the process:</p>
+<ol class="arabic simple">
+<li><p>You may cross-check with the Billinge group’s up-to-date package, <code class="docutils literal notranslate"><span class="pre">diffpy.utils</span></code>: <a class="reference external" href="https://github.com/diffpy/diffpy.utils">https://github.com/diffpy/diffpy.utils</a>.</p></li>
+<li><p>We provide <a class="reference internal" href="../support/frequently-asked-questions.html#frequently-asked-questions"><span class="std std-ref">Frequently asked questions (FAQ)</span></a> describing  design decisions and how to override them in the <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> template.</p></li>
+<li><p>After you’ve cross-checked and searched through the documentation (tutorials, examples, FAQs) please feel free to ask questions by creating an issue in the GitHub repository <a class="reference external" href="https://github.com/scikit-package/scikit-package/issues">here</a>.</p></li>
+</ol>
+<section id="install-scikit-package-with-conda">
+<h3>Install <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> with conda<a class="headerlink" href="#install-scikit-package-with-conda" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Ensure that <code class="docutils literal notranslate"><span class="pre">conda</span></code> is installed on your local computer as instructed in <a class="reference internal" href="tutorial-level-1-2-3.html#conda-env-setup-simple"><span class="std std-ref">(Required) Use conda environment to install packages and run Python code</span></a>.</p></li>
+<li><p>Ensure that you have added the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel to your <code class="docutils literal notranslate"><span class="pre">conda</span></code> configuration.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>conda-forge
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new conda environment <code class="docutils literal notranslate"><span class="pre">skpkg-env</span></code> and install <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> and <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> simultaneously by running the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>skpkg-env<span class="w"> </span>scikit-package<span class="w"> </span>pre-commit
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the above command does not work, ensure you have added the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel to your <code class="docutils literal notranslate"><span class="pre">conda</span></code> configuration in Step 2.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Activate the environment:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>skpkg-env
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Confirm that you have the latest version of <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> available on GitHub:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>show<span class="w"> </span>scikit-package
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+</section>
+<section id="step-1-pre-commit-workflow">
+<span id="migration-pre-commit"></span><h2>Step 1. Pre-commit workflow<a class="headerlink" href="#step-1-pre-commit-workflow" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Clone the repository and set <code class="docutils literal notranslate"><span class="pre">upstream</span></code> to the original repository.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone &lt;URL-of-the-forked-repo&gt;
+$ cd &lt;package-name&gt;
+$ git remote add upstream &lt;URL-of-the-original-repo&gt;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Are you the creator of the repository? You can type <code class="docutils literal notranslate"><span class="pre">origin</span></code> instead of <code class="docutils literal notranslate"><span class="pre">upstream</span></code> in the rest of the tutorial, e.g., <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">main</span></code> instead of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">upstream</span> <span class="pre">main</span></code>. Here, we assume a forking workflow.</p></li>
+<li><p>Is your default branch called <code class="docutils literal notranslate"><span class="pre">master</span></code>? Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">upstream</span> <span class="pre">master</span></code> throughout the guide instead. However, please note that <code class="docutils literal notranslate"><span class="pre">main</span></code> is the default branch name for GitHub.</p></li>
+</ul>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<section id="run-black-in-your-codebase">
+<h3>Run <code class="docutils literal notranslate"><span class="pre">black</span></code> in your codebase<a class="headerlink" href="#run-black-in-your-codebase" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Create a new branch called <code class="docutils literal notranslate"><span class="pre">black-edits</span></code>. This branch will be used to apply <code class="docutils literal notranslate"><span class="pre">black</span></code> to all files in the old project directory:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>main
+$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Activate the conda environment and install <code class="docutils literal notranslate"><span class="pre">black</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>skpkg-env
+$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>black
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new branch called <code class="docutils literal notranslate"><span class="pre">black-edits</span></code> and create a new file called <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>black-edits
+$<span class="w"> </span>touch<span class="w"> </span>pyproject.toml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Copy and paste the following content at the bottom of <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[tool.black]
+line-length = 79
+include = &#39;\.pyi?$&#39;
+exclude = &#39;&#39;&#39;
+/(
+    \.git
+| \.hg
+| \.mypy_cache
+| \.tox
+| \.venv
+| \.rst
+| \.txt
+| _build
+| buck-out
+| build
+| dist
+| blib2to3
+| tests/data
+)/
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Lint the code:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>black<span class="w"> </span>.
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To skip certain files, add them under the <code class="docutils literal notranslate"><span class="pre">exclude</span></code> section in the <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Push the changes to the <code class="docutils literal notranslate"><span class="pre">black-edits</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: apply black to all files in the project directory&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>black-edits
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a PR from <code class="docutils literal notranslate"><span class="pre">username/black-edits</span></code> to <code class="docutils literal notranslate"><span class="pre">upstream/main</span></code>.</p>
+<blockquote>
+<div><p>The PR title can be <code class="docutils literal notranslate"><span class="pre">skpkg:</span> <span class="pre">apply</span> <span class="pre">black</span> <span class="pre">line-length</span> <span class="pre">79</span> <span class="pre">to</span> <span class="pre">all</span> <span class="pre">files</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">project</span> <span class="pre">directory</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>Review and wait for the PR to be merged to <code class="docutils literal notranslate"><span class="pre">upstream/main</span></code>. If you are the project maintainer, you can merge the PR yourself.</p></li>
+<li><p>Done!</p></li>
+</ol>
+</section>
+<section id="apply-pre-commit-auto-fixes-without-manual-edits">
+<h3>Apply pre-commit auto-fixes without manual edits<a class="headerlink" href="#apply-pre-commit-auto-fixes-without-manual-edits" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Sync with the <code class="docutils literal notranslate"><span class="pre">upstream/main</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>main<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new branch called <code class="docutils literal notranslate"><span class="pre">pre-commit-auto</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>pre-commit-auto
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new package using <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>package<span class="w"> </span>create<span class="w"> </span>public
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> configuration files from the new to the old directory:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cp<span class="w"> </span>&lt;package-name&gt;/.pre-commit-config.yaml<span class="w"> </span>.
+$<span class="w"> </span>cp<span class="w"> </span>&lt;package-name&gt;/.isort.cfg<span class="w"> </span>.
+$<span class="w"> </span>cp<span class="w"> </span>&lt;package-name&gt;/.flake8<span class="w"> </span>.
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Trigger hooks and auto-fixes without manual edits:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add the changes to the <code class="docutils literal notranslate"><span class="pre">pre-commit-auto</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;style: apply pre-commit hooks with no manual edits&quot;</span><span class="sb">``</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Push the changes to the remote repository:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>pre-commit-auto
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a PR from <code class="docutils literal notranslate"><span class="pre">username/pre-commit-auto</span></code> to <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code>. The PR title can be <code class="docutils literal notranslate"><span class="pre">skpkg:</span> <span class="pre">apply</span> <span class="pre">pre-commit</span> <span class="pre">to</span> <span class="pre">project</span> <span class="pre">directory</span> <span class="pre">with</span> <span class="pre">no</span> <span class="pre">manual</span> <span class="pre">edits</span></code>.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The new <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> branch can be created by the project maintainer or owner. On the main page of the upstream repository, click <span class="menuselection">main -&gt; Switch branches/tags -&gt; Find or create a branch</span> and type <code class="docutils literal notranslate"><span class="pre">migration</span></code>. This will create a new branch called <code class="docutils literal notranslate"><span class="pre">migration</span></code>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Wait for the PR to be merged to <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> branch.</p></li>
+</ol>
+</section>
+<section id="apply-manual-edits-to-pass-pre-commit-hooks">
+<h3>Apply manual edits to pass <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> hooks<a class="headerlink" href="#apply-manual-edits-to-pass-pre-commit-hooks" title="Link to this heading"></a></h3>
+<p>The package will most likely have failed <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> hooks. We will manually fix the errors raised by <code class="docutils literal notranslate"><span class="pre">flake8</span></code>, <code class="docutils literal notranslate"><span class="pre">codespell</span></code>, etc.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do you have <strong>no pre-commit errors</strong> after running <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">--all-files</span></code>? Great! You can skip this section and move on to the next section.</p>
+</div>
+<p>Here, instead of fixing all errors at once, we will address each type of error one at a time.  For example, a branch called <code class="docutils literal notranslate"><span class="pre">pre-commit-spelling</span></code> may contain spelling fixes, while another branch, <code class="docutils literal notranslate"><span class="pre">pre-commit-flake8-line</span></code> fixes of line length errors raised by flake8.</p>
+<ol class="arabic">
+<li><p>Sync with the <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>migration
+$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>migration
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new branch that will be used to fix the type of errors:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>pre-commit-&lt;theme&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">--all-files</span></code> to see the errors:</p>
+<blockquote>
+<div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Do you want to <strong>ignore</strong> certain files/folders and also set the preferred line-length? Visit <a class="reference internal" href="../support/frequently-asked-questions.html#faq-pre-commit"><span class="std std-ref">Pre-commit</span></a> in the FAQ section to learn how to customize line-lenghts, ignore certain errors, and skip certain files and paths.</p>
+<p>If you are suppressing <code class="docutils literal notranslate"><span class="pre">flake8</span></code> errors, you can <strong>create GitHub issues</strong> to resolve them after migration.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Fix the errors manually for the specific theme.</p></li>
+<li><p>Once you are done with fixing the type of errors commit, push the changes to your branch</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>&lt;files-modified-to-fix-error&gt;
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: fix &lt;theme&gt; errors&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>pre-commit-&lt;theme&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a PR from <code class="docutils literal notranslate"><span class="pre">username/pre-commit-&lt;theme&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code>. The PR title can be <code class="docutils literal notranslate"><span class="pre">skpkg:</span> <span class="pre">fix</span> <span class="pre">&lt;theme&gt;</span> <span class="pre">errors</span></code>.</p></li>
+<li><p>Wait for the PR to be merged to <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> branch.</p></li>
+<li><p>Repeat for other themes of errors, always pull the latest commits from <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> before creating a new branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>migration
+$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>migration
+$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>pre-commit-&lt;another-theme&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Are all the PRs merged and do all <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> hooks pass? If so, you are ready for the next section! Before that, let’s automatically trigger <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> hooks going forward:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="setup-pre-commit-ci">
+<h3>Setup pre-commit CI<a class="headerlink" href="#setup-pre-commit-ci" title="Link to this heading"></a></h3>
+<p>Now, we want to ensure pre-commit hooks are also executed when a pull request is made in the remote repository.</p>
+<ol class="arabic simple">
+<li><p>Visit <a class="reference external" href="https://github.com/apps/pre-commit-ci">https://github.com/apps/pre-commit-ci</a> and click <span class="guilabel">Configure</span>.</p></li>
+<li><p>Select the repository(s).</p></li>
+<li><p>Done!</p></li>
+</ol>
+</section>
+</section>
+<section id="step-2-migration-workflow">
+<span id="migration-workflow"></span><h2>Step 2. Migration workflow<a class="headerlink" href="#step-2-migration-workflow" title="Link to this heading"></a></h2>
+<p>Let’s first migrate the essential files from the old project to the new project directory.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Please read the following carefully before proceeding:</p>
+<ul class="simple">
+<li><p>Please Do NOT delete/remove any files before confirming that it is absolutely unnecessary. If you are unsure, contact the project maintainer first.</p></li>
+<li><p>Please Do NOT delete project-specific content such as project descriptions in README, license information, authors, tutorials, examples.</p></li>
+</ul>
+</div>
+<section id="move-essential-files-to-run-local-tests">
+<h3>Move essential files to run local tests<a class="headerlink" href="#move-essential-files-to-run-local-tests" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Pull the latest commits from <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout migration &amp;&amp; git pull upstream migration
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Move into the new directory created by <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code>:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd &lt;package-name&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Move <code class="docutils literal notranslate"><span class="pre">.git</span></code> from the old (<code class="docutils literal notranslate"><span class="pre">..</span></code>) to the new directory (<code class="docutils literal notranslate"><span class="pre">.</span></code>):</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mv ../&lt;package-name&gt;/.git .
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>See a list of files that have been (1) untracked, (2) deleted, (3) modified:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git status
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">untracked</span></code> are new files created by <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deleted</span></code> are files in the old directory but the files that are not in the new directory. At the moment, most of the <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">tests</span></code> and <code class="docutils literal notranslate"><span class="pre">doc</span></code> files will be in this category. We will move them from the old to the new directory in the next few steps.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">modified</span></code> are files that that exist both in the old and the new directory, while the scikig-package has made changes to them.</p></li>
+</ul>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new branch called called <code class="docutils literal notranslate"><span class="pre">setup-CI</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>setup-CI
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now you will move <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">tests</span></code> folders in the following steps.</p></li>
+<li><p>Copy files</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cp<span class="w"> </span>-n<span class="w"> </span>-r<span class="w"> </span>../src<span class="w"> </span>.
+$<span class="w"> </span>cp<span class="w"> </span>-n<span class="w"> </span>-r<span class="w"> </span>../tests<span class="w"> </span>.
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-n</span></code> option is used to prevent overwriting existing files in the destination directory. If you want to overwrite existing files, remove the <code class="docutils literal notranslate"><span class="pre">-n</span></code> option.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Confirm the <code class="docutils literal notranslate"><span class="pre">src</span></code> and <code class="docutils literal notranslate"><span class="pre">tests</span></code> files that showed as <code class="docutils literal notranslate"><span class="pre">deleted</span></code> are no longer in the <code class="docutils literal notranslate"><span class="pre">deleted</span></code>.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>status
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Commit the changes:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>src<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: mirate src folder&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>tests<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: migrate tests folder&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Manually list the dependencies under <code class="docutils literal notranslate"><span class="pre">requirements/pip.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements/tests.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements/docs.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements/conda.txt</span></code>.</p></li>
+<li><p>Delete <code class="docutils literal notranslate"><span class="pre">requirements/build.txt</span></code> if your package only contains Python code.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>requirements/build.txt
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add and commit the changes in the  <code class="docutils literal notranslate"><span class="pre">requirements</span></code> folder:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>requirements
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: list dependencies in requirements folder&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Test your package from a new conda environment:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>&lt;package-name&gt;-env<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.13<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--file<span class="w"> </span>requirements/conda.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--file<span class="w"> </span>requirements/test.txt
+$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>&lt;package-name&gt;-env
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w"> </span>--no-deps
+$<span class="w"> </span>pytest
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Include <code class="docutils literal notranslate"><span class="pre">--file</span> <span class="pre">requirements/build.txt</span></code> if it exists.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Congratulations! After the tests pass, let’s now setup GitHub Actions in the following section.</p></li>
+</ol>
+</section>
+<section id="setup-repository">
+<h3>Setup repository<a class="headerlink" href="#setup-repository" title="Link to this heading"></a></h3>
+<p>We want to run GitHub Actions, in order to do so</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="tutorial-level-5.html#tutorial-5-pre-commit-ci"><span class="std std-ref">1. Setup pre-commit CI in the remote repository in each pull request</span></a></p></li>
+<li><p><a class="reference internal" href="tutorial-level-5.html#tutorial-5-github-codecov-setup"><span class="std std-ref">2. Setup Codecov token for GitHub repository</span></a></p></li>
+<li><p><a class="reference internal" href="tutorial-level-5.html#tutorial-5-ci-permission"><span class="std std-ref">3. Allow GitHub Actions to write comments in PRs</span></a></p></li>
+</ul>
+</section>
+<section id="setup-github-actions">
+<h3>Setup GitHub Actions<a class="headerlink" href="#setup-github-actions" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Add and commit the files in the <code class="docutils literal notranslate"><span class="pre">.github</span></code> folder:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/tests-on-pr.yml<span class="w"> </span>.gitignore
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: add CI and issue/PR templates&quot;</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If your package does not support the latest Python version of 3.13, you will need to specify the Python version supported by your package. Follow the instructions here to set the Python version under <code class="docutils literal notranslate"><span class="pre">.github/workflows</span></code> <a class="reference internal" href="../support/frequently-asked-questions.html#github-actions-python-versions"><span class="std std-ref">here</span></a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add and commit the <code class="docutils literal notranslate"><span class="pre">requirements</span></code> folder:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>requirements
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: list dependencies in requirements folder&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add and commit <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: add pyproject.toml&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Push the changes to the <code class="docutils literal notranslate"><span class="pre">setup-CI</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>setup-CI
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a PR from <code class="docutils literal notranslate"><span class="pre">username/setup-CI</span></code> to <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code>.</p>
+<blockquote>
+<div><p>The pull request title can be <code class="docutils literal notranslate"><span class="pre">skpkg:</span> <span class="pre">setup</span> <span class="pre">CI</span> <span class="pre">after</span> <span class="pre">migrating</span> <span class="pre">tests,</span> <span class="pre">src,</span> <span class="pre">requirements,</span> <span class="pre">and</span> <span class="pre">.github</span> <span class="pre">folder</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>Wait for review after CI passes.</p></li>
+<li><p>Once the PR is merged, let’s upload other files.</p></li>
+</ol>
+</section>
+<section id="add-configuration-files">
+<h3>Add configuration files<a class="headerlink" href="#add-configuration-files" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Pull the latest commits from <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> and create a new branch called <code class="docutils literal notranslate"><span class="pre">config</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>migration
+$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>migration
+$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>config
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add and commit configuration files:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.pre-commit-config.yaml<span class="w"> </span>.codespell<span class="w"> </span>.flake8<span class="w"> </span>.isort.cfg
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: add config files for pre-commit &quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.readthedocs.yaml<span class="w"> </span>.codecov.yml<span class="w"> </span>.github
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: add config files readthedocs, codecov, GitHub&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a PR from <code class="docutils literal notranslate"><span class="pre">username/config</span></code> to <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code>.</p>
+<blockquote>
+<div><p>The PR title can be <code class="docutils literal notranslate"><span class="pre">skpkg:</span> <span class="pre">add</span> <span class="pre">configuration</span> <span class="pre">files</span> <span class="pre">for</span> <span class="pre">pre-commit,</span> <span class="pre">readthedocs,</span> <span class="pre">codecov</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>Once the PR is merged, move to the next section.</p></li>
+</ol>
+</section>
+<section id="move-documentation-files">
+<h3>Move documentation files<a class="headerlink" href="#move-documentation-files" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Pull the latest commits from <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> and create a new branch called <code class="docutils literal notranslate"><span class="pre">doc</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>migration
+$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>migration
+$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>doc
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Copy documentation from the old to the new repository:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cp<span class="w"> </span>-n<span class="w"> </span>-r<span class="w"> </span>../doc/source/*<span class="w"> </span>./doc/source.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If files are moved to a different path like <code class="docutils literal notranslate"><span class="pre">doc/manual/source</span></code> (old) to <code class="docutils literal notranslate"><span class="pre">doc/source</span></code> (new), open the project in IDE and do a global search (ctrl + shift + f) for <code class="docutils literal notranslate"><span class="pre">../</span></code> or <code class="docutils literal notranslate"><span class="pre">..</span></code> and modify all relative path instances.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ensure the documentation can be built locally:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements/docs.txt
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-reload
+$<span class="w"> </span>sphinx-reload<span class="w"> </span>doc
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add and commit the changes:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>doc
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: migrate documentation&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>By hand, migrate content over to <code class="docutils literal notranslate"><span class="pre">README.rst</span></code>.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Level 5, we provide a rich template for <code class="docutils literal notranslate"><span class="pre">README.rst</span></code> instead of using <code class="docutils literal notranslate"><span class="pre">README.md</span></code>. If you already had a rich <code class="docutils literal notranslate"><span class="pre">README.md</span></code> in Level 4, you can use a tool to convert <code class="docutils literal notranslate"><span class="pre">.md</span></code> to <code class="docutils literal notranslate"><span class="pre">.rst</span></code>. For example, you may use this free <a class="reference external" href="https://cloudconvert.com/md-to-rst/">CloudConvert</a> tool.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add other public facing static files:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>AUTHORS.rst<span class="w"> </span>CHANGELOG.rst<span class="w"> </span>CODE_OF_CONDUCT.rst<span class="w"> </span>LICENSE.rst
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: add config files for authors, changelog, code of conduct, license&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>MANIFEST.in
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: add MANIFEST.in&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.rst
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: add README.rst&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a news file:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cp<span class="w"> </span>news/TEMPLATE.rst<span class="w"> </span>news/doc.rst
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">news/docs..rst</span></code>, add the following content under <code class="docutils literal notranslate"><span class="pre">Fixed:</span></code>:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>**Added:**
+
+* &lt;news item&gt;
+
+**Fixed:**
+
+* Support ``scikit-package`` Level 5 standard (https://scikit-package.github.io/scikit-package/).
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add the news files:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>news
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: add news files&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a PR from <code class="docutils literal notranslate"><span class="pre">usernmae/doc</span></code> to <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code>.</p>
+<blockquote>
+<div><p>The PR title can be <code class="docutils literal notranslate"><span class="pre">skpkg:</span> <span class="pre">migrate</span> <span class="pre">documentation,</span> <span class="pre">README,</span> <span class="pre">and</span> <span class="pre">public</span> <span class="pre">static</span> <span class="pre">files</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>Once the PR is merged to <code class="docutils literal notranslate"><span class="pre">upstream/main</span></code>, move to the final step!</p></li>
+</ol>
+</section>
+</section>
+<section id="step-3-final-check">
+<h2>Step 3. Final check<a class="headerlink" href="#step-3-final-check" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Review the following items:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>All the badges on <code class="docutils literal notranslate"><span class="pre">README.rst</span></code> are passing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LICENSE.rst</span></code> is verified as correct.</p></li>
+<li><p>Locally rendered documentation contains all appropriate pages, tutorials, and other human-written text is up-to-date with any changes in the code.</p></li>
+<li><p>Installation instructions in the <code class="docutils literal notranslate"><span class="pre">README.rst</span></code>, documentation, and the website are updated.</p></li>
+<li><p>Successfully run any tutorial examples or do functional testing with the latest Python version.</p></li>
+<li><p>Grammar and writing quality are checked (no typos).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Ask the project maintainer to create a PR from <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> to <code class="docutils literal notranslate"><span class="pre">upstream/main</span></code></p></li>
+<li><p>After the PR is merged to <code class="docutils literal notranslate"><span class="pre">upstream/main</span></code>, archive the old repository by naming it:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mv<span class="w"> </span>&lt;package-name&gt;<span class="w"> </span>&lt;package-name&gt;-archive
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Clone the latest version of the package from the remote:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/dev
+$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>&lt;URL-of-the-forked-repo&gt;
+$<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>&lt;URL-of-the-original-repo&gt;
+$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now, you should be able to run the following to test your package!</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>&lt;package-name&gt;-env
+$<span class="w"> </span>pytest
+$<span class="w"> </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Congratulations! You are done with migration!</p></li>
+</ol>
+</section>
+<section id="ready-for-release">
+<h2>Ready for release?<a class="headerlink" href="#ready-for-release" title="Link to this heading"></a></h2>
+<p>Are you ready to release your package to PyPI and conda-forge? Let’s start from <a class="reference internal" href="../release-guides/pypi-github.html#release-pypi-github"><span class="std std-ref">Publish on GitHub and to PyPI</span></a>!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorial-level-4-to-5.html" class="btn btn-neutral float-left" title="Migrate your package from Level 4 to Level 5" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../release-guides/pypi-github.html" class="btn btn-neutral float-right" title="Publish on GitHub and to PyPI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, The Trustees of Columbia University in the City of New York.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -11,16 +11,24 @@ Here are the 5 levels of sharing your code. We provide tutorials for each level.
 
 .. include:: snippets/5-levels-table.rst
 
-⏩️ Are you here to **start** a new Python project?
+⏩️ Are you here to **start a new Python** project?
 
-    If you are **new** to programming in general, we recommend you start from Levels 1-3, where you learn to reuse your scripts across files and folders without the need to install anything. Start :ref:`here <level-1-2-3-tutorials>`.
+    If you are **new** to programming, start from Level 1. You will learn how to reuse code across files and folders without needing to install anything. You will also learn how to write unit tests. To get started, visit :ref:`level-1-2-3-tutorials`.
 
-    If you have **experience** in developing scientific code in Python, we recommend you start from Level 4, where you learn to turn your project into a lightweight Python package that can be installed locally. Start :ref:`here <level-4-tutorial>`.
+    If you have **experience** developing scientific code in Python, we recommend starting with Level 4, where you will create a lightweight Python package with automatic formatting and unit testing using GitHub Actions. To get started, visit :ref:`level-4-tutorial`.
 
-⏩️ Do you want to **release** your code as a fully installable Python package?
+    If you are an **active open-source developer** and familiar with GitHub Actions and forking workflows, we recommend you start from Level 5 so that your code can be shared with the world. To get started, visit :ref:`level-5-tutorial`.
 
-    If your package is already developed with Level 4, and you are ready to release your package, let's learn to migrate from Level 4 to Level 5 and host documentation and release it to PyPI and conda-forge. Start :ref:`here <level-5-tutorial>`.
+⏩️ Are you here to **migrate** an existing Python project?
 
-⏩️ Do you want to explore **best practices** for developing scientific code? Start :ref:`here <billinge-group-standards>`.
+    Do you want to migrate your existing Python project/package to the ``scikit-package`` Level 5 ``public`` standard? To get started, visit :ref:`migrate-existing-package-to-level-5`.
 
-⏩️ Do you want to migrate your existing Python package to the ``scikit-package`` Level 5 ``public`` standard? Start :ref:`here <migration-guide>`.
+    Do you want to upgrade from Level 4 to Level 5? To get started, visit :ref:`level-4-to-5-tutorial`.
+
+⏩️ Are you here to **release** your package online?
+
+    Do you want to streamline the release process with GitHub tags and have your package installabe with ``conda install`` and ``pip install``? To get started, visit :ref:`level-5-tutorial`.
+
+⏩️ Do you want to explore **best practices** for developing and publishing scientific code?
+
+    The documentation covers, among other topics, how to write effective Git commit messages and news entries used for compiling the changelog, as well as a recommended workflow for developing and requesting new features within GitHub's ecosystem. To get started, visit :ref:`billinge-group-standards`.

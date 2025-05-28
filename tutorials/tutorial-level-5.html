@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>(Level 5) Share your code as a publicly installable package &mdash; scikit-package 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+    <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=cca77546"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Migrate your package from Level 4 to Level 5" href="tutorial-level-4-to-5.html" />
+    <link rel="prev" title="(Level 4) Share your code as a locally installable Python package" href="tutorial-level-4.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/scikit-package-logo-docs.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">GETTING STARTED</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">TUTORIALS</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial-level-1-2-3.html">(Level 1-3) Reuse code within a file, across files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-level-4.html">(Level 4) Share your code as a locally installable Python package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">(Level 5) Share your code as a publicly installable package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-scikit-package-with-conda">Install <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> with conda</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-create-a-new-project-with-scikit-package">Step 1. Create a new project with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-new-github-repository">Create a new GitHub repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-new-project-with-scikit-package">Create a new project with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-your-package-locally">Install your package locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-documentation-locally">Build documentation locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upload-readme-md-to-your-github-repository">Upload <code class="docutils literal notranslate"><span class="pre">README.md</span></code> to your GitHub repository</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-automate-code-linting-and-testing-with-github-actions">Step 2. Automate code linting and testing with GitHub Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup-pre-commit-ci-in-the-remote-repository-in-each-pull-request">1. Setup <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">CI</span></code> in the remote repository in each pull request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-codecov-token-for-github-repository">2. Setup Codecov token for GitHub repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#allow-github-actions-to-write-comments-in-prs">3. Allow GitHub Actions to write comments in PRs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-upload-rest-of-files-to-github-repository-with-pull-request-and-news-item">Step 3. Upload rest of files to GitHub repository with pull request and news item</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#upload-remaining-files">Upload remaining files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-news-items-in-the-github-pull-request">Add news items in the GitHub pull request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-pull-request">Create a pull request</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ready-for-public-release">Ready for public release?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recommended-how-to-develop-your-code-moving-forward-using-pull-requests">(Recommended) How to develop your code moving forward using pull requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-useful-features-available-in-level-5">(Optional) Useful features available in Level 5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preview-documentation-in-each-pull-request">Preview documentation in each pull request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-api-reference-documentation">Build API reference documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-default-prompt-values">Set up default prompt values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-level-4-to-5.html">Migrate your package from Level 4 to Level 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-level-5-migration.html">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RELEASE GUIDES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release-guides/pypi-github.html">Publish on GitHub and to PyPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-guides/conda-forge.html">Create conda package with conda-forge</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">PROGRAMMING GUIDES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../programming-guides/billinge-group-standards.html">Billinge Group standards</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../support/frequently-asked-questions.html">Frequently asked questions (FAQ)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">scikit-package</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">(Level 5) Share your code as a publicly installable package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/scikit-package/scikit-package/blob/main/doc/source/tutorials/tutorial-level-5.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="level-5-share-your-code-as-a-publicly-installable-package">
+<span id="level-5-tutorial"></span><h1>(Level 5) Share your code as a publicly installable package<a class="headerlink" href="#level-5-share-your-code-as-a-publicly-installable-package" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Welcome! By the end of the tutorial, you will be able to share your code as a publicly installable package that can be installed using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&lt;package-name&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">&lt;package-name&gt;</span></code>.</p>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
+<p>We assume that you have a basic understanding of starting a new project and have hosted at least one project on GitHub. If you are new to GitHub, we recommend you start from <a class="reference internal" href="tutorial-level-4.html#level-4-tutorial"><span class="std std-ref">(Level 4) Share your code as a locally installable Python package</span></a> where you will learn how to create a new project and host it on GitHub while using GitHub Actions to automatically format your code and run unit tests.</p>
+<p>Make sure you have the latest version of <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> installed:</p>
+</section>
+<section id="install-scikit-package-with-conda">
+<h3>Install <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> with conda<a class="headerlink" href="#install-scikit-package-with-conda" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Ensure that <code class="docutils literal notranslate"><span class="pre">conda</span></code> is installed on your local computer as instructed in <a class="reference internal" href="tutorial-level-1-2-3.html#conda-env-setup-simple"><span class="std std-ref">(Required) Use conda environment to install packages and run Python code</span></a>.</p></li>
+<li><p>Ensure that you have added the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel to your <code class="docutils literal notranslate"><span class="pre">conda</span></code> configuration.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>conda-forge
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new conda environment <code class="docutils literal notranslate"><span class="pre">skpkg-env</span></code> and install <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> and <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> simultaneously by running the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>skpkg-env<span class="w"> </span>scikit-package<span class="w"> </span>pre-commit
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the above command does not work, ensure you have added the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel to your <code class="docutils literal notranslate"><span class="pre">conda</span></code> configuration in Step 2.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Activate the environment:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>skpkg-env
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Confirm that you have the latest version of <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> available on GitHub:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>show<span class="w"> </span>scikit-package
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+</section>
+<section id="step-1-create-a-new-project-with-scikit-package">
+<h2>Step 1. Create a new project with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code><a class="headerlink" href="#step-1-create-a-new-project-with-scikit-package" title="Link to this heading"></a></h2>
+<section id="create-a-new-github-repository">
+<h3>Create a new GitHub repository<a class="headerlink" href="#create-a-new-github-repository" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Visit <a class="reference external" href="https://github.com/new">https://github.com/new</a>.</p></li>
+<li><p>Enter the <code class="docutils literal notranslate"><span class="pre">Repository</span> <span class="pre">name</span></code>. You may use <code class="docutils literal notranslate"><span class="pre">my-package</span></code> or any other name you like.</p></li>
+<li><p>Choose <code class="docutils literal notranslate"><span class="pre">Public</span></code>.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">None</span></code> under <span class="guilabel">Add .gitignore</span>.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">None</span></code> Under <span class="guilabel">Choose a license</span>.</p></li>
+<li><p>Click the <span class="guilabel">Create repository</span> green button to create the repository.</p></li>
+<li><p>Done!</p></li>
+</ol>
+</section>
+<section id="create-a-new-project-with-scikit-package">
+<h3>Create a new project with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code><a class="headerlink" href="#create-a-new-project-with-scikit-package" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Run the following command to create a new project folder with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> using the Level 5 <code class="docutils literal notranslate"><span class="pre">public</span></code> template:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>package<span class="w"> </span>create<span class="w"> </span>public
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Answer the following questions:</p>
+<blockquote>
+<div><blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description and example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>maintainer_name</p></td>
+<td><p>The name of the project maintainer.
+e.g., Simon Billinge</p></td>
+</tr>
+<tr class="row-odd"><td><p>maintainer_email</p></td>
+<td><p>The maintainer’s email address.
+e.g., <a class="reference external" href="mailto:sbillinge&#37;&#52;&#48;columbia&#46;edu">sbillinge<span>&#64;</span>columbia<span>&#46;</span>edu</a></p></td>
+</tr>
+<tr class="row-even"><td><p>maintainer_github_username</p></td>
+<td><p>The maintainer’s GitHub username.
+e.g., sbillinge</p></td>
+</tr>
+<tr class="row-odd"><td><p>contributors</p></td>
+<td><p>Individuals or groups contributing to the project.
+e.g., Sangjoon Lee, Simon Billinge, Billinge Group members</p></td>
+</tr>
+<tr class="row-even"><td><p>license_holders</p></td>
+<td><p>The license holders listed in <code class="docutils literal notranslate"><span class="pre">LICENSE.rst</span></code>.
+e.g., The Trustees of Columbia University in the City of New York</p></td>
+</tr>
+<tr class="row-odd"><td><p>project_name</p></td>
+<td><p>The name displayed in the <code class="docutils literal notranslate"><span class="pre">README.rst</span></code> and documentation.
+Use <code class="docutils literal notranslate"><span class="pre">name-with-hyphens</span></code> e.g., <code class="docutils literal notranslate"><span class="pre">my-package</span></code>.
+To support namespace imports, see <a class="reference internal" href="../support/frequently-asked-questions.html#faq-project-setup-namespace"><span class="std std-ref">FAQ</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>github_username_or_orgname</p></td>
+<td><p>The GitHub username or organization name.
+e.g., sbillinge or billingegroup</p></td>
+</tr>
+<tr class="row-odd"><td><p>github_repo_name</p></td>
+<td><p>The GitHub repository name.
+Use <code class="docutils literal notranslate"><span class="pre">name-with-hyphens</span></code> e.g., my-package</p></td>
+</tr>
+<tr class="row-even"><td><p>conda_pypi_package_dist_name</p></td>
+<td><p>The name used for publishing to PyPI and conda-forge.
+Use <code class="docutils literal notranslate"><span class="pre">name-with-hyphens</span></code> e.g., my-package</p></td>
+</tr>
+<tr class="row-odd"><td><p>package_dir_name</p></td>
+<td><p>The name of the package directory under <code class="docutils literal notranslate"><span class="pre">src</span></code>.
+Use <code class="docutils literal notranslate"><span class="pre">name_with_underscores</span></code> e.g., my_package</p></td>
+</tr>
+<tr class="row-even"><td><p>project_short_description</p></td>
+<td><p>A brief description of the project, shown in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>.
+e.g., A Python package standard for scientific code</p></td>
+</tr>
+<tr class="row-odd"><td><p>project_keywords</p></td>
+<td><p>A list of keywords included in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>.
+e.g., PDF, diffraction, neutron, x-ray</p></td>
+</tr>
+<tr class="row-even"><td><p>min_python_version</p></td>
+<td><p>The minimum supported Python version.
+e.g. 3.11</p></td>
+</tr>
+<tr class="row-odd"><td><p>max_python_version</p></td>
+<td><p>The maximum supported Python version
+e.g. 3.13</p></td>
+</tr>
+<tr class="row-even"><td><p>needs_c_code_compiled</p></td>
+<td><p>Specifies whether C code compilation is required.
+For pure Python packages, the default value is <code class="docutils literal notranslate"><span class="pre">No</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>has_gui_tests</p></td>
+<td><p>Specifies whether GUI tests are included.
+For most packages, the default value is <code class="docutils literal notranslate"><span class="pre">No</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may press the “Enter” key to accept the default values for the questions.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now type <code class="docutils literal notranslate"><span class="pre">ls</span></code> to check a new folder has been created.</p></li>
+</ol>
+</section>
+<section id="install-your-package-locally">
+<h3>Install your package locally<a class="headerlink" href="#install-your-package-locally" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Create a new conda environment. Let’s call this environment <code class="docutils literal notranslate"><span class="pre">my-package-env</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>my-package-env<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.13<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--file<span class="w"> </span>requirements/conda.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--file<span class="w"> </span>requirements/test.txt
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Activate the conda environment:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>my-package-env
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Build and install the package locally:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w"> </span>--no-deps
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>What is the <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag?</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> will also install the dependencies listed in <code class="docutils literal notranslate"><span class="pre">requirements/pip.txt</span></code>. The <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag indicates that you want to install the package in “editable” mode, which means that any changes you make to the source code will be reflected immediately without needing to reinstall the package. This is useful for development purposes.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>What is the <code class="docutils literal notranslate"><span class="pre">--no-deps</span></code> flag?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--no-deps</span></code> flag tells pip not to install any dependencies listed in <code class="docutils literal notranslate"><span class="pre">requirements/pip.txt</span></code>. This is because we have already installed the dependencies in the conda environment using the command above.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Why is it required to list dependencies both under <code class="docutils literal notranslate"><span class="pre">pip.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">conda.txt</span></code>? Please refer to the FAQ section <a class="reference internal" href="../support/frequently-asked-questions.html#faq-dependency-management"><span class="std std-ref">Dependency management</span></a>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Then, run the tests using the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pytest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ensure tests all pass with green checkmarks. Notice that in <code class="docutils literal notranslate"><span class="pre">tests/test_functions.py</span></code>, we are importing the locally installed package.</p></li>
+<li><p>Done!</p></li>
+</ol>
+</section>
+<section id="build-documentation-locally">
+<h3>Build documentation locally<a class="headerlink" href="#build-documentation-locally" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">/doc</span></code> is the the Sphinx documentation folder. The documentation will be built locally first and then automatically built and hosted on GitHub Pages when a new release is created.</p>
+<ol class="arabic">
+<li><p>Install the requirements for building the documentation.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements/docs.txt
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Then we will use an external tool called <code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code> to automatically reload the documentation when you make changes to <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-reload
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code> is only available via pip install.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>A HTML will appear automatically in your browser by running the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sphinx-reload<span class="w"> </span>doc
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Did you encounter <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span></code> error? Please refer to <a class="reference internal" href="../support/frequently-asked-questions.html#faq-doc-error-no-module-name"><span class="std std-ref">How do I fix the “No module named” error when I render documentation?</span></a>.</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="upload-readme-md-to-your-github-repository">
+<h3>Upload <code class="docutils literal notranslate"><span class="pre">README.md</span></code> to your GitHub repository<a class="headerlink" href="#upload-readme-md-to-your-github-repository" title="Link to this heading"></a></h3>
+<p>At the moment, the GitHub repository is empty. Let’s create a local branch called <code class="docutils literal notranslate"><span class="pre">main</span></code> and upload this local branch to the remote GitHub repository.</p>
+<ol class="arabic">
+<li><p>Follow the series of steps to initialite <code class="docutils literal notranslate"><span class="pre">Git</span></code>, create a new branch called <code class="docutils literal notranslate"><span class="pre">main</span></code> in the local repository and push the branch to the remote GitHub repository:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>init
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.md<span class="w">   </span><span class="c1"># If you are using Level 4</span>
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.rst<span class="w">  </span><span class="c1"># If you are using Level 5</span>
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: add README&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
+$<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;your-github-repo-url&gt;
+$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>What’s <code class="docutils literal notranslate"><span class="pre">origin</span></code>?</p>
+<p><code class="docutils literal notranslate"><span class="pre">origin</span></code> is the default name for the remote repository under your GitHub account. You can think of it as a nickname for the remote repository. You can also use any other name you like, but <code class="docutils literal notranslate"><span class="pre">origin</span></code> is the most common convention. For more, please read <a class="reference internal" href="../support/frequently-asked-questions.html#faq-github-terminology"><span class="std std-ref">Do you have a general summary of each term used in the GitHub workflow?</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>What is <code class="docutils literal notranslate"><span class="pre">-u</span></code> next to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-u</span></code> flag tells Git to set the upstream (remote) branch for the local branch. This means that in the future, you can simply use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> without specifying the remote and branch name, and Git will know where to push your changes.</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+</section>
+<section id="step-2-automate-code-linting-and-testing-with-github-actions">
+<span id="tutorial-level-5-github-setup"></span><h2>Step 2. Automate code linting and testing with GitHub Actions<a class="headerlink" href="#step-2-automate-code-linting-and-testing-with-github-actions" title="Link to this heading"></a></h2>
+<p>We will do 3 things in order to automate testing, linting, infrastructure in your GitHub repository.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#tutorial-5-pre-commit-ci"><span class="std std-ref">1. Setup pre-commit CI in the remote repository in each pull request</span></a></p></li>
+<li><p><a class="reference internal" href="#tutorial-5-github-codecov-setup"><span class="std std-ref">2. Setup Codecov token for GitHub repository</span></a></p></li>
+<li><p><a class="reference internal" href="#tutorial-5-ci-permission"><span class="std std-ref">3. Allow GitHub Actions to write comments in PRs</span></a></p></li>
+</ul>
+<p>The above steps will take 5 to 10 minutes in total but save hours and days of time in the long run.</p>
+<section id="setup-pre-commit-ci-in-the-remote-repository-in-each-pull-request">
+<span id="tutorial-5-pre-commit-ci"></span><h3>1. Setup <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">CI</span></code> in the remote repository in each pull request<a class="headerlink" href="#setup-pre-commit-ci-in-the-remote-repository-in-each-pull-request" title="Link to this heading"></a></h3>
+<p>Now, we want to ensure pre-commit hooks are also executed when a pull request is made in the remote repository.</p>
+<ol class="arabic simple">
+<li><p>Visit <a class="reference external" href="https://github.com/apps/pre-commit-ci">https://github.com/apps/pre-commit-ci</a> and click <span class="guilabel">Configure</span>.</p></li>
+<li><p>Select the repository(s).</p></li>
+<li><p>Done!</p></li>
+</ol>
+</section>
+<section id="setup-codecov-token-for-github-repository">
+<span id="tutorial-5-github-codecov-setup"></span><h3>2. Setup Codecov token for GitHub repository<a class="headerlink" href="#setup-codecov-token-for-github-repository" title="Link to this heading"></a></h3>
+<p id="codecov-token-setup">We also want to ensure we report that tests are written for the incoming code and report in the incoming PR as shown below:</p>
+<img alt="codecov-in-pr-comment" src="../_images/codecov-pr.png" />
+<ol class="arabic">
+<li><p>Ensure your GitHub repository is public.</p></li>
+<li><p>Visit <a class="reference external" href="https://app.codecov.io/">https://app.codecov.io/</a></p></li>
+<li><p>Click <span class="guilabel">Configure Codecov’s GitHub app</span>.</p></li>
+<li><p>Scroll down, find the repository, and click <span class="guilabel">Configure</span>.</p></li>
+<li><p>Scroll down again, copy <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code>, shown below:</p>
+<blockquote>
+<div><img alt="codecov-list-github-projects" src="../_images/codecov-token.png" />
+</div></blockquote>
+</li>
+<li><p>In your GitHub repository, visit <span class="menuselection">Settings -&gt; Actions -&gt; Secrets and Variables</span>.</p></li>
+<li><p>Click <span class="guilabel">New repository secret</span>.</p></li>
+<li><p>Paste the token value in the previous step and name it as <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code> as shown below:</p>
+<blockquote>
+<div><img alt="codecov-list-github-projects" src="../_images/codecov-github.png" />
+</div></blockquote>
+</li>
+<li><p>Done. From now on, a new comment will be generated on each PR.</p></li>
+</ol>
+</section>
+<section id="allow-github-actions-to-write-comments-in-prs">
+<span id="tutorial-5-ci-permission"></span><h3>3. Allow GitHub Actions to write comments in PRs<a class="headerlink" href="#allow-github-actions-to-write-comments-in-prs" title="Link to this heading"></a></h3>
+<p>We’d like to have GitHub Actions write comments in the incoming pull request to guide us. We need to provide permissions in the GitHub repository settings by following the steps below.</p>
+<ol class="arabic simple">
+<li><p>Visit the <span class="guilabel">Settings</span> page of the GitHub repository.</p></li>
+<li><p>Click on <span class="guilabel">Actions</span> in the left sidebar.</p></li>
+<li><p>Click on <span class="guilabel">General</span> in the left sidebar.</p></li>
+<li><p>Scroll down to the <span class="guilabel">Workflow permissions</span> section.</p></li>
+<li><p>Select <span class="guilabel">Read and write permissions</span>.</p></li>
+<li><p>Done!</p></li>
+</ol>
+</section>
+</section>
+<section id="step-3-upload-rest-of-files-to-github-repository-with-pull-request-and-news-item">
+<span id="github-news-item-pr"></span><h2>Step 3. Upload rest of files to GitHub repository with pull request and news item<a class="headerlink" href="#step-3-upload-rest-of-files-to-github-repository-with-pull-request-and-news-item" title="Link to this heading"></a></h2>
+<section id="upload-remaining-files">
+<h3>Upload remaining files<a class="headerlink" href="#upload-remaining-files" title="Link to this heading"></a></h3>
+<p>Before we upload anything to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch, we want to check the incoming code <strong>formatted</strong>, <strong>tested</strong>, and <strong>reviewed</strong>. We will try to automate these tasks as much as we can while creating a pull request (PR) to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch.</p>
+<ol class="arabic">
+<li><p>Just in case, pull the latest code from the remote <code class="docutils literal notranslate"><span class="pre">main</span></code> branch to your local <code class="docutils literal notranslate"><span class="pre">main</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>main
+$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Setup pre-commit locally so that code is linted before a commit is made:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Checkout a new branch called <code class="docutils literal notranslate"><span class="pre">skpkg-public</span></code> from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>skpkg-public
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: start a new level 5 project with skpkg&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>skpkg-public
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Did you see any failed <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> hooks after you typed <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span></code>? If so, no commit will be made. Confirm by typing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>. Then, simply re-run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;file&gt;</span></code> on the files that have been modified by <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> and re-enter the same commit message again, such as <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;skpkg:</span> <span class="pre">start</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">project</span> <span class="pre">with</span> <span class="pre">skpkg</span> <span class="pre">template&quot;</span></code>. If you are having trouble getting a commit to be accepted, please refer to the FAQ section <a class="reference internal" href="../support/frequently-asked-questions.html#faq-pre-commit-error"><span class="std std-ref">How do I fix conflicted hook auto-fix errors?</span></a>.</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="add-news-items-in-the-github-pull-request">
+<h3>Add news items in the GitHub pull request<a class="headerlink" href="#add-news-items-in-the-github-pull-request" title="Link to this heading"></a></h3>
+<p>Before merging to <code class="docutils literal notranslate"><span class="pre">main</span></code>, we require that each PR includes a file documenting the changes under <code class="docutils literal notranslate"><span class="pre">\news</span></code>. This ensures that the changes are documented in the <code class="docutils literal notranslate"><span class="pre">CHANGELOG.rst</span></code> when you create a new release, as shown in <a class="reference external" href="https://scikit-package.github.io/scikit-package/release.html">https://scikit-package.github.io/scikit-package/release.html</a>, for example.</p>
+<blockquote>
+<div><div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If no news file is created for this PR, the CI will not only fail but also write a comment to remind you to create a news file. Recall we granted GitHub Actions permission to write comments in the PR in the previous section.</p>
+</div>
+</div></blockquote>
+<p>Let’s create a news item for the changes made in this PR.</p>
+<ol class="arabic">
+<li><p>Check out the <code class="docutils literal notranslate"><span class="pre">skpkg-public</span></code> branch and sync with the remote branch.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>skpkg-public
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Make a copy of <code class="docutils literal notranslate"><span class="pre">news/TEMPLATE.rst</span></code> and rename to <code class="docutils literal notranslate"><span class="pre">news/&lt;branch-name&gt;.rst</span></code>.</p></li>
+<li><p>(optional) If you are using a Linux shell, you can setup an <code class="docutils literal notranslate"><span class="pre">alias</span></code> to make the creation of the news file ready for editing much quicker and easier. Read <a class="reference internal" href="../support/frequently-asked-questions.html#faq-github-news-automate"><span class="std std-ref">How can I automate the process of creating a new file from the command line?</span></a> to learn how to setup shortcuts.</p></li>
+<li><p>Do not delete <code class="docutils literal notranslate"><span class="pre">news/TEMPLATE.rst</span></code>. Leave it as it is.</p></li>
+<li><p>Do not modify other section headers in the rst file. Replace <code class="docutils literal notranslate"><span class="pre">*</span> <span class="pre">&lt;news</span> <span class="pre">item&gt;</span></code> with the following item:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>**Added:**
+
+* Support public releases with scikit-package by migrating the package from Level 4 to Level 5 in the scikit-package standard.
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Push the change to the remote GitHub repository.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>news/skpkg-public.rst
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;chore: Add news item for skpkg-public&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>skpkg-public
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="create-a-pull-request">
+<h3>Create a pull request<a class="headerlink" href="#create-a-pull-request" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>In your GitHub repository, click <span class="guilabel">Compare &amp; pull request</span>.</p></li>
+<li><p>Set the PR title as <code class="docutils literal notranslate"><span class="pre">skpkg:</span> <span class="pre">start</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">project</span> <span class="pre">with</span> <span class="pre">Level</span> <span class="pre">5</span> <span class="pre">tutorial</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">base</span></code> branch should be <code class="docutils literal notranslate"><span class="pre">main</span></code> and the <code class="docutils literal notranslate"><span class="pre">compare</span></code> branch should be <code class="docutils literal notranslate"><span class="pre">skpkg-public</span></code>.</p></li>
+<li><p>Click <span class="guilabel">Create pull request</span>.</p></li>
+<li><p>Wait all GitHub Action workflows to run including <code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">on</span> <span class="pre">PR</span></code>.</p></li>
+<li><p>Also wait for <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> CI to run and pass.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Did <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">CI</span></code> fail?</p>
+<p>If the pre-commit failed, you will need to first pull the new commit created by <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">CI</span></code> before making any new edits locally. You can do this by running the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>skpkg-public
+</pre></div>
+</div>
+<p>If you have more problems, please read the FAQ section on <a class="reference internal" href="../support/frequently-asked-questions.html#faq-pre-commit-error"><span class="std std-ref">How do I fix conflicted hook auto-fix errors?</span></a>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Click <span class="guilabel">Files changed</span> in the PR to to review the new files added to the repository.</p></li>
+<li><p>Once reviewed, click <span class="guilabel">Merge pull request</span>.</p></li>
+<li><p>Delete the remote branch after merging.</p></li>
+<li><p>Visit your GitHub repository and confirm that the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch is updated.</p></li>
+<li><p>Congratulations! You are done with creating a Level 5 project with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code>.</p></li>
+</ol>
+</section>
+</section>
+<section id="ready-for-public-release">
+<h2>Ready for public release?<a class="headerlink" href="#ready-for-public-release" title="Link to this heading"></a></h2>
+<p>Congratulations! Let’s release your package to PyPI and conda-forge. Visit <a class="reference internal" href="../release-guides/pypi-github.html#release-pypi-github"><span class="std std-ref">Publish on GitHub and to PyPI</span></a> to have your package available via <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>!</p>
+</section>
+<section id="recommended-how-to-develop-your-code-moving-forward-using-pull-requests">
+<h2>(Recommended) How to develop your code moving forward using pull requests<a class="headerlink" href="#recommended-how-to-develop-your-code-moving-forward-using-pull-requests" title="Link to this heading"></a></h2>
+<p>Assume that you have successfully followed the previous steps. Now, you want to add new code to your GitHub repository. Perhaps you are working with a group of people. Here is a high-level overview with step-by-step instructions on how to do that:</p>
+<ol class="arabic">
+<li><p>Pull the latest code from the remote <code class="docutils literal notranslate"><span class="pre">main</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>main
+$<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Recall that we used the name <code class="docutils literal notranslate"><span class="pre">origin</span></code> as the nickname for the remote GitHub repository.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Ensure that your local <code class="docutils literal notranslate"><span class="pre">main</span></code> branch is synced with the remote <code class="docutils literal notranslate"><span class="pre">main</span></code> branch by running:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>log
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a new local branch from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch. Let’s call this branch <code class="docutils literal notranslate"><span class="pre">skpkg</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>&lt;branch-name&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Modify any file that you want. Then, stage and commit the changes:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>&lt;file-modified-added-deleted&gt;
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: &lt;your commit message&gt;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Push your code from <code class="docutils literal notranslate"><span class="pre">&lt;branch-name&gt;</span></code> to the remote <code class="docutils literal notranslate"><span class="pre">&lt;branch-name&gt;</span></code> branch:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>--set-upstream<span class="w"> </span>origin<span class="w"> </span>&lt;branch-name&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Visit your GitHub repository.</p></li>
+<li><p>Create a PR from <code class="docutils literal notranslate"><span class="pre">origin/&lt;branch-name&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">origin/main</span></code>.</p></li>
+<li><p>Wait for the <code class="docutils literal notranslate"><span class="pre">Tests</span> <span class="pre">on</span> <span class="pre">PR</span></code> and <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> checks to pass.</p></li>
+<li><p>Merge the PR, delete the branch.</p></li>
+<li><p>Repeat the steps in this section.</p></li>
+<li><p>Done!</p></li>
+</ol>
+</section>
+<section id="optional-useful-features-available-in-level-5">
+<h2>(Optional) Useful features available in Level 5<a class="headerlink" href="#optional-useful-features-available-in-level-5" title="Link to this heading"></a></h2>
+<section id="preview-documentation-in-each-pull-request">
+<h3>Preview documentation in each pull request<a class="headerlink" href="#preview-documentation-in-each-pull-request" title="Link to this heading"></a></h3>
+<p>Do you want to review documentation changes easily? Follow the instructions in <a class="reference internal" href="../support/frequently-asked-questions.html#faq-doc-pr-preview"><span class="std std-ref">How can I preview the documentation in each pull request?</span></a> to view rendered documentation for each pull request with a public URL.</p>
+</section>
+<section id="build-api-reference-documentation">
+<h3>Build API reference documentation<a class="headerlink" href="#build-api-reference-documentation" title="Link to this heading"></a></h3>
+<p>Here is how to create an API reference section, like <a class="reference external" href="https://www.diffpy.org/diffpy.utils/api/diffpy.utils.html">https://www.diffpy.org/diffpy.utils/api/diffpy.utils.html</a>:</p>
+<ul class="simple">
+<li><p>If your package can be imported as <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">&lt;package_name&gt;</span></code>, visit <a class="reference internal" href="../support/frequently-asked-questions.html#faq-doc-api-standard"><span class="std std-ref">How do I build API .rst files automatically for a standard Python package?</span></a>.</p></li>
+<li><p>If your package supports <strong>namespace import</strong>, like <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">&lt;namespace_name&gt;.&lt;package_name&gt;</span></code>, visit <a class="reference internal" href="../support/frequently-asked-questions.html#faq-doc-api-namespace"><span class="std std-ref">How do I build API .rst files for a Python package with a namespace import?</span></a>.</p></li>
+</ul>
+</section>
+<section id="set-up-default-prompt-values">
+<h3>Set up default prompt values<a class="headerlink" href="#set-up-default-prompt-values" title="Link to this heading"></a></h3>
+<p>When you create a new project in Level 3, 4 or 5, you will be prompted to enter the values for some variables, like <code class="docutils literal notranslate"><span class="pre">maintainer_name</span></code>, <code class="docutils literal notranslate"><span class="pre">maintainer_email</span></code> and <code class="docutils literal notranslate"><span class="pre">maintainer_github_username</span></code>. These variables have default values in the package. It can save your time and reduce errors if you can change the default values that are more relevant for your installation of <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code>.</p>
+<p>To set up your own default promprt values, please refer to <a class="reference internal" href="../support/frequently-asked-questions.html#faq-set-default-prompt-value"><span class="std std-ref">How can I change the default values that appear in the prompt when creating projects in Level 3,4,5?</span></a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorial-level-4.html" class="btn btn-neutral float-left" title="(Level 4) Share your code as a locally installable Python package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial-level-4-to-5.html" class="btn btn-neutral float-right" title="Migrate your package from Level 4 to Level 5" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, The Trustees of Columbia University in the City of New York.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Publish on GitHub and to PyPI &mdash; scikit-package 0.0.3 documentation</title>
+  <title>Publish on GitHub and to PyPI &mdash; scikit-package 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=7cc827d7"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Create conda package with conda-forge" href="conda-forge.html" />
-    <link rel="prev" title="(Level 5) Share code as a publicly installable Python package" href="../tutorials/level-5-tutorial.html" /> 
+    <link rel="prev" title="Migrate your existing package with scikit-package" href="../tutorials/tutorial-level-5-migration.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,9 +53,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">TUTORIALS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/level-1-2-3-tutorials.html">(Level 1-3) Reuse code within a file, across files and folders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/level-4-tutorial.html">(Level 4) Share code as a locally installable Python package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/level-5-tutorial.html">(Level 5) Share code as a publicly installable Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-1-2-3.html">(Level 1-3) Reuse code within a file, across files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-4.html">(Level 4) Share your code as a locally installable Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-5.html">(Level 5) Share your code as a publicly installable package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-4-to-5.html">Migrate your package from Level 4 to Level 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-5-migration.html">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RELEASE GUIDES</span></p>
 <ul class="current">
@@ -75,10 +77,6 @@
 <p class="caption" role="heading"><span class="caption-text">PROGRAMMING GUIDES</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../programming-guides/billinge-group-standards.html">Billinge Group standards</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples/migration.html">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
 <ul>
@@ -145,7 +143,9 @@
 <li><p>In your terminal, run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">pull</span> <span class="pre">upstream</span> <span class="pre">main</span></code> to sync with the main branch.</p></li>
 <li><p>(Optional but recommended) Install and run the <code class="docutils literal notranslate"><span class="pre">vulture</span></code> tool to identify and manually remove unused or dead code before tagging a release:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>vulture
+<span class="c1">#### Example outputs after running vulture ####</span>
 $<span class="w"> </span>vulture<span class="w"> </span>src/<span class="w"> </span>tests/
+tests/test_module1.py:22:<span class="w"> </span>unused<span class="w"> </span>import<span class="w"> </span><span class="s1">&#39;os&#39;</span><span class="w"> </span><span class="o">(</span><span class="m">100</span>%<span class="w"> </span>confidence<span class="o">)</span>
 </pre></div>
 </div>
 <p>Review the output and remove or suppress unused code when it is not needed to keep the release clean and maintainable.</p>
@@ -162,6 +162,10 @@ $<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>
 <li><p>You will see that the GitHub Actions workflow is triggered and the package is built and uploaded to PyPI and GitHub.</p></li>
 <li><p>For <code class="docutils literal notranslate"><span class="pre">pre-release</span></code>, it will not update the documentation on GitHub Pages. It will also not update the changelog. See the next section for the full release process.</p></li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Did you encounter any errors in the workflow, such as permission issues? Check the solutions provided in <a class="reference internal" href="../support/frequently-asked-questions.html#faq-release-ci-failed"><span class="std std-ref">Release CI failed. What should I do?</span></a>.</p>
+</div>
 </section>
 <section id="full-release-after-pre-release">
 <h2>Full release after pre-release<a class="headerlink" href="#full-release-after-pre-release" title="Link to this heading"></a></h2>
@@ -174,9 +178,12 @@ $<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>
 </pre></div>
 </div>
 </li>
-<li><p>Notice that the documentation is deployed. It will also update the <code class="docutils literal notranslate"><span class="pre">CHANGELOG.rst</span></code>.</p></li>
-<li><p>Now that you have your source code uploaded to <code class="docutils literal notranslate"><span class="pre">PyPI</span></code>, we will then now provide a conda package as well.</p></li>
+<li><p>Notice that <code class="docutils literal notranslate"><span class="pre">CHANGELOG.rst</span></code> is also updated with the new release version and the documentation is built under the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p></li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Did you encounter any errors in the workflow, such as issues related to <code class="docutils literal notranslate"><span class="pre">CHANGELOG.rst</span></code>? Check the solutions provided in <a class="reference internal" href="../support/frequently-asked-questions.html#faq-release-ci-failed"><span class="std std-ref">Release CI failed. What should I do?</span></a>.</p>
+</div>
 </section>
 <section id="what-s-next-create-conda-package">
 <h2>What’s next? Create conda package<a class="headerlink" href="#what-s-next-create-conda-package" title="Link to this heading"></a></h2>
@@ -243,7 +250,7 @@ $<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../tutorials/level-5-tutorial.html" class="btn btn-neutral float-left" title="(Level 5) Share code as a publicly installable Python package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tutorials/tutorial-level-5-migration.html" class="btn btn-neutral float-left" title="Migrate your existing package with scikit-package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="conda-forge.html" class="btn btn-neutral float-right" title="Create conda package with conda-forge" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

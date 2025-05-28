@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Billinge Group standards &mdash; scikit-package 0.0.3 documentation</title>
+  <title>Billinge Group standards &mdash; scikit-package 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=7cc827d7"></script>
+      <script src="../_static/documentation_options.js?v=f539c95a"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -23,7 +23,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Migrate your existing package with scikit-package" href="../examples/migration.html" />
+    <link rel="next" title="Frequently asked questions (FAQ)" href="../support/frequently-asked-questions.html" />
     <link rel="prev" title="Create conda package with conda-forge" href="../release-guides/conda-forge.html" /> 
 </head>
 
@@ -53,9 +53,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">TUTORIALS</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/level-1-2-3-tutorials.html">(Level 1-3) Reuse code within a file, across files and folders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/level-4-tutorial.html">(Level 4) Share code as a locally installable Python package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/level-5-tutorial.html">(Level 5) Share code as a publicly installable Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-1-2-3.html">(Level 1-3) Reuse code within a file, across files and folders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-4.html">(Level 4) Share your code as a locally installable Python package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-5.html">(Level 5) Share your code as a publicly installable package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-4-to-5.html">Migrate your package from Level 4 to Level 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial-level-5-migration.html">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RELEASE GUIDES</span></p>
 <ul>
@@ -73,6 +75,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#where-to-place-the-news-item-in-branch-name-rst">Where to place the news item in <code class="docutils literal notranslate"><span class="pre">&lt;branch-name&gt;.rst</span></code>?</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-tutorials">Writing tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unit-tests">Unit tests</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#why-do-we-write-unit-tests">Why do we write unit tests?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#group-and-organize-test-cases">Group and organize test cases</a></li>
@@ -87,10 +90,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#other-considerations-for-maintaining-group-infrastructure">Other considerations for maintaining group infrastructure</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">EXAMPLES</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples/migration.html">Migrate your existing package with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code></a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">SUPPORT</span></p>
 <ul>
@@ -159,6 +158,20 @@ skpkg: Using scikit-package to create a new package or maintain an existing pack
 <p>How do I write a good Git commit message?</p>
 <p>A commit message is written for PR reviewers and for debuggers. Avoid verbosity for a quick overview. An ideal commit message communicates file(s) of interest, the reason for the modification, and what modifications were made. e.g., “chore: move all files from docs to doc for scikit-packaging.”</p>
 </div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>How do I write a good GitHub issue title?</p>
+<p>The issue is where we discuss and determine whether to implement via a pull request. It’s much easier for the project maintainer(s) to recall the problem/intended behavior and the technique in that order. Here are some examples:</p>
+<blockquote>
+<div><p>e.g., “feat: set custom default prompt values after <code class="docutils literal notranslate"><span class="pre">package</span> <span class="pre">create</span> <span class="pre">&lt;command&gt;</span></code> using hidden config file.”</p>
+<p>e.g., “feat: preview rendered documentation in each PR with GitHub Actions”</p>
+</div></blockquote>
+<p>If you have a <strong>suggestion</strong>, you can also create an issue with a question mark:</p>
+<blockquote>
+<div><p>e.g., “refactor: how can we dynamically retrieve python min/max default Python versions in documentation?”</p>
+<p>e.g., “refactor: can we standarlize the way we write CHANGELOG (news.rst file)?”</p>
+</div></blockquote>
+</div>
 </section>
 <section id="pull-request-practices">
 <h3>Pull request practices<a class="headerlink" href="#pull-request-practices" title="Link to this heading"></a></h3>
@@ -166,9 +179,13 @@ skpkg: Using scikit-package to create a new package or maintain an existing pack
 <li><p>Have a theme for each PR to reduce cognitive overload for the reviewer.</p></li>
 <li><p>Make PRs small with the possibility of rejection.</p></li>
 <li><p>Write <code class="docutils literal notranslate"><span class="pre">closes</span> <span class="pre">#&lt;issue-number&gt;</span></code> in the PR comment to automatically close the issue when the PR is merged. See <a class="reference external" href="https://github.com/scikit-package/scikit-package/pull/350">https://github.com/scikit-package/scikit-package/pull/350</a>.</p></li>
-<li><p>A PR should close an issue on GitHub. If there is no issue, make one. If the issue is big, consider breaking it down into smaller issues.</p></li>
-<li><p>Review your own PR. Start as a draft PR, click <span class="guilabel">Files changed</span>, add comments, and then request a review. In-line comments are needed if the changes are not obvious for the reviewer. See <a class="reference external" href="https://github.com/scikit-package/scikit-package/pull/310">https://github.com/scikit-package/scikit-package/pull/310</a>.</p></li>
-<li><p>If <em>another commit</em> was pushed after “&#64;username ready for review”, write another comment <em>“&#64;username ready for review after fixing ____”</em> so that the reviewer is directed to the PR, not the file changes by the new commit.</p></li>
+<li><p>A PR should <strong>close an issue</strong> on GitHub. If there is no issue, make one. If the issue is big, consider breaking it down into smaller issues.</p></li>
+<li><p><strong>Review</strong> your own PR. Start as a draft PR, click <span class="guilabel">Files changed</span>, add comments, and then request a review. In-line comments are needed if the changes are not obvious for the reviewer. See <a class="reference external" href="https://github.com/scikit-package/scikit-package/pull/310">https://github.com/scikit-package/scikit-package/pull/310</a>.</p></li>
+<li><p>If <strong>another commit</strong> was pushed after <em>“&#64;username ready for review”</em>, write another comment <em>“&#64;username ready for review after fixing ____”</em> so that the reviewer is directed to the PR, not the file changes by the new commit.</p></li>
+<li><p>Use the pull request template provided in <code class="docutils literal notranslate"><span class="pre">.github/PULL_REQUEST_TEMPLATE</span></code>. In the PR comment, <strong>highlight inputs and outputs</strong> of the changes (screenshots/outputs).</p></li>
+<li><p><strong>Address all</strong> in-line comments made by the reviewer(s) before asking for another round of review. If you have seen a comment and agree with it but no action is needed, a thumbs-up emoji is sufficient.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> to quote the reviewer’s sentence(s) and write your response below it. If there are multiple comments, tag the reviewer(s) with &#64;username.</p></li>
+<li><p>During PR review, when reviewers propose new ideas or suggestions beyond the scope of the PR, create an issue using the issue template and include a link to the specific PR comment URL (not the PR itself). Then, reply to the reviewer(s) to confirm that the issue has been created.</p></li>
 <li><p>PR from a new branch if it contains a meaningless commit history.</p></li>
 <li><p>Do not force push. Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code> to unwind the previous commit.</p></li>
 <li><p>If you’ve made a mistake but have not used <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">&lt;file-name&gt;</span></code>.</p></li>
@@ -213,6 +230,12 @@ skpkg: Using scikit-package to create a new package or maintain an existing pack
 <li><p><code class="docutils literal notranslate"><span class="pre">Security:**</span></code>: include fixes or improvements related to vulnerabilities, authentication, or access control.</p></li>
 </ul>
 </section>
+</section>
+<section id="writing-tutorials">
+<h2>Writing tutorials<a class="headerlink" href="#writing-tutorials" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>In general, we want to provide step-by-step instructions, including CLI commands and expected outputs. However, to avoid “reinventing the internet”, we should provide recommended workflows and tools. For example, in <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code>, we recommend using <code class="docutils literal notranslate"><span class="pre">Git</span> <span class="pre">for</span> <span class="pre">Windows</span></code> for Windows users so that everyone, including macOS and Linux users, can also follow the same steps.</p></li>
+</ol>
 </section>
 <section id="unit-tests">
 <h2>Unit tests<a class="headerlink" href="#unit-tests" title="Link to this heading"></a></h2>
@@ -331,7 +354,7 @@ skpkg: Using scikit-package to create a new package or maintain an existing pack
 <span id="file-folder-naming-convention"></span><h2>Naming conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading"></a></h2>
 <section id="when-should-we-use-hyphens-or-underscores-in-file-and-folder-names">
 <h3>When should we use hyphens <code class="docutils literal notranslate"><span class="pre">-</span></code> or underscores <code class="docutils literal notranslate"><span class="pre">_</span></code> in file and folder names?<a class="headerlink" href="#when-should-we-use-hyphens-or-underscores-in-file-and-folder-names" title="Link to this heading"></a></h3>
-<p>Use hyphens <code class="docutils literal notranslate"><span class="pre">-</span></code> for project names, package names, GitHub repositories, folder names, branch names, and static files like <code class="docutils literal notranslate"><span class="pre">.rst</span></code>, <code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">.yml</span></code>, and <code class="docutils literal notranslate"><span class="pre">.png</span></code>. For CLI, also use minus signs <code class="docutils literal notranslate"><span class="pre">-</span></code> for args  like <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">pr</span> <span class="pre">list</span> <span class="pre">--author</span> <span class="pre">&quot;&#64;sbillinge&quot;</span></code> Check an example documentation of <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> here: <a class="reference external" href="https://github.com/scikit-package/scikit-package/tree/main/doc/source">https://github.com/scikit-package/scikit-package/tree/main/doc/source</a>.</p>
+<p>Use hyphens <code class="docutils literal notranslate"><span class="pre">-</span></code> for project names, package names, GitHub repositories, folder names, branch names, and static files like <code class="docutils literal notranslate"><span class="pre">.rst</span></code>, <code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">.yml</span></code>, and <code class="docutils literal notranslate"><span class="pre">.png</span></code>. For CLI, also use hyphens <code class="docutils literal notranslate"><span class="pre">-</span></code> for args like <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">pr</span> <span class="pre">list</span> <span class="pre">--author</span> <span class="pre">&quot;&#64;sbillinge&quot;</span></code> Check an example documentation of <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> here: <a class="reference external" href="https://github.com/scikit-package/scikit-package/tree/main/doc/source">https://github.com/scikit-package/scikit-package/tree/main/doc/source</a>.</p>
 <p>Use underscores <code class="docutils literal notranslate"><span class="pre">_</span></code> in the following two cases:</p>
 <ol class="arabic simple">
 <li><p>Python files, e.g., <code class="docutils literal notranslate"><span class="pre">tests/test_diffraction_objects.py</span></code>.</p></li>
@@ -339,8 +362,11 @@ skpkg: Using scikit-package to create a new package or maintain an existing pack
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> automatically creates a folder with underscores <code class="docutils literal notranslate"><span class="pre">_</span></code> for the project directory name and <code class="docutils literal notranslate"><span class="pre">.py</span></code> files.</p>
-<p>We recommend using a single word for folder names that contain Python scripts, e.g., <code class="docutils literal notranslate"><span class="pre">src/example_package/parsers</span></code>, so that it can be imported as <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">example_package.parsers</span> <span class="pre">import</span> <span class="pre">&lt;module&gt;</span></code>. This follows Python conventions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> automatically creates a folder with underscores <code class="docutils literal notranslate"><span class="pre">_</span></code> for the project directory name and <code class="docutils literal notranslate"><span class="pre">.py</span></code> files. We recommend using a single word for folder names that contain Python scripts, e.g., <code class="docutils literal notranslate"><span class="pre">src/example_package/parsers</span></code>, so that it can be imported as <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">example_package.parsers</span> <span class="pre">import</span> <span class="pre">&lt;module&gt;</span></code>. This follows Python conventions.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>There are still cases where we do not strictly follow the above conventions, typically for configuration files. In such cases, we adhere to the naming conventions of the respective tool. For example, <code class="docutils literal notranslate"><span class="pre">.codespell/ignore_lines.txt</span></code> is a configuration file for the <code class="docutils literal notranslate"><span class="pre">codespell</span></code> tool. <code class="docutils literal notranslate"><span class="pre">.github/ISSUE_TEMPLATE</span></code> is the designated folder for storing GitHub issue templates. If you are unsure, please feel free to open an issue in the <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code> GitHub repository.</p>
 </div>
 </section>
 </section>
@@ -364,7 +390,7 @@ skpkg: Using scikit-package to create a new package or maintain an existing pack
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../release-guides/conda-forge.html" class="btn btn-neutral float-left" title="Create conda package with conda-forge" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../examples/migration.html" class="btn btn-neutral float-right" title="Migrate your existing package with scikit-package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../support/frequently-asked-questions.html" class="btn btn-neutral float-right" title="Frequently asked questions (FAQ)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

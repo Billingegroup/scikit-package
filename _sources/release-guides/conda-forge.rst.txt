@@ -21,15 +21,15 @@ Overview
 
 The process is divided into three steps:
 
-:ref:`Step 1. Prepare recipe <conda-forge-recipe-prepare>`
+:ref:`conda-forge-recipe-prepare`
 
     You will learn to prepare package information in a file called ``meta.yaml`` using our ``scikit-package`` template. The file serves as a recipe for building your conda package. The recipe contains the package version, the source code, the dependencies, the license, etc.
 
-:ref:`Step 2. Upload the recipe <conda-forge-recipe-upload>`
+:ref:`conda-forge-recipe-upload`
 
     Once you have the ``meta.yaml`` generated, you will create a pull request to the the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ from your forked repository. The staged-recipes repository is a temporary location for the recipe until it is approved by the conda-forge community.
 
-:ref:`Step 3. Recipe review <conda-forge-recipe-review>`
+:ref:`conda-forge-recipe-review`
 
     One of the community members of conda-forge will review your ``meta.yaml`` and provide feedback. Once the recipe is approved, you will have a package available for ``conda install`` automatically, and you will have your own designated feedstock repository that contains ``meta.yaml`` in ``https://github.com/conda-forge/<package-name>-feedstock``.
 
@@ -40,7 +40,9 @@ Step 1. Prepare conda package recipe in ``meta.yaml``
 
 We first need to generate a "recipe" for the conda package. The recipe contains the type of programming language, the package version, the source code, the dependencies, and license, etc. This recipe is stored in a file called ``meta.yaml``.
 
-.. seealso:: Do you want to learn more about ``meta.yaml``? Please read :ref:`Appendix 1 <meta-yaml-info>`.
+.. seealso::
+
+    Do you want to learn more about ``meta.yaml``? Please read :ref:`meta-yaml-info`.
 
 Hence, in Step 1, we will generate ``meta.yaml`` using the Billinge group's template. See https://github.com/conda-forge/diffpy.utils-feedstock/blob/main/recipe/meta.yaml as an example of a ``meta.yaml`` used in production.
 
@@ -78,10 +80,9 @@ Hence, in Step 1, we will generate ``meta.yaml`` using the Billinge group's temp
 
 .. important::
 
-   - For a pure python package, have you removed the ``build`` section under the ``requirements``? See https://github.com/conda-forge/diffpy.utils-feedstock/blob/main/recipe/meta.yaml for example.
+   - For a pure python package, have you removed the ``build`` section under the ``requirements``? You can find an example ``meta.yaml`` here: https://github.com/conda-forge/diffpy.utils-feedstock/blob/main/recipe/meta.yaml
 
    - Have you double-checked the license file name in ``meta.yaml`` against the license files in the project repository. If you are unsure, please confirm with the project owner.
-
 
 .. _conda-forge-recipe-upload:
 
