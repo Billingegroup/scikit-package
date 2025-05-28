@@ -48,6 +48,22 @@ Please see an example here: https://github.com/scikit-package/scikit-package/iss
 
     A commit message is written for PR reviewers and for debuggers. Avoid verbosity for a quick overview. An ideal commit message communicates file(s) of interest, the reason for the modification, and what modifications were made. e.g., “chore: move all files from docs to doc for scikit-packaging."
 
+.. attention::
+
+    How do I write a good GitHub issue title?
+
+    The issue is where we discuss and determine whether to implement via a pull request. It's much easier for the project maintainer(s) to recall the problem/intended behavior and the technique in that order. Here are some examples:
+
+        e.g., "feat: set custom default prompt values after ``package create <command>`` using hidden config file."
+
+        e.g., "feat: preview rendered documentation in each PR with GitHub Actions"
+
+    If you have a **suggestion**, you can also create an issue with a question mark:
+
+        e.g., "refactor: how can we dynamically retrieve python min/max default Python versions in documentation?"
+
+        e.g., "refactor: can we standarlize the way we write CHANGELOG (news.rst file)?"
+
 Pull request practices
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -57,17 +73,25 @@ Pull request practices
 
 #. Write ``closes #<issue-number>`` in the PR comment to automatically close the issue when the PR is merged. See https://github.com/scikit-package/scikit-package/pull/350.
 
-#. A PR should close an issue on GitHub. If there is no issue, make one. If the issue is big, consider breaking it down into smaller issues.
+#. A PR should **close an issue** on GitHub. If there is no issue, make one. If the issue is big, consider breaking it down into smaller issues.
 
-#. Review your own PR. Start as a draft PR, click :guilabel:`Files changed`, add comments, and then request a review. In-line comments are needed if the changes are not obvious for the reviewer. See https://github.com/scikit-package/scikit-package/pull/310.
+#. **Review** your own PR. Start as a draft PR, click :guilabel:`Files changed`, add comments, and then request a review. In-line comments are needed if the changes are not obvious for the reviewer. See https://github.com/scikit-package/scikit-package/pull/310.
 
-#. If *another commit* was pushed after “@username ready for review”, write another comment *“@username ready for review after fixing ____”* so that the reviewer is directed to the PR, not the file changes by the new commit.
+#. If **another commit** was pushed after *“@username ready for review”*, write another comment *“@username ready for review after fixing ____”* so that the reviewer is directed to the PR, not the file changes by the new commit.
+
+#. Use the pull request template provided in ``.github/PULL_REQUEST_TEMPLATE``. In the PR comment, **highlight inputs and outputs** of the changes (screenshots/outputs).
+
+#. **Address all** in-line comments made by the reviewer(s) before asking for another round of review. If you have seen a comment and agree with it but no action is needed, a thumbs-up emoji is sufficient.
+
+#. Use ``>`` to quote the reviewer's sentence(s) and write your response below it. If there are multiple comments, tag the reviewer(s) with @username.
+
+#. During PR review, when reviewers propose new ideas or suggestions beyond the scope of the PR, create an issue using the issue template and include a link to the specific PR comment URL (not the PR itself). Then, reply to the reviewer(s) to confirm that the issue has been created.
 
 #. PR from a new branch if it contains a meaningless commit history.
 
 #. Do not force push. Use ``git revert`` to unwind the previous commit.
 
-#. If you’ve made a mistake but have not used ``git add``, use ``git restore <file-name>``.
+#. If you've made a mistake but have not used ``git add``, use ``git restore <file-name>``.
 
 #. Before CI is integrated, include local test passing results in each PR to save time for the reviewer.
 
@@ -79,8 +103,12 @@ Pull request practices
 
 .. _news-item-practice:
 
-
 .. include:: ../snippets/news-file-format.rst
+
+Writing tutorials
+-----------------
+
+#. In general, we want to provide step-by-step instructions, including CLI commands and expected outputs. However, to avoid "reinventing the internet", we should provide recommended workflows and tools. For example, in ``scikit-package``, we recommend using ``Git for Windows`` for Windows users so that everyone, including macOS and Linux users, can also follow the same steps.
 
 Unit tests
 ----------
@@ -196,11 +224,11 @@ Docstrings
 
 Please bookmark the following:
 
-  PEP257: https://peps.python.org/pep-0257
+    PEP257: https://peps.python.org/pep-0257
 
-  PEP8: https://peps.python.org/pep-0008/
+    PEP8: https://peps.python.org/pep-0008/
 
-  NumPy document style guide: https://numpydoc.readthedocs.io/en/latest/format.html
+    NumPy document style guide: https://numpydoc.readthedocs.io/en/latest/format.html
 
 In the group, we follow the NumPy standard:
 

@@ -27,12 +27,7 @@ Virtual environments allow you to create isolated environments, each with their 
 
     .. code-block:: bash
 
-        # Check Python version
         $ python --version
-
-        # Run the script
-        $ python <python_file_name>.py
-
 
     .. note::
 

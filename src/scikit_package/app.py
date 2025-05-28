@@ -14,20 +14,22 @@ config_file = Path(config_file).expanduser()
 exist_config = config_file.exists()
 
 
-def create(package_type):
-    if package_type == "workspace":
+def create(entry_type):
+    if entry_type == "workspace":
         run_cookiecutter(f"{SKPKG_GITHUB_URL}-workspace")
-    elif package_type == "system":
+    elif entry_type == "system":
         run_cookiecutter(f"{SKPKG_GITHUB_URL}-system")
-    elif package_type == "public":
+    elif entry_type == "public":
         run_cookiecutter(SKPKG_GITHUB_URL)
-    elif package_type == "conda-forge":
+    elif entry_type == "conda-forge":
         run_cookiecutter(f"{SKPKG_GITHUB_URL}-conda-forge")
+    elif entry_type == "manuscript":
+        run_cookiecutter(f"{SKPKG_GITHUB_URL}-manuscript")
 
 
 def update():
     # FIXME: Implement the update command.
-    # As of now it does the same as the create command.
+    # As of now it does the same as the create public command.
     run_cookiecutter(SKPKG_GITHUB_URL)
 
 
@@ -60,36 +62,21 @@ def setup_subparsers(parser):
     # Create "create" subparser
     parser_create = parser.add_parser("create", help="Create a new package")
 
-    # Add subcommands under "create" for different
-    sub_create = parser_create.add_subparsers(
-        dest="package_type", required=True
-    )
+    # Add subcommands under "create"
+    sub_create = parser_create.add_subparsers(dest="subcommand", required=True)
 
-    # "workspace" subcommand
-    parser_create_workspace = sub_create.add_parser(
-        "workspace", help="Create a workspace package"
-    )
-    parser_create_workspace.set_defaults(func=create, package_type="workspace")
+    # Define all "create" subcommands
+    create_subcommands = [
+        ("workspace", "Create a workspace package"),
+        ("system", "Create a system package"),
+        ("public", "Create a public package"),
+        ("conda-forge", "Create a conda-forge recipe meta.yml file"),
+        ("manuscript", "Create Overleaf LaTeX template of Billinge group."),
+    ]
 
-    # "system" subcommand
-    parser_create_system = sub_create.add_parser(
-        "system", help="Create a system package"
-    )
-    parser_create_system.set_defaults(func=create, package_type="system")
-
-    # "public" subcommand
-    parser_create_public = sub_create.add_parser(
-        "public", help="Create a public package"
-    )
-    parser_create_public.set_defaults(func=create, package_type="public")
-
-    # "conda-forge" subcommand
-    parser_create_conda_forge = sub_create.add_parser(
-        "conda-forge", help="Create a conda-forge recipe meta.yml file"
-    )
-    parser_create_conda_forge.set_defaults(
-        func=create, package_type="conda-forge"
-    )
+    for subcommand, help_text in create_subcommands:
+        parser_sub = sub_create.add_parser(subcommand, help=help_text)
+        parser_sub.set_defaults(func=create, subcommand=subcommand)
 
     # Create "update" subparser
     parser_update = parser.add_parser(
@@ -106,7 +93,9 @@ def main():
     >>> package create workspace
     >>> package create system
     >>> package create public
-    >>> package update
+    >>> package create manuscript
+    >>> package create conda-forge
+    >>> package update (Not implemented yet)
     """
 
     parser = ArgumentParser(
@@ -115,7 +104,7 @@ def main():
     subparsers = parser.add_subparsers(dest="command", required=True)
     setup_subparsers(subparsers)
     args = parser.parse_args()
-    args.func(args.package_type)
+    args.func(args.subcommand)
 
 
 if __name__ == "__main__":

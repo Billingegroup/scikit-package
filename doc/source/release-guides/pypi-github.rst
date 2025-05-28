@@ -50,7 +50,9 @@ Start pre-release
    .. code-block:: bash
 
       $ conda install vulture
+      #### Example outputs after running vulture ####
       $ vulture src/ tests/
+      tests/test_module1.py:22: unused import 'os' (100% confidence)
 
    Review the output and remove or suppress unused code when it is not needed to keep the release clean and maintainable.
 
