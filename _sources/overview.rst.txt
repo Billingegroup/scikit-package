@@ -13,11 +13,11 @@ Here are the 5 levels of sharing your code. We provide tutorials for each level.
 
 ⏩️ Are you here to **start a new Python** project?
 
-    If you are **new** to programming, start from Level 1. You will learn how to reuse code across files and folders without needing to install anything. You will also learn how to write unit tests. To get started, visit :ref:`level-1-2-3-tutorials`.
+    If you are **new** to programming, start from Level 1. You will learn how to reuse code across files and folders. You will also learn how to write unit tests. To get started, visit :ref:`level-1-2-3-tutorials`.
 
-    If you have **experience** developing scientific code in Python, we recommend starting with Level 4, where you will create a lightweight Python package with automatic formatting and unit testing using GitHub Actions. To get started, visit :ref:`level-4-tutorial`.
+    If you have **experience** developing scientific code in Python, we recommend starting from Level 4, where you will create a lightweight Python package with automatic formatting and unit testing using GitHub Actions. To get started, visit :ref:`level-4-tutorial`.
 
-    If you are an **active open-source developer** and familiar with GitHub Actions and forking workflows, we recommend you start from Level 5 so that your code can be shared with the world. To get started, visit :ref:`level-5-tutorial`.
+    If you are an **active open-source developer** and you are also familiar with GitHub Actions and forking workflows, we recommend you start from Level 5. To get started, visit :ref:`level-5-tutorial`.
 
 ⏩️ Are you here to **migrate** an existing Python project?
 

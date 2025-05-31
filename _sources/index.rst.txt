@@ -158,17 +158,6 @@ The Billinge Group's ``scikit-package`` has been modified from the NSLS-II scien
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: EXAMPLES
-
-   examples/overview
-   examples/example-1-level-4-new
-   examples/example-2-level-5-new
-   examples/example-3-level-5-namespace
-   examples/example-4-level-5-migration
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
    :caption: SUPPORT
 
    support/frequently-asked-questions

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>(Level 5) Share your code as a publicly installable package &mdash; scikit-package 0.0.1 documentation</title>
+  <title>(Level 5) Share your code as a publicly installable package &mdash; scikit-package 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=9205c5d6"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -194,7 +194,7 @@
 <li><p>Visit <a class="reference external" href="https://github.com/new">https://github.com/new</a>.</p></li>
 <li><p>Enter the <code class="docutils literal notranslate"><span class="pre">Repository</span> <span class="pre">name</span></code>. You may use <code class="docutils literal notranslate"><span class="pre">my-package</span></code> or any other name you like.</p></li>
 <li><p>Choose <code class="docutils literal notranslate"><span class="pre">Public</span></code>.</p></li>
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">None</span></code> under <span class="guilabel">Add .gitignore</span>.</p></li>
+<li><p>We want to create an empty repository so set <code class="docutils literal notranslate"><span class="pre">None</span></code> under <span class="guilabel">Add .gitignore</span>.</p></li>
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">None</span></code> Under <span class="guilabel">Choose a license</span>.</p></li>
 <li><p>Click the <span class="guilabel">Create repository</span> green button to create the repository.</p></li>
 <li><p>Done!</p></li>
@@ -219,13 +219,13 @@
 <col style="width: 75.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
+<tr class="row-odd"><th class="head"><p>Prompt</p></th>
 <th class="head"><p>Description and example</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>maintainer_name</p></td>
-<td><p>The name of the project maintainer.
+<td><p>The name of the project maintainer. This person will make the public releases.
 e.g., Simon Billinge</p></td>
 </tr>
 <tr class="row-odd"><td><p>maintainer_email</p></td>
@@ -262,7 +262,8 @@ Use <code class="docutils literal notranslate"><span class="pre">name-with-hyphe
 Use <code class="docutils literal notranslate"><span class="pre">name-with-hyphens</span></code> e.g., my-package</p></td>
 </tr>
 <tr class="row-odd"><td><p>package_dir_name</p></td>
-<td><p>The name of the package directory under <code class="docutils literal notranslate"><span class="pre">src</span></code>.
+<td><p>The name of the package directory under <code class="docutils literal notranslate"><span class="pre">src</span></code>. This name will be used in
+when importing modules from this package.
 Use <code class="docutils literal notranslate"><span class="pre">name_with_underscores</span></code> e.g., my_package</p></td>
 </tr>
 <tr class="row-even"><td><p>project_short_description</p></td>
@@ -275,11 +276,12 @@ e.g., PDF, diffraction, neutron, x-ray</p></td>
 </tr>
 <tr class="row-even"><td><p>min_python_version</p></td>
 <td><p>The minimum supported Python version.
-e.g. 3.11</p></td>
+e.g. 3.11.  Current practice (<a class="reference external" href="https://scientific-python.org/specs/spec-0000/">SPEC 0 specification</a>) is to drop support
+for Python versions that were released more than 72 months ago.</p></td>
 </tr>
 <tr class="row-odd"><td><p>max_python_version</p></td>
 <td><p>The maximum supported Python version
-e.g. 3.13</p></td>
+e.g. 3.13.  Ideally, the current latest version.</p></td>
 </tr>
 <tr class="row-even"><td><p>needs_c_code_compiled</p></td>
 <td><p>Specifies whether C code compilation is required.
@@ -287,7 +289,8 @@ For pure Python packages, the default value is <code class="docutils literal not
 </tr>
 <tr class="row-odd"><td><p>has_gui_tests</p></td>
 <td><p>Specifies whether GUI tests are included.
-For most packages, the default value is <code class="docutils literal notranslate"><span class="pre">No</span></code>.</p></td>
+For most packages, the default value is <code class="docutils literal notranslate"><span class="pre">No</span></code> but will be
+yes if your app has a gui and there are tests that run the GUI.</p></td>
 </tr>
 </tbody>
 </table>
@@ -328,7 +331,7 @@ For most packages, the default value is <code class="docutils literal notranslat
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>What is the <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag?</p>
-<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> will also install the dependencies listed in <code class="docutils literal notranslate"><span class="pre">requirements/pip.txt</span></code>. The <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag indicates that you want to install the package in “editable” mode, which means that any changes you make to the source code will be reflected immediately without needing to reinstall the package. This is useful for development purposes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag indicates that you want to install the package in “editable” mode, which means that any changes you make to the source code will be reflected immediately without needing to reinstall the package. This is useful for development purposes.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -356,49 +359,91 @@ For most packages, the default value is <code class="docutils literal notranslat
 <h3>Build documentation locally<a class="headerlink" href="#build-documentation-locally" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">/doc</span></code> is the the Sphinx documentation folder. The documentation will be built locally first and then automatically built and hosted on GitHub Pages when a new release is created.</p>
 <ol class="arabic">
-<li><p>Install the requirements for building the documentation.</p>
+<li><p>Install documentation related dependencies:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements/docs.txt
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Then we will use an external tool called <code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code> to automatically reload the documentation when you make changes to <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files.</p>
+<li><p>Enter into the <code class="docutils literal notranslate"><span class="pre">doc</span></code> project directory and render documentation:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-reload
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>doc
+$<span class="w"> </span>make<span class="w"> </span>html
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code> is only available via pip install.</p>
 </div>
 </div></blockquote>
 </li>
-<li><p>A HTML will appear automatically in your browser by running the following command:</p>
+<li><p>Open the rendered documentation via web browser:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sphinx-reload<span class="w"> </span>doc
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>open<span class="w"> </span>_build/html/index.html
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Here is a shortcut if you want to use it from the root directory of the project:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>doc<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>html<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>open<span class="w"> </span>_build/html/index.html<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>Did you encounter <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span></code> error? Please refer to <a class="reference internal" href="../support/frequently-asked-questions.html#faq-doc-error-no-module-name"><span class="std std-ref">How do I fix the “No module named” error when I render documentation?</span></a>.</p>
+<p>You can use a <code class="docutils literal notranslate"><span class="pre">alias</span></code> shortcut. Open <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> in your text editor and add the following line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="nv">doc</span><span class="o">=</span><span class="s1">&#39;cd doc &amp;&amp; make html &amp;&amp; open _build/html/index.html &amp;&amp; cd ..&#39;</span>
+</pre></div>
+</div>
+<p>Apply the changes to your current terminal session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+<p>Now, you can simply enter the <code class="docutils literal notranslate"><span class="pre">doc</span></code> command in your terminal to build and open the documentation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>doc
+</pre></div>
+</div>
 </div>
 </div></blockquote>
 </li>
 </ol>
+<p>(Optional for macOS/Linux only) Do you want to re-render documentation without running <code class="docutils literal notranslate"><span class="pre">doc</span></code> command every time? You can use <code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code>.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Install the dependencies including <code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code> sourced from <code class="docutils literal notranslate"><span class="pre">PyPI</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements/docs.txt
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-reload
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Run the following command to start live-reloading:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sphinx-reload<span class="w"> </span>doc
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now, each time you make changes to the documentation, it will be automatically reloaded in your web browser.</p></li>
+</ol>
+</div></blockquote>
 </section>
 <section id="upload-readme-md-to-your-github-repository">
 <h3>Upload <code class="docutils literal notranslate"><span class="pre">README.md</span></code> to your GitHub repository<a class="headerlink" href="#upload-readme-md-to-your-github-repository" title="Link to this heading"></a></h3>
 <p>At the moment, the GitHub repository is empty. Let’s create a local branch called <code class="docutils literal notranslate"><span class="pre">main</span></code> and upload this local branch to the remote GitHub repository.</p>
 <ol class="arabic">
-<li><p>Follow the series of steps to initialite <code class="docutils literal notranslate"><span class="pre">Git</span></code>, create a new branch called <code class="docutils literal notranslate"><span class="pre">main</span></code> in the local repository and push the branch to the remote GitHub repository:</p>
+<li><p>Follow the series of steps to initialite <code class="docutils literal notranslate"><span class="pre">Git</span></code>.  You only have to do this once.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>init
-$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.md<span class="w">   </span><span class="c1"># If you are using Level 4</span>
+$<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;your-github-repo-url&gt;
+$<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Commit the README file to the Git database and push it to the remote GitHub repository:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.md<span class="w">   </span><span class="c1"># If you are using Level 4</span>
 $<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.rst<span class="w">  </span><span class="c1"># If you are using Level 5</span>
 $<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: add README&quot;</span>
-$<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
-$<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;your-github-repo-url&gt;
 $<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
 </pre></div>
 </div>
@@ -419,7 +464,7 @@ $<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>
 </section>
 <section id="step-2-automate-code-linting-and-testing-with-github-actions">
 <span id="tutorial-level-5-github-setup"></span><h2>Step 2. Automate code linting and testing with GitHub Actions<a class="headerlink" href="#step-2-automate-code-linting-and-testing-with-github-actions" title="Link to this heading"></a></h2>
-<p>We will do 3 things in order to automate testing, linting, infrastructure in your GitHub repository.</p>
+<p>We will do 3 things in order to automate testing, linting, infrastructure in your GitHub repository. Rest assured that these configuration steps are only done once!</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#tutorial-5-pre-commit-ci"><span class="std std-ref">1. Setup pre-commit CI in the remote repository in each pull request</span></a></p></li>
 <li><p><a class="reference internal" href="#tutorial-5-github-codecov-setup"><span class="std std-ref">2. Setup Codecov token for GitHub repository</span></a></p></li>
@@ -439,24 +484,29 @@ $<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>
 <span id="tutorial-5-github-codecov-setup"></span><h3>2. Setup Codecov token for GitHub repository<a class="headerlink" href="#setup-codecov-token-for-github-repository" title="Link to this heading"></a></h3>
 <p id="codecov-token-setup">We also want to ensure we report that tests are written for the incoming code and report in the incoming PR as shown below:</p>
 <img alt="codecov-in-pr-comment" src="../_images/codecov-pr.png" />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Is this NOT your first time setting up Codecov?</strong> Setting up the Codecov report can be done just once for all projects under your account or a GitHub organization with the “global token.” Please check whether you already have a Codecov token. If it exists, you may still follow the steps, but you don’t have to create a new token. Instead, you can use the existing token.</p>
+</div>
 <ol class="arabic">
 <li><p>Ensure your GitHub repository is public.</p></li>
-<li><p>Visit <a class="reference external" href="https://app.codecov.io/">https://app.codecov.io/</a></p></li>
-<li><p>Click <span class="guilabel">Configure Codecov’s GitHub app</span>.</p></li>
-<li><p>Scroll down, find the repository, and click <span class="guilabel">Configure</span>.</p></li>
-<li><p>Scroll down again, copy <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code>, shown below:</p>
+<li><p>Visit <code class="docutils literal notranslate"><span class="pre">https://app.codecov.io/account/gh/&lt;your_github_username_or_orgname&gt;/org-upload-token</span></code>, replacing <code class="docutils literal notranslate"><span class="pre">&lt;your_github_username_or_orgname&gt;</span></code> with your actual GitHub username or organization name.</p></li>
+<li><p>Under <span class="guilabel">Select an authentication option</span>, select <code class="docutils literal notranslate"><span class="pre">Required</span></code>.</p></li>
+<li><p>Click <span class="guilabel">Generate</span> or <span class="guilabel">Regenerate</span> to create a new token.</p></li>
+<li><p>Click on the clipboard symbol to copy <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code>. Copy the one that starts with <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN=</span></code>. Here is an example of what it looks like:</p>
 <blockquote>
-<div><img alt="codecov-list-github-projects" src="../_images/codecov-token.png" />
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CODECOV_TOKEN=abcd1234-5678-1234-5678-b862619523bd
+</pre></div>
+</div>
 </div></blockquote>
 </li>
-<li><p>In your GitHub repository, visit <span class="menuselection">Settings -&gt; Actions -&gt; Secrets and Variables</span>.</p></li>
-<li><p>Click <span class="guilabel">New repository secret</span>.</p></li>
-<li><p>Paste the token value in the previous step and name it as <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code> as shown below:</p>
-<blockquote>
-<div><img alt="codecov-list-github-projects" src="../_images/codecov-github.png" />
-</div></blockquote>
-</li>
-<li><p>Done. From now on, a new comment will be generated on each PR.</p></li>
+<li><p>In your GitHub repository, visit <span class="menuselection">Settings ‣ Actions ‣ Secrets and Variables</span>.</p></li>
+<li><p>If the repository is under your personal account, click <span class="guilabel">New repository secret</span>.</p></li>
+<li><p>If the repository is under an organization, click <span class="menuselection">Manage organization secrets ‣ New organization secret</span>.</p></li>
+<li><p>Under the <span class="guilabel">Name</span> field, type <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code>.</p></li>
+<li><p>Under the <span class="guilabel">Secret</span> field, paste the <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code> value you copied earlier without any modification.</p></li>
+<li><p>Click <span class="guilabel">Add secret</span> to save the token.</p></li>
+<li><p>Done. From now on, a new Codecov comment will be generated on each PR!</p></li>
 </ol>
 </section>
 <section id="allow-github-actions-to-write-comments-in-prs">

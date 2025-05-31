@@ -1,6 +1,6 @@
 First, let's ensure that before we upload any of our code to the remote repository, we lint the code and ensure that it is formatted correctly. We will use a library called ``pre-commit`` to do this.
 
-#. Configure ``pre-commit`` to run each time a new commit is made:
+#. Configure ``pre-commit`` to run each time a new commit is made. You only have to do this once. We assume you have pre-commit installed in your environment by running ``conda install pre-commit``:
 
     .. code-block:: bash
 
@@ -11,7 +11,7 @@ First, let's ensure that before we upload any of our code to the remote reposito
     .. code-block:: bash
 
         $ git add .
-        $ git commit -m "skpkg: start a new project"
+        $ git commit -m "skpkg: initial commit of a new project"
 
 #. Ensure that all of the ``pre-commit`` hooks pass:
 

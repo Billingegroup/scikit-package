@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; scikit-package 0.0.1 documentation</title>
+  <title>&lt;no title&gt; &mdash; scikit-package 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=9205c5d6"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -102,14 +102,20 @@
              
   <p>At the moment, the GitHub repository is empty. Let’s create a local branch called <code class="docutils literal notranslate"><span class="pre">main</span></code> and upload this local branch to the remote GitHub repository.</p>
 <ol class="arabic">
-<li><p>Follow the series of steps to initialite <code class="docutils literal notranslate"><span class="pre">Git</span></code>, create a new branch called <code class="docutils literal notranslate"><span class="pre">main</span></code> in the local repository and push the branch to the remote GitHub repository:</p>
+<li><p>Follow the series of steps to initialite <code class="docutils literal notranslate"><span class="pre">Git</span></code>.  You only have to do this once.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>init
-$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.md<span class="w">   </span><span class="c1"># If you are using Level 4</span>
+$<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;your-github-repo-url&gt;
+$<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Commit the README file to the Git database and push it to the remote GitHub repository:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.md<span class="w">   </span><span class="c1"># If you are using Level 4</span>
 $<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.rst<span class="w">  </span><span class="c1"># If you are using Level 5</span>
 $<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: add README&quot;</span>
-$<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
-$<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;your-github-repo-url&gt;
 $<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
 </pre></div>
 </div>

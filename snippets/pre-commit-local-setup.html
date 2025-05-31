@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; scikit-package 0.0.1 documentation</title>
+  <title>&lt;no title&gt; &mdash; scikit-package 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=9205c5d6"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -102,7 +102,7 @@
              
   <p>First, let’s ensure that before we upload any of our code to the remote repository, we lint the code and ensure that it is formatted correctly. We will use a library called <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> to do this.</p>
 <ol class="arabic">
-<li><p>Configure <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> to run each time a new commit is made:</p>
+<li><p>Configure <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> to run each time a new commit is made. You only have to do this once. We assume you have pre-commit installed in your environment by running <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">pre-commit</span></code>:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pre-commit<span class="w"> </span>install
 </pre></div>
@@ -112,7 +112,7 @@
 <li><p>Let’s now stage and commit the code:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
-$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: start a new project&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;skpkg: initial commit of a new project&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>

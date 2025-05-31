@@ -6,7 +6,7 @@
 Overview
 --------
 
-You will learn to share code across any files in your computer. By the end of this tutorial, you will also have your package hosted on GitHub, where you will utilize GitHub Actions to run automatic linting and testing for the incoming code in your GitHub repository.
+In this tutorial, you will learn how to share code across any files in your computer. By the end of this tutorial, you will also have your package hosted on GitHub, where you will utilize GitHub Actions to run automatic linting and testing for the incoming code in your GitHub repository.
 
 This tutorial should take about 10 to 15 minutes.
 
@@ -26,7 +26,7 @@ For Level 4, we assume you have prior experience in developing scientific code i
 
 .. seealso:: Are you new to Git and GitHub?
 
-    Please read the GitHub workflow section in :ref:`faq-github-workflow` to familiarize yourself with the common jargon and terms used.
+    Please read the GitHub workflow section in :ref:`faq-github-workflow` to familiarize yourself with the common jargon and terms used. There are also many online resources for learning Git and GitHub.
 
 .. include:: ../snippets/scikit-installation.rst
 
@@ -42,7 +42,7 @@ In this tutorial, we will start by creating a new GitHub repository. The GitHub 
 
 .. include:: ../snippets/github-create-new-repo.rst
 
-Let's now create a new package in your computer (local) next using ``scikit-package``.
+Let's now create a new package in your computer (local) using ``scikit-package``.
 
 Create a new project with ``scikit-package``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -53,24 +53,24 @@ Create a new project with ``scikit-package``
 
         $ package create system
 
-#. Answer the following questions:
+#. Respond to the following prompts:
 
     .. list-table::
        :header-rows: 1
        :widths: 25 75
 
-       * - Field
+       * - Prompt
          - Description and example
        * - project_name
-         - The project name displayed on README. e.g., my-package
+         - The project name. Will be used for the top level folder name. e.g., my-package
        * - github_username_or_orgname
-         - The GitHub username or organization name, e.g., sbillinge or billingegroup
+         - Your GitHub username, or GitHub organization name, where it will be hosted on GitHub. e.g., sbillinge or billingegroup
        * - github_repo_name
-         - The GitHub repository name. Use ``name-with-hypens``. e.g., my-package
+         - The GitHub repository name. Usually the same as the project_name. Use ``name-with-hypens``. e.g., my-package
        * - conda_pypi_package_dist_name
-         - The name displayed on PyPI and conda-forge. Use ``name-with-hypens``. e.g., my-package
+         - The name displayed on PyPI and conda-forge. Must not already exist there. Use ``name-with-hypens``. e.g., my-package
        * - package_dir_name
-         - The name of the package directory under ``src``. Use ``name_with_underscores``. e.g., my_package
+         - The name of the package directory under ``src``. Usually the same as the project name  but use ``name_with_underscores``. e.g., my_package
        * - contributors
          - The contributors involved in the project. e.g., Sangjoon Lee, Simon Billinge
 
@@ -93,13 +93,13 @@ Create a new project with ``scikit-package``
         ├── README.md
         ├── pyproject.toml
         ├── requirements
-        │   ├── conda.txt
-        │   ├── pip.txt
-        │   └── test.txt
+        │   ├── conda.txt
+        │   ├── pip.txt
+        │   └── test.txt
         ├── src
-        │   └── my_package
-        │       ├── __init__.py
-        │       └── functions.py
+        │   └── my_package
+        │   ├── __init__.py
+        │   └── functions.py
         └── tests
             └── test_functions.py
 

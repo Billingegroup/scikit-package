@@ -1,15 +1,20 @@
 At the moment, the GitHub repository is empty. Let's create a local branch called ``main`` and upload this local branch to the remote GitHub repository.
 
-#. Follow the series of steps to initialite ``Git``, create a new branch called ``main`` in the local repository and push the branch to the remote GitHub repository:
+#. Follow the series of steps to initialite ``Git``.  You only have to do this once.
 
     .. code-block:: bash
 
         $ git init
+        $ git remote add origin <your-github-repo-url>
+        $ git branch -M main
+
+#. Commit the README file to the Git database and push it to the remote GitHub repository:
+
+    .. code-block:: bash
+
         $ git add README.md   # If you are using Level 4
         $ git add README.rst  # If you are using Level 5
         $ git commit -m "docs: add README"
-        $ git branch -M main
-        $ git remote add origin <your-github-repo-url>
         $ git push -u origin main
 
     .. note:: What's ``origin``?

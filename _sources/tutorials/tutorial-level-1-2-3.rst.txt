@@ -13,7 +13,8 @@ Overview
 
 By the end of this tutorial, you will be able to reuse code within a file by creating a function.
 
-You will also learn the recommended setup to setup Terminal and Python environment for development and distribution.
+You will also learn the recommended way to use the Terminal to set up your computer and your Python
+environment for development and distribution.
 
 .. _conda-env-setup-simple:
 
@@ -69,10 +70,11 @@ Example
           v4 = [7, 8]
           print(dot_product(v3, v4))  # returns 83
 
-#. Install ``numpy`` and run the code:
+#. Run the code after activating your conda environment that you have created in :ref:`conda-env-setup-simple` above:
 
      .. code-block:: bash
 
+          $ conda activate <env-name>
           $ python shared_functions.py
 
 #. You should see the outputs of 11 and 83 printed.
@@ -123,7 +125,8 @@ Example code
 
           v1 = [1, 2]
           v2 = [3, 4]
-          print(dot_product(v1, v2))  # returns 11
+          v1dotv2 = dot_product(v1, v2)
+          print(v1dotv2)  # returns 11
 
      .. seealso::
 
@@ -138,11 +141,21 @@ Example code
 
           v3 = [5, 6]
           v4 = [7, 8]
-          print(shared_functions.dot_product(v3, v4))  # returns 83
+          v3dotv4 = shared_functions.dot_product(v3, v4)
+          print(v3dotv4)  # returns 83
 
-.. note::
+     .. note::
 
-    Notice that in ``file_two.py``, you can import the entire module ``shared_functions`` and use the function ``dot_product`` by prefixing it with the module name. Importing a module is generally recommended. This way, you can avoid name conflicts and make your code more readable.
+          Notice that in ``file_two.py``, we imported the entire module ``shared_functions``.  When we did this, all the functions are imported but to access them you have to prefix the module name.
+          This way, you can avoid name conflicts as well as making your code more readable.
+
+#. As we have done in Level 1, activate the conda environment and run the code:
+
+     .. code-block:: bash
+
+          $ conda activate <env-name>
+          $ python file_one.py
+          $ python file_two.py
 
 What's next?
 ^^^^^^^^^^^^
@@ -159,12 +172,19 @@ The goal in Level 3 is to reuse code across multiple projects. Hence, the name a
 
 Also, you will learn to execute and write **unit tests** for your reusable code. Unit tests are small, isolated tests that verify functionality. They help ensure that your code behaves as expected and can catch bugs early in the development process. You might want to run them before sharing code with others or deploying it to more projects.
 
-Lastly, you will also learn to **automate formatting** to keep your code clean and consistent so that others, including you, can save time reading and adding new code.
+Lastly, you will also learn to **automate formatting** to keep your code clean and consistent so that others, including future-you, can save time reading and adding new code.
 
 This tutorial will take about 3-10 minutes.
 
 Initiate a new project with ``scikit-package``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Activate your conda environment you've created in :ref:`conda-env-setup-simple` above and install ``scikit-package``:
+
+     .. code-block:: bash
+
+          $ conda activate <env-name>
+          $ conda install scikit-package
 
 #. Create a new project by running the following command:
 
@@ -213,7 +233,7 @@ Let's go through some important files and their purposes:
 
      - ``README.md`` is a markdown file for project documentation. Typically, it includes a project description, installation instructions, and usage examples. You can edit this file to add your own project information.
 
-     - The ``__init__.py`` file, when placed inside a directory, tells Python to treat that directory as a package, which can contain modules. A module can be either a Python script or another package (i.e., a subpackage). The ``__init__.py`` file is empty in the ``workspace`` level.
+     - The ``__init__.py`` file, when placed inside a directory, tells Python to treat that directory as a package, which can contain modules. A Python module is a file with a ``.py`` extension that contains Python code. The ``__init__.py`` file is empty in the ``workspace`` level.
 
      - The ``tests`` folder contains tests for your shared functions. For example, ``test_shared_functions.py`` includes tests for the ``dot_product()`` function using ``pytest``. General naming convention for test files is ``test_<module_name>.py``. Similarly, test function names should be ``test_<function_name>()``. This is how ``pytest`` recognizes them as test functions. This can also contain tests for your sub-project modules.
 
@@ -234,7 +254,7 @@ Before running code, you need to set the ``PYTHONPATH`` environment variable to 
 
      .. code-block:: bash
 
-          # For macOS/Linux user
+          # For macOS/Linux/Git for Windows user
           $ export PYTHONPATH="${PYTHONPATH}:<path-to-your-workspace-folder>"
 
           # For Windows (Powershell) user
@@ -244,7 +264,8 @@ Before running code, you need to set the ``PYTHONPATH`` environment variable to 
 
      .. code-block:: bash
 
-          $ pip install -r requirements.txt
+          $ conda activate <env-name>
+          $ conda install --file requirements.txt
 
      .. note::
 
@@ -254,12 +275,14 @@ Before running code, you need to set the ``PYTHONPATH`` environment variable to 
 
      .. code-block:: bash
 
-          $ python proj-one/proj_one_code.py
+          $ cd proj-one
+          $ python proj_one_code.py
 
 #. Also run the tests:
 
      .. code-block:: bash
 
+          $ cd ..        # go back to the parent directory to run pytest
           $ pytest
 
      You should see the output similar to:
@@ -286,12 +309,14 @@ Before running code, you need to set the ``PYTHONPATH`` environment variable to 
 Automatic code formatting with ``pre-commit``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We want to automatically format code. ``pre-commit`` is a tool that helps you with that.
+We want to automatically format code syntax to make it more standard and
+more readable. ``pre-commit`` is a tool that helps you with that.
 
 #. Install ``pre-commit`` by running the following command:
 
      .. code-block:: bash
 
+          $ conda activate <env-name>
           $ conda install pre-commit
 
      .. note::
@@ -302,8 +327,8 @@ We want to automatically format code. ``pre-commit`` is a tool that helps you wi
 
      .. code-block:: bash
 
-          git init
-          git add .
+          $ git init
+          $ git add .
 
      .. note::
 
@@ -327,7 +352,7 @@ We want to automatically format code. ``pre-commit`` is a tool that helps you wi
 
           ``black`` is a tool that automatically formats Python code to conform to the PEP 8 style guide. ``prettier`` is a tool that formats code in various languages, including ``.md``, ``.rst``, and ``.json`` files. ``docformatter`` is a tool that formats docstrings in Python code.
 
-#. Done! Run ``pre-commit run --all-files`` frequently while developing code.
+#. Done! Run ``pre-commit run --all-files`` frequently while developing code to keep your code in good shape.
 
 What's next?
 ^^^^^^^^^^^^
@@ -341,13 +366,13 @@ When you are ready, you can proceed to the next tutorial: :ref:`level-4-tutorial
 (Optional) How to set PYTHONPATH permanently
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To avoid retyping this command every time you open a new terminal, you can add it to your shell configuration file. The configuration files most commonly used are ``.bashrc`` or ``.zshrc`` for macOS/Linux users, and ``$PROFILE`` for Windows users. These files are located at the root directory (``~``).
+To avoid retyping this command every time you open a new terminal, you can add it to your shell configuration file. The configuration files most commonly used are ``.bashrc`` or ``.zshrc`` for macOS/Linux/Git for Windows users, and ``$PROFILE`` for Windows users. These files are located at the root directory (``~``).
 
 #. To edit these files, run the command:
 
      .. code-block:: bash
 
-          # For macOS/Linux:
+          # For macOS/Linux/Git for Windows:
           # bash shell
           $ nano ~/.bashrc
           # For Windows PowerShell:
@@ -357,7 +382,7 @@ To avoid retyping this command every time you open a new terminal, you can add i
 
      .. code-block:: bash
 
-          # For macOS/Linux (bash or zsh shell)
+          # For macOS/Linux/Git for Windows
           $ echo 'export PYTHONPATH="${PYTHONPATH}:/path/to/your/workspace_folder"'
 
           # For Windows (PowerShell)
@@ -369,7 +394,7 @@ To avoid retyping this command every time you open a new terminal, you can add i
 
      .. code-block:: bash
 
-          # For macOS/Linux:
+          # For macOS/Linux/Git for Windows:
           $ source ~/.bashrc
           # For Windows PowerShell:
           $ . $PROFILE
@@ -403,6 +428,7 @@ Here is an example of how to create an additional project under the same workspa
 
      .. code-block:: bash
 
-          $ python proj-two/proj_two_code.py
+          $ cd proj-two
+          $ python proj_two_code.py
 
 #. Done! You can also start writing tests for this new project in the ``tests`` folder by creating a new file named ``test_proj_two_code.py``.

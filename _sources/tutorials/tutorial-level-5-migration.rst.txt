@@ -170,7 +170,7 @@ Apply pre-commit auto-fixes without manual edits
 
     .. note::
 
-        The new ``upstream/migration`` branch can be created by the project maintainer or owner. On the main page of the upstream repository, click :menuselection:`main -> Switch branches/tags -> Find or create a branch` and type ``migration``. This will create a new branch called ``migration``.
+        The new ``upstream/migration`` branch can be created by the project maintainer or owner. On the main page of the upstream repository, click :menuselection:`main --> Switch branches/tags --> Find or create a branch` and type ``migration``. This will create a new branch called ``migration``.
 
 #. Wait for the PR to be merged to ``upstream/migration`` branch.
 
@@ -369,7 +369,7 @@ Setup GitHub Actions
         $ git commit -m "skpkg: add CI and issue/PR templates"
 
     .. Attention::
-        If your package does not support the latest Python version of |PYTHON_MAX_VERSION|, you will need to specify the Python version supported by your package. Follow the instructions here to set the Python version under ``.github/workflows`` :ref:`here <github-actions-python-versions>`
+        If your package does not support the latest Python version of |PYTHON_MAX_VERSION|, you will need to specify the Python version supported by your package. Follow the instructions here to set the Python version under ``.github/workflows`` in :ref:`github-actions-python-versions`.
 
 #. Add and commit the ``requirements`` folder:
 
@@ -451,8 +451,8 @@ Move documentation files
     .. code-block:: bash
 
         $ conda install --file requirements/docs.txt
-        $ pip install sphinx-reload
-        $ sphinx-reload doc
+        $ cd doc && make html
+        & open _build/html/index.html
 
 #. Add and commit the changes:
 

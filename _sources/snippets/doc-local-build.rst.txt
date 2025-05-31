@@ -1,25 +1,61 @@
-#. Install the requirements for building the documentation.
+#. Install documentation related dependencies:
 
     .. code-block:: bash
 
         $ conda install --file requirements/docs.txt
 
-#. Then we will use an external tool called ``sphinx-reload`` to automatically reload the documentation when you make changes to ``.rst`` files.
+#. Enter into the ``doc`` project directory and render documentation:
 
     .. code-block:: bash
 
-        $ pip install sphinx-reload
+        $ cd doc
+        $ make html
 
-    .. note::
-
-        ``sphinx-reload`` is only available via pip install.
-
-#. A HTML will appear automatically in your browser by running the following command:
+#. Open the rendered documentation via web browser:
 
     .. code-block:: bash
 
-        $ sphinx-reload doc
+        $ open _build/html/index.html
+
+#. Here is a shortcut if you want to use it from the root directory of the project:
+
+    .. code-block:: bash
+
+        $ cd doc && make html && open _build/html/index.html && cd ..
 
     .. seealso::
 
-        Did you encounter ``No module named`` error? Please refer to :ref:`faq-doc-error-no-module-name`.
+        You can use a ``alias`` shortcut. Open ``~/.bashrc`` in your text editor and add the following line:
+
+        .. code-block:: bash
+
+            alias doc='cd doc && make html && open _build/html/index.html && cd ..'
+
+        Apply the changes to your current terminal session:
+
+        .. code-block:: bash
+
+            $ source ~/.bashrc
+
+        Now, you can simply enter the ``doc`` command in your terminal to build and open the documentation:
+
+        .. code-block:: bash
+
+            $ doc
+
+(Optional for macOS/Linux only) Do you want to re-render documentation without running ``doc`` command every time? You can use ``sphinx-reload``.
+
+    #. Install the dependencies including ``sphinx-reload`` sourced from ``PyPI``:
+
+        .. code-block:: bash
+
+            $ conda install --file requirements/docs.txt
+            $ pip install sphinx-reload
+
+    #. Run the following command to start live-reloading:
+
+        .. code-block:: bash
+
+            $ sphinx-reload doc
+
+    #. Now, each time you make changes to the documentation, it will be automatically reloaded in your web browser.

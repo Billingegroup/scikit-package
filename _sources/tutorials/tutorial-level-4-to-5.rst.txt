@@ -27,7 +27,7 @@ We assume you have already completed and created your scientific code in Level 4
 Create a new Level 5 project and migrate files
 ----------------------------------------------
 
-The first step is to create a new project with ``scikit-package`` using the Level 5 ``public`` template. Then we will migrate the files and folderes from the existing Level 4 project to the new Level 5 project. Let's begin!
+The first step is to create a new project with ``scikit-package`` using the Level 5 ``public`` template. Then we will migrate the files and folders from the existing Level 4 project to the new Level 5 project. Let's begin!
 
 
 Create a new project with ``scikit-package``

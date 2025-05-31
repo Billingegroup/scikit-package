@@ -3,28 +3,36 @@
 We also want to ensure we report that tests are written for the incoming code and report in the incoming PR as shown below:
 
 .. image:: ../img/codecov-pr.png
-   :alt: codecov-in-pr-comment
+    :alt: codecov-in-pr-comment
+
+.. warning::
+
+    **Is this NOT your first time setting up Codecov?** Setting up the Codecov report can be done just once for all projects under your account or a GitHub organization with the "global token." Please check whether you already have a Codecov token. If it exists, you may still follow the steps, but you don't have to create a new token. Instead, you can use the existing token.
 
 #. Ensure your GitHub repository is public.
 
-#. Visit https://app.codecov.io/
+#. Visit ``https://app.codecov.io/account/gh/<your_github_username_or_orgname>/org-upload-token``, replacing ``<your_github_username_or_orgname>`` with your actual GitHub username or organization name.
 
-#. Click :guilabel:`Configure Codecov's GitHub app`.
+#. Under :guilabel:`Select an authentication option`, select ``Required``.
 
-#. Scroll down, find the repository, and click :guilabel:`Configure`.
+#. Click :guilabel:`Generate` or :guilabel:`Regenerate` to create a new token.
 
-#. Scroll down again, copy ``CODECOV_TOKEN``, shown below:
+#. Click on the clipboard symbol to copy ``CODECOV_TOKEN``. Copy the one that starts with ``CODECOV_TOKEN=``. Here is an example of what it looks like:
 
-    .. image:: ../img/codecov-token.png
-        :alt: codecov-list-github-projects
+    .. code-block:: text
 
-#. In your GitHub repository, visit :menuselection:`Settings -> Actions -> Secrets and Variables`.
+        CODECOV_TOKEN=abcd1234-5678-1234-5678-b862619523bd
 
-#. Click :guilabel:`New repository secret`.
+#. In your GitHub repository, visit :menuselection:`Settings --> Actions --> Secrets and Variables`.
 
-#. Paste the token value in the previous step and name it as ``CODECOV_TOKEN`` as shown below:
+#. If the repository is under your personal account, click :guilabel:`New repository secret`.
 
-    .. image:: ../img/codecov-github.png
-        :alt: codecov-list-github-projects
+#. If the repository is under an organization, click :menuselection:`Manage organization secrets --> New organization secret`.
 
-#. Done. From now on, a new comment will be generated on each PR.
+#. Under the :guilabel:`Name` field, type ``CODECOV_TOKEN``.
+
+#. Under the :guilabel:`Secret` field, paste the ``CODECOV_TOKEN`` value you copied earlier without any modification.
+
+#. Click :guilabel:`Add secret` to save the token.
+
+#. Done. From now on, a new Codecov comment will be generated on each PR!

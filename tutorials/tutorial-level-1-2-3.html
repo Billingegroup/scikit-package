@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>(Level 1-3) Reuse code within a file, across files and folders &mdash; scikit-package 0.0.1 documentation</title>
+  <title>(Level 1-3) Reuse code within a file, across files and folders &mdash; scikit-package 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=9205c5d6"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -136,7 +136,8 @@
 <section id="overview">
 <h3>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
 <p>By the end of this tutorial, you will be able to reuse code within a file by creating a function.</p>
-<p>You will also learn the recommended setup to setup Terminal and Python environment for development and distribution.</p>
+<p>You will also learn the recommended way to use the Terminal to set up your computer and your Python
+environment for development and distribution.</p>
 </section>
 <section id="required-use-conda-environment-to-install-packages-and-run-python-code">
 <span id="conda-env-setup-simple"></span><h3>(Required) Use conda environment to install packages and run Python code<a class="headerlink" href="#required-use-conda-environment-to-install-packages-and-run-python-code" title="Link to this heading"></a></h3>
@@ -232,9 +233,10 @@ $<span class="w"> </span>touch<span class="w"> </span>shared_functions.py
 </div>
 </div></blockquote>
 </li>
-<li><p>Install <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and run the code:</p>
+<li><p>Run the code after activating your conda environment that you have created in <a class="reference internal" href="#conda-env-setup-simple"><span class="std std-ref">(Required) Use conda environment to install packages and run Python code</span></a> above:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>shared_functions.py
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>&lt;env-name&gt;
+$<span class="w"> </span>python<span class="w"> </span>shared_functions.py
 </pre></div>
 </div>
 </div></blockquote>
@@ -281,7 +283,8 @@ $<span class="w"> </span>touch<span class="w"> </span>file_one.py<span class="w"
 
 <span class="n">v1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">v2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dot_product</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">))</span>  <span class="c1"># returns 11</span>
+<span class="n">v1dotv2</span> <span class="o">=</span> <span class="n">dot_product</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v1dotv2</span><span class="p">)</span>  <span class="c1"># returns 11</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -297,16 +300,27 @@ $<span class="w"> </span>touch<span class="w"> </span>file_one.py<span class="w"
 
 <span class="n">v3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 <span class="n">v4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">shared_functions</span><span class="o">.</span><span class="n">dot_product</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span> <span class="n">v4</span><span class="p">))</span>  <span class="c1"># returns 83</span>
+<span class="n">v3dotv4</span> <span class="o">=</span> <span class="n">shared_functions</span><span class="o">.</span><span class="n">dot_product</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span> <span class="n">v4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v3dotv4</span><span class="p">)</span>  <span class="c1"># returns 83</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice that in <code class="docutils literal notranslate"><span class="pre">file_two.py</span></code>, we imported the entire module <code class="docutils literal notranslate"><span class="pre">shared_functions</span></code>.  When we did this, all the functions are imported but to access them you have to prefix the module name.
+This way, you can avoid name conflicts as well as making your code more readable.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>As we have done in Level 1, activate the conda environment and run the code:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>&lt;env-name&gt;
+$<span class="w"> </span>python<span class="w"> </span>file_one.py
+$<span class="w"> </span>python<span class="w"> </span>file_two.py
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 </ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Notice that in <code class="docutils literal notranslate"><span class="pre">file_two.py</span></code>, you can import the entire module <code class="docutils literal notranslate"><span class="pre">shared_functions</span></code> and use the function <code class="docutils literal notranslate"><span class="pre">dot_product</span></code> by prefixing it with the module name. Importing a module is generally recommended. This way, you can avoid name conflicts and make your code more readable.</p>
-</div>
 </section>
 <section id="id2">
 <h3>What’s next?<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
@@ -319,12 +333,20 @@ $<span class="w"> </span>touch<span class="w"> </span>file_one.py<span class="w"
 <h3>Overview<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <p>The goal in Level 3 is to reuse code across multiple projects. Hence, the name associated with this level is <code class="docutils literal notranslate"><span class="pre">workspace</span></code>. Each project could have many files that would utilize the reusable code.</p>
 <p>Also, you will learn to execute and write <strong>unit tests</strong> for your reusable code. Unit tests are small, isolated tests that verify functionality. They help ensure that your code behaves as expected and can catch bugs early in the development process. You might want to run them before sharing code with others or deploying it to more projects.</p>
-<p>Lastly, you will also learn to <strong>automate formatting</strong> to keep your code clean and consistent so that others, including you, can save time reading and adding new code.</p>
+<p>Lastly, you will also learn to <strong>automate formatting</strong> to keep your code clean and consistent so that others, including future-you, can save time reading and adding new code.</p>
 <p>This tutorial will take about 3-10 minutes.</p>
 </section>
 <section id="initiate-a-new-project-with-scikit-package">
 <h3>Initiate a new project with <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code><a class="headerlink" href="#initiate-a-new-project-with-scikit-package" title="Link to this heading"></a></h3>
 <ol class="arabic">
+<li><p>Activate your conda environment you’ve created in <a class="reference internal" href="#conda-env-setup-simple"><span class="std std-ref">(Required) Use conda environment to install packages and run Python code</span></a> above and install <code class="docutils literal notranslate"><span class="pre">scikit-package</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>&lt;env-name&gt;
+$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>scikit-package
+</pre></div>
+</div>
+</div></blockquote>
+</li>
 <li><p>Create a new project by running the following command:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>package<span class="w"> </span>create<span class="w"> </span>workspace
@@ -375,7 +397,7 @@ $<span class="w"> </span>touch<span class="w"> </span>file_one.py<span class="w"
 <p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> is a markdown file for project documentation. Typically, it includes a project description, installation instructions, and usage examples. You can edit this file to add your own project information.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file, when placed inside a directory, tells Python to treat that directory as a package, which can contain modules. A module can be either a Python script or another package (i.e., a subpackage). The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file is empty in the <code class="docutils literal notranslate"><span class="pre">workspace</span></code> level.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file, when placed inside a directory, tells Python to treat that directory as a package, which can contain modules. A Python module is a file with a <code class="docutils literal notranslate"><span class="pre">.py</span></code> extension that contains Python code. The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file is empty in the <code class="docutils literal notranslate"><span class="pre">workspace</span></code> level.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">tests</span></code> folder contains tests for your shared functions. For example, <code class="docutils literal notranslate"><span class="pre">test_shared_functions.py</span></code> includes tests for the <code class="docutils literal notranslate"><span class="pre">dot_product()</span></code> function using <code class="docutils literal notranslate"><span class="pre">pytest</span></code>. General naming convention for test files is <code class="docutils literal notranslate"><span class="pre">test_&lt;module_name&gt;.py</span></code>. Similarly, test function names should be <code class="docutils literal notranslate"><span class="pre">test_&lt;function_name&gt;()</span></code>. This is how <code class="docutils literal notranslate"><span class="pre">pytest</span></code> recognizes them as test functions. This can also contain tests for your sub-project modules.</p></li>
 </ul>
 </div>
@@ -394,7 +416,7 @@ $<span class="w"> </span>touch<span class="w"> </span>file_one.py<span class="w"
 </li>
 <li><p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;path-to-your-workspace-folder&gt;</span></code> with the output of <code class="docutils literal notranslate"><span class="pre">pwd</span></code> in the command below:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For macOS/Linux user</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For macOS/Linux/Git for Windows user</span>
 $<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PYTHONPATH</span><span class="si">}</span><span class="s2">:&lt;path-to-your-workspace-folder&gt;&quot;</span>
 
 <span class="c1"># For Windows (Powershell) user</span>
@@ -405,7 +427,8 @@ $<span class="w"> </span>env:PYTHONPATH<span class="w"> </span><span class="o">=
 </li>
 <li><p>Install the dependencies:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>&lt;env-name&gt;
+$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements.txt
 </pre></div>
 </div>
 <div class="admonition note">
@@ -416,14 +439,16 @@ $<span class="w"> </span>env:PYTHONPATH<span class="w"> </span><span class="o">=
 </li>
 <li><p>Run the code in <code class="docutils literal notranslate"><span class="pre">proj_one/proj_one_code.py</span></code>:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>proj-one/proj_one_code.py
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>proj-one
+$<span class="w"> </span>python<span class="w"> </span>proj_one_code.py
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Also run the tests:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pytest
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..<span class="w">        </span><span class="c1"># go back to the parent directory to run pytest</span>
+$<span class="w"> </span>pytest
 </pre></div>
 </div>
 <p>You should see the output similar to:</p>
@@ -449,11 +474,13 @@ tests/test_shared_functions.py ........                           [100%]
 </section>
 <section id="automatic-code-formatting-with-pre-commit">
 <span id="pre-commit-manual"></span><h3>Automatic code formatting with <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code><a class="headerlink" href="#automatic-code-formatting-with-pre-commit" title="Link to this heading"></a></h3>
-<p>We want to automatically format code. <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> is a tool that helps you with that.</p>
+<p>We want to automatically format code syntax to make it more standard and
+more readable. <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> is a tool that helps you with that.</p>
 <ol class="arabic">
 <li><p>Install <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> by running the following command:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>pre-commit
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>&lt;env-name&gt;
+$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>pre-commit
 </pre></div>
 </div>
 <div class="admonition note">
@@ -464,8 +491,8 @@ tests/test_shared_functions.py ........                           [100%]
 </li>
 <li><p>Initiate <code class="docutils literal notranslate"><span class="pre">Git</span></code> and stage all files generated by the <code class="docutils literal notranslate"><span class="pre">package</span> <span class="pre">create</span> <span class="pre">workspace</span></code> command to the local Git database:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>init
-git<span class="w"> </span>add<span class="w"> </span>.
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>init
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
 </pre></div>
 </div>
 <div class="admonition note">
@@ -494,7 +521,7 @@ docformatter.............................................................Passed
 </div>
 </div></blockquote>
 </li>
-<li><p>Done! Run <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">--all-files</span></code> frequently while developing code.</p></li>
+<li><p>Done! Run <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">--all-files</span></code> frequently while developing code to keep your code in good shape.</p></li>
 </ol>
 </section>
 <section id="id4">
@@ -505,11 +532,11 @@ docformatter.............................................................Passed
 </section>
 <section id="optional-how-to-set-pythonpath-permanently">
 <h3>(Optional) How to set PYTHONPATH permanently<a class="headerlink" href="#optional-how-to-set-pythonpath-permanently" title="Link to this heading"></a></h3>
-<p>To avoid retyping this command every time you open a new terminal, you can add it to your shell configuration file. The configuration files most commonly used are <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> for macOS/Linux users, and <code class="docutils literal notranslate"><span class="pre">$PROFILE</span></code> for Windows users. These files are located at the root directory (<code class="docutils literal notranslate"><span class="pre">~</span></code>).</p>
+<p>To avoid retyping this command every time you open a new terminal, you can add it to your shell configuration file. The configuration files most commonly used are <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> for macOS/Linux/Git for Windows users, and <code class="docutils literal notranslate"><span class="pre">$PROFILE</span></code> for Windows users. These files are located at the root directory (<code class="docutils literal notranslate"><span class="pre">~</span></code>).</p>
 <ol class="arabic">
 <li><p>To edit these files, run the command:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For macOS/Linux:</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For macOS/Linux/Git for Windows:</span>
 <span class="c1"># bash shell</span>
 $<span class="w"> </span>nano<span class="w"> </span>~/.bashrc
 <span class="c1"># For Windows PowerShell:</span>
@@ -520,7 +547,7 @@ $<span class="w"> </span>notepad<span class="w"> </span><span class="nv">$PROFIL
 </li>
 <li><p>Add the command to set <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> at the end of the file:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For macOS/Linux (bash or zsh shell)</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For macOS/Linux/Git for Windows</span>
 $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PYTHONPATH=&quot;${PYTHONPATH}:/path/to/your/workspace_folder&quot;&#39;</span>
 
 <span class="c1"># For Windows (PowerShell)</span>
@@ -532,7 +559,7 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 <li><p>Save the file.</p></li>
 <li><p>Run the following command to apply the changes:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For macOS/Linux:</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For macOS/Linux/Git for Windows:</span>
 $<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.bashrc
 <span class="c1"># For Windows PowerShell:</span>
 $<span class="w"> </span>.<span class="w"> </span><span class="nv">$PROFILE</span>
@@ -567,7 +594,8 @@ $<span class="w"> </span>touch<span class="w"> </span>__init__.py<span class="w"
 <li><p>Add your code to <code class="docutils literal notranslate"><span class="pre">proj_two_code.py</span></code>.</p></li>
 <li><p>Run the code:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>proj-two/proj_two_code.py
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>proj-two
+$<span class="w"> </span>python<span class="w"> </span>proj_two_code.py
 </pre></div>
 </div>
 </div></blockquote>

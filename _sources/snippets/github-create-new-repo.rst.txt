@@ -4,7 +4,7 @@
 
 #. Choose ``Public``.
 
-#. Set ``None`` under :guilabel:`Add .gitignore`.
+#. We want to create an empty repository so set ``None`` under :guilabel:`Add .gitignore`.
 
 #. Set ``None`` Under :guilabel:`Choose a license`.
 

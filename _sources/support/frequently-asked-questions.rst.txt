@@ -8,7 +8,6 @@ Frequently asked questions (FAQ)
 
 Here, you will learn how to customize the ``scikit-package`` template for your own project, such as setting the line-width and including/excluding files for PyPI distribution. We also provide design decisions for the current setup of the ``scikit-package`` template.
 
-
 .. _faq-pre-commit:
 
 Pre-commit
@@ -223,7 +222,7 @@ Pre-release:
 Release:
 
 - Did you encounter an error related to ``fatal: could not read Username``? Ensure you have ``PAT_TOKEN`` configured at the organization or repository level. Please read :ref:`pat-token-setup`. Even if ``PAT_TOKEN`` is already configured, ensure it is the latest token and has not been revoked or expired.
-- Did you encounter any error from ``Rulesets``? In your repository, visit :menuselection:`Settings -> Rules -> Rulesets`. Then click one or more of the rulesets. For each ruleset, under the :guilabel:`Bypass list`, click :guilabel:`Add bypass` and :guilabel:`Organization admin` to the ruleset. The GitHub workflow will use the ``PAT_TOKEN`` to bypass the ruleset.
+- Did you encounter any error from ``Rulesets``? In your repository, visit :menuselection:`Settings --> Rules --> Rulesets`. Then click one or more of the rulesets. For each ruleset, under the :guilabel:`Bypass list`, click :guilabel:`Add bypass` and :guilabel:`Organization admin` to the ruleset. The GitHub workflow will use the ``PAT_TOKEN`` to bypass the ruleset.
 
   .. note::
     Here, we don't want to bump a new version. As the next step, delete the Git tag in the local by running ``git tag -d <tagname>`` and visit ``https://github.com/<org-or-username>/<package-name>/tags`` to delete it in the remote. Then, follow the same process for a full release by creating a new tag and pushing it to the remote.
@@ -557,8 +556,6 @@ I am encountering a 'build' is requesting 'pull-requests: write' error. How do I
 
 .. include:: ../snippets/github-ci-permission.rst
 
-It is an essential step to set up the news CI. For more, please read :ref:`github-news-ci-permission` section in the Level 5 tutorial.
-
 What is the difference between ``pull_request`` and ``pull_request_target``?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -673,7 +670,7 @@ From the forked repository, you then want to upload changes to the repository un
 I have a general understanding of fork, clone, commit, push, and pull request. How do I set up my repository for packaging?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please be familiar with the terminology such as "fork", "clone", "push", and "pull request" :ref:`above <github-workflow-overview>`.
+Please be familiar with the terminology such as "fork", "clone", "push", and "pull request" explained above in :ref:`faq-github-workflow-overview`.
 
 You may fork the repository using the "Fork" button on the top right corner of the repository page. This will copy the repository to your GitHub account. e.g., ``github.com/scikit-package/scikit-package`` to ``github.com/sbillinge/scikit-package``.
 
@@ -809,22 +806,27 @@ Add the following line to ``~/.bashrc`` or ``~/.zshrc`` file:
 
     $ alias cpnews="cp news/TEMPLATE.rst news/$(git rev-parse --abbrev-ref HEAD).rst"
 
-Run the following command to apply the shell configuration.
+Optionally, if you also want to apply ``git add`` for the ``news/<branch-name>.rst`` created, you can use the following command instead:
 
 .. code-block:: bash
 
-    $ source ~/.bashrc  # if you are using bash
-    $ source ~/.zshrc  # if you are using zsh
+    $ alias cpnews='cp news/TEMPLATE.rst news/$(git rev-parse --abbrev-ref HEAD).rst && git add news/$(git rev-parse --abbrev-ref HEAD).rst'
 
-Now, whenever you want to create a news file, simply navigate to the top-level directory in the project and type ``cpnews`` on the command line.
+Run the following command to apply the shell configuration:
+
+.. code-block:: bash
+
+    $ source ~/.bashrc
+
+Now, whenever you want to create a news file for the PR, simply navigate to the top-level directory in the project and type ``cpnews`` on the command line.
 
 You can then open the project in an editor. The news file located under ``news`` will have the name ``<branch-name>.rst`` where ``<branch-name>`` is replaced by the current branch name.
 
 Add a description of the edits made in this PR. This should be a user-facing high-level summary of the edits made in this PR and will be automatically converted into the ``CHANGELOG.rst`` when the code is released.
 
-.. note::
+.. seealso::
 
-    How do I write good news items? What if the changes in the PR are trivial and no news is needed? Please check out the news guide in the FAQ :ref:`here<news-item-practice>`.
+      How do I write good news items? What if the changes in the PR are trivial and no news is needed? Please read our guide provided in :ref:`news-item-practice`.
 
 
 

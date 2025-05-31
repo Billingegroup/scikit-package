@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Frequently asked questions (FAQ) &mdash; scikit-package 0.0.1 documentation</title>
+  <title>Frequently asked questions (FAQ) &mdash; scikit-package 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=9205c5d6"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -376,7 +376,7 @@ For the purposes of branding and also differentiating packages with similar name
 <p>Release:</p>
 <ul>
 <li><p>Did you encounter an error related to <code class="docutils literal notranslate"><span class="pre">fatal:</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">read</span> <span class="pre">Username</span></code>? Ensure you have <code class="docutils literal notranslate"><span class="pre">PAT_TOKEN</span></code> configured at the organization or repository level. Please read <a class="reference internal" href="../release-guides/pypi-github.html#pat-token-setup"><span class="std std-ref">Appendix 2. Setup PAT_TOKEN to allow GitHub Actions to compile CHANGELOG.rst</span></a>. Even if <code class="docutils literal notranslate"><span class="pre">PAT_TOKEN</span></code> is already configured, ensure it is the latest token and has not been revoked or expired.</p></li>
-<li><p>Did you encounter any error from <code class="docutils literal notranslate"><span class="pre">Rulesets</span></code>? In your repository, visit <span class="menuselection">Settings -&gt; Rules -&gt; Rulesets</span>. Then click one or more of the rulesets. For each ruleset, under the <span class="guilabel">Bypass list</span>, click <span class="guilabel">Add bypass</span> and <span class="guilabel">Organization admin</span> to the ruleset. The GitHub workflow will use the <code class="docutils literal notranslate"><span class="pre">PAT_TOKEN</span></code> to bypass the ruleset.</p>
+<li><p>Did you encounter any error from <code class="docutils literal notranslate"><span class="pre">Rulesets</span></code>? In your repository, visit <span class="menuselection">Settings ‣ Rules ‣ Rulesets</span>. Then click one or more of the rulesets. For each ruleset, under the <span class="guilabel">Bypass list</span>, click <span class="guilabel">Add bypass</span> and <span class="guilabel">Organization admin</span> to the ruleset. The GitHub workflow will use the <code class="docutils literal notranslate"><span class="pre">PAT_TOKEN</span></code> to bypass the ruleset.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Here, we don’t want to bump a new version. As the next step, delete the Git tag in the local by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span> <span class="pre">-d</span> <span class="pre">&lt;tagname&gt;</span></code> and visit <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;org-or-username&gt;/&lt;package-name&gt;/tags</span></code> to delete it in the remote. Then, follow the same process for a full release by creating a new tag and pushing it to the remote.</p>
@@ -419,36 +419,72 @@ global-exclude .git*  # Exclude git files and directories.
 <section id="how-can-i-preview-the-documentation-in-real-time">
 <h3>How can I preview the documentation in real-time?<a class="headerlink" href="#how-can-i-preview-the-documentation-in-real-time" title="Link to this heading"></a></h3>
 <ol class="arabic">
-<li><p>Install the requirements for building the documentation.</p>
+<li><p>Install documentation related dependencies:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements/docs.txt
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Then we will use an external tool called <code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code> to automatically reload the documentation when you make changes to <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files.</p>
+<li><p>Enter into the <code class="docutils literal notranslate"><span class="pre">doc</span></code> project directory and render documentation:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-reload
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>doc
+$<span class="w"> </span>make<span class="w"> </span>html
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code> is only available via pip install.</p>
 </div>
 </div></blockquote>
 </li>
-<li><p>A HTML will appear automatically in your browser by running the following command:</p>
+<li><p>Open the rendered documentation via web browser:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sphinx-reload<span class="w"> </span>doc
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>open<span class="w"> </span>_build/html/index.html
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Here is a shortcut if you want to use it from the root directory of the project:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>doc<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>html<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>open<span class="w"> </span>_build/html/index.html<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>Did you encounter <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span></code> error? Please refer to <a class="reference internal" href="#faq-doc-error-no-module-name"><span class="std std-ref">How do I fix the “No module named” error when I render documentation?</span></a>.</p>
+<p>You can use a <code class="docutils literal notranslate"><span class="pre">alias</span></code> shortcut. Open <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> in your text editor and add the following line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="nv">doc</span><span class="o">=</span><span class="s1">&#39;cd doc &amp;&amp; make html &amp;&amp; open _build/html/index.html &amp;&amp; cd ..&#39;</span>
+</pre></div>
+</div>
+<p>Apply the changes to your current terminal session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+<p>Now, you can simply enter the <code class="docutils literal notranslate"><span class="pre">doc</span></code> command in your terminal to build and open the documentation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>doc
+</pre></div>
+</div>
 </div>
 </div></blockquote>
 </li>
 </ol>
+<p>(Optional for macOS/Linux only) Do you want to re-render documentation without running <code class="docutils literal notranslate"><span class="pre">doc</span></code> command every time? You can use <code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code>.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Install the dependencies including <code class="docutils literal notranslate"><span class="pre">sphinx-reload</span></code> sourced from <code class="docutils literal notranslate"><span class="pre">PyPI</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements/docs.txt
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-reload
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Run the following command to start live-reloading:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sphinx-reload<span class="w"> </span>doc
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now, each time you make changes to the documentation, it will be automatically reloaded in your web browser.</p></li>
+</ol>
+</div></blockquote>
 </section>
 <section id="how-do-i-build-api-rst-files-automatically-for-a-standard-python-package">
 <span id="faq-doc-api-standard"></span><h3>How do I build API .rst files automatically for a standard Python package?<a class="headerlink" href="#how-do-i-build-api-rst-files-automatically-for-a-standard-python-package" title="Link to this heading"></a></h3>
@@ -748,7 +784,6 @@ python<span class="w"> </span>../release-scripts/auto_api.py<span class="w"> </s
 <li><p>Select <span class="guilabel">Read and write permissions</span>.</p></li>
 <li><p>Done!</p></li>
 </ol>
-<p>It is an essential step to set up the news CI. For more, please read <span class="xref std std-ref">github-news-ci-permission</span> section in the Level 5 tutorial.</p>
 </section>
 <section id="what-is-the-difference-between-pull-request-and-pull-request-target">
 <h3>What is the difference between <code class="docutils literal notranslate"><span class="pre">pull_request</span></code> and <code class="docutils literal notranslate"><span class="pre">pull_request_target</span></code>?<a class="headerlink" href="#what-is-the-difference-between-pull-request-and-pull-request-target" title="Link to this heading"></a></h3>
@@ -838,7 +873,7 @@ $<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </
 </section>
 <section id="i-have-a-general-understanding-of-fork-clone-commit-push-and-pull-request-how-do-i-set-up-my-repository-for-packaging">
 <h3>I have a general understanding of fork, clone, commit, push, and pull request. How do I set up my repository for packaging?<a class="headerlink" href="#i-have-a-general-understanding-of-fork-clone-commit-push-and-pull-request-how-do-i-set-up-my-repository-for-packaging" title="Link to this heading"></a></h3>
-<p>Please be familiar with the terminology such as “fork”, “clone”, “push”, and “pull request” <span class="xref std std-ref">above</span>.</p>
+<p>Please be familiar with the terminology such as “fork”, “clone”, “push”, and “pull request” explained above in <a class="reference internal" href="#faq-github-workflow-overview"><span class="std std-ref">What is the general the workflow?</span></a>.</p>
 <p>You may fork the repository using the “Fork” button on the top right corner of the repository page. This will copy the repository to your GitHub account. e.g., <code class="docutils literal notranslate"><span class="pre">github.com/scikit-package/scikit-package</span></code> to <code class="docutils literal notranslate"><span class="pre">github.com/sbillinge/scikit-package</span></code>.</p>
 <p>Then download the forked repository under your account to the local machine by cloning:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;username&gt;/&lt;package-name&gt;
@@ -947,17 +982,20 @@ git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> 
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="nv">cpnews</span><span class="o">=</span><span class="s2">&quot;cp news/TEMPLATE.rst news/</span><span class="k">$(</span>git<span class="w"> </span>rev-parse<span class="w"> </span>--abbrev-ref<span class="w"> </span>HEAD<span class="k">)</span><span class="s2">.rst&quot;</span>
 </pre></div>
 </div>
-<p>Run the following command to apply the shell configuration.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.bashrc<span class="w">  </span><span class="c1"># if you are using bash</span>
-$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.zshrc<span class="w">  </span><span class="c1"># if you are using zsh</span>
+<p>Optionally, if you also want to apply <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> for the <code class="docutils literal notranslate"><span class="pre">news/&lt;branch-name&gt;.rst</span></code> created, you can use the following command instead:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="nv">cpnews</span><span class="o">=</span><span class="s1">&#39;cp news/TEMPLATE.rst news/$(git rev-parse --abbrev-ref HEAD).rst &amp;&amp; git add news/$(git rev-parse --abbrev-ref HEAD).rst&#39;</span>
 </pre></div>
 </div>
-<p>Now, whenever you want to create a news file, simply navigate to the top-level directory in the project and type <code class="docutils literal notranslate"><span class="pre">cpnews</span></code> on the command line.</p>
+<p>Run the following command to apply the shell configuration:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+<p>Now, whenever you want to create a news file for the PR, simply navigate to the top-level directory in the project and type <code class="docutils literal notranslate"><span class="pre">cpnews</span></code> on the command line.</p>
 <p>You can then open the project in an editor. The news file located under <code class="docutils literal notranslate"><span class="pre">news</span></code> will have the name <code class="docutils literal notranslate"><span class="pre">&lt;branch-name&gt;.rst</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;branch-name&gt;</span></code> is replaced by the current branch name.</p>
 <p>Add a description of the edits made in this PR. This should be a user-facing high-level summary of the edits made in this PR and will be automatically converted into the <code class="docutils literal notranslate"><span class="pre">CHANGELOG.rst</span></code> when the code is released.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>How do I write good news items? What if the changes in the PR are trivial and no news is needed? Please check out the news guide in the FAQ <a class="reference internal" href="../programming-guides/billinge-group-standards.html#news-item-practice"><span class="std std-ref">here</span></a>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>How do I write good news items? What if the changes in the PR are trivial and no news is needed? Please read our guide provided in <a class="reference internal" href="../programming-guides/billinge-group-standards.html#news-item-practice"><span class="std std-ref">Why do I need a news file for each PR?</span></a>.</p>
 </div>
 </section>
 </section>

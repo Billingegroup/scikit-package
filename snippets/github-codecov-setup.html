@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; scikit-package 0.0.1 documentation</title>
+  <title>&lt;no title&gt; &mdash; scikit-package 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=9205c5d6"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -102,24 +102,29 @@
              
   <p id="codecov-token-setup">We also want to ensure we report that tests are written for the incoming code and report in the incoming PR as shown below:</p>
 <img alt="codecov-in-pr-comment" src="../_images/codecov-pr.png" />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Is this NOT your first time setting up Codecov?</strong> Setting up the Codecov report can be done just once for all projects under your account or a GitHub organization with the “global token.” Please check whether you already have a Codecov token. If it exists, you may still follow the steps, but you don’t have to create a new token. Instead, you can use the existing token.</p>
+</div>
 <ol class="arabic">
 <li><p>Ensure your GitHub repository is public.</p></li>
-<li><p>Visit <a class="reference external" href="https://app.codecov.io/">https://app.codecov.io/</a></p></li>
-<li><p>Click <span class="guilabel">Configure Codecov’s GitHub app</span>.</p></li>
-<li><p>Scroll down, find the repository, and click <span class="guilabel">Configure</span>.</p></li>
-<li><p>Scroll down again, copy <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code>, shown below:</p>
+<li><p>Visit <code class="docutils literal notranslate"><span class="pre">https://app.codecov.io/account/gh/&lt;your_github_username_or_orgname&gt;/org-upload-token</span></code>, replacing <code class="docutils literal notranslate"><span class="pre">&lt;your_github_username_or_orgname&gt;</span></code> with your actual GitHub username or organization name.</p></li>
+<li><p>Under <span class="guilabel">Select an authentication option</span>, select <code class="docutils literal notranslate"><span class="pre">Required</span></code>.</p></li>
+<li><p>Click <span class="guilabel">Generate</span> or <span class="guilabel">Regenerate</span> to create a new token.</p></li>
+<li><p>Click on the clipboard symbol to copy <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code>. Copy the one that starts with <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN=</span></code>. Here is an example of what it looks like:</p>
 <blockquote>
-<div><img alt="codecov-list-github-projects" src="../_images/codecov-token.png" />
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CODECOV_TOKEN=abcd1234-5678-1234-5678-b862619523bd
+</pre></div>
+</div>
 </div></blockquote>
 </li>
-<li><p>In your GitHub repository, visit <span class="menuselection">Settings -&gt; Actions -&gt; Secrets and Variables</span>.</p></li>
-<li><p>Click <span class="guilabel">New repository secret</span>.</p></li>
-<li><p>Paste the token value in the previous step and name it as <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code> as shown below:</p>
-<blockquote>
-<div><img alt="codecov-list-github-projects" src="../_images/codecov-github.png" />
-</div></blockquote>
-</li>
-<li><p>Done. From now on, a new comment will be generated on each PR.</p></li>
+<li><p>In your GitHub repository, visit <span class="menuselection">Settings ‣ Actions ‣ Secrets and Variables</span>.</p></li>
+<li><p>If the repository is under your personal account, click <span class="guilabel">New repository secret</span>.</p></li>
+<li><p>If the repository is under an organization, click <span class="menuselection">Manage organization secrets ‣ New organization secret</span>.</p></li>
+<li><p>Under the <span class="guilabel">Name</span> field, type <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code>.</p></li>
+<li><p>Under the <span class="guilabel">Secret</span> field, paste the <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code> value you copied earlier without any modification.</p></li>
+<li><p>Click <span class="guilabel">Add secret</span> to save the token.</p></li>
+<li><p>Done. From now on, a new Codecov comment will be generated on each PR!</p></li>
 </ol>
 
 

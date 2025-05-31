@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Migrate your existing package with scikit-package &mdash; scikit-package 0.0.1 documentation</title>
+  <title>Migrate your existing package with scikit-package &mdash; scikit-package 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/scikit-package-logo-blank.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f539c95a"></script>
+      <script src="../_static/documentation_options.js?v=9205c5d6"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -343,7 +343,7 @@ $<span class="w"> </span>cp<span class="w"> </span>&lt;package-name&gt;/.flake8<
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The new <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> branch can be created by the project maintainer or owner. On the main page of the upstream repository, click <span class="menuselection">main -&gt; Switch branches/tags -&gt; Find or create a branch</span> and type <code class="docutils literal notranslate"><span class="pre">migration</span></code>. This will create a new branch called <code class="docutils literal notranslate"><span class="pre">migration</span></code>.</p>
+<p>The new <code class="docutils literal notranslate"><span class="pre">upstream/migration</span></code> branch can be created by the project maintainer or owner. On the main page of the upstream repository, click <span class="menuselection">main ‣ Switch branches/tags ‣ Find or create a branch</span> and type <code class="docutils literal notranslate"><span class="pre">migration</span></code>. This will create a new branch called <code class="docutils literal notranslate"><span class="pre">migration</span></code>.</p>
 </div>
 </div></blockquote>
 </li>
@@ -563,7 +563,7 @@ $<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </spa
 </div>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>If your package does not support the latest Python version of 3.13, you will need to specify the Python version supported by your package. Follow the instructions here to set the Python version under <code class="docutils literal notranslate"><span class="pre">.github/workflows</span></code> <a class="reference internal" href="../support/frequently-asked-questions.html#github-actions-python-versions"><span class="std std-ref">here</span></a></p>
+<p>If your package does not support the latest Python version of 3.13, you will need to specify the Python version supported by your package. Follow the instructions here to set the Python version under <code class="docutils literal notranslate"><span class="pre">.github/workflows</span></code> in <a class="reference internal" href="../support/frequently-asked-questions.html#github-actions-python-versions"><span class="std std-ref">In Level 5, How do I set different Python versions for GitHub CI?</span></a>.</p>
 </div>
 </div></blockquote>
 </li>
@@ -655,8 +655,8 @@ $<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </s
 <li><p>Ensure the documentation can be built locally:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements/docs.txt
-$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-reload
-$<span class="w"> </span>sphinx-reload<span class="w"> </span>doc
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>doc<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>html
+<span class="p">&amp;</span><span class="w"> </span>open<span class="w"> </span>_build/html/index.html
 </pre></div>
 </div>
 </div></blockquote>
