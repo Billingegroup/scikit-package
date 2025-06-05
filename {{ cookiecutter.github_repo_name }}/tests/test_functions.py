@@ -31,8 +31,7 @@ def test_dot_product_3D_list():
         # C3: numpy arrays, expect correct float output
         (np.array([1, 2]), np.array([3, 4]), 11.0),
         (np.array([1, 2, 3]), np.array([4, 5, 6]), 32.0),
-    ]
-
+    ],
 )
 def test_dot_product(a, b, expected):
     actual = functions.dot_product(a, b)
