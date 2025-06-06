@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 
 from scikit_package.cli import add, create
+from scikit_package.cli.update import cf
 
 SKPKG_GITHUB_URL = "https://github.com/scikit-package/scikit-package"
 
@@ -59,6 +60,20 @@ def setup_subparsers(parser):
             "no-news": _add_news_flags,
         },
     )
+    # "update" subparser
+    parser_update = parser.add_parser(
+        "update", help="Update existing package."
+    )
+    subparsers_update = parser_update.add_subparsers(
+        dest="subcommand", required=True
+    )
+    update_commands = [
+        (
+            "conda-forge",
+            "Update conda-forge recipe meta.yml file after release.",
+        ),
+    ]
+    _add_subcommands(subparsers_update, update_commands, cf.update)
 
 
 def main():
@@ -73,6 +88,7 @@ def main():
     >>> package create conda-forge
     >>> package add news -a -m "Add awesome news item."
     >>> package add no-news -m "It was a simple typo."
+    >>> package update conda-forge
     >>> package update (Not implemented yet)
     """
     parser = ArgumentParser(

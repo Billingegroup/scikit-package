@@ -1,6 +1,6 @@
 **Added:**
 
-* Implement ``package add news -a -m "<message>"`` and ``package add no news -m "<message>"`` to streamline news item creation process.
+* Implement ``package update feedstock`` to streamline making a conda-forge feedstock version update PR after PyPI release.
 
 **Changed:**
 
