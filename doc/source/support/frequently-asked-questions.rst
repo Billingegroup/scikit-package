@@ -415,7 +415,6 @@ If you are using a namespace import, ``sphinx-apidoc`` will not work. We have de
 
 #. Done! You will see that the ``.rst`` files under ``doc/source/api`` are generated.
 
-
 #. (Optional) Feel free to use the following shortcut. Add the following function to your ``~/.bashrc`` or ``~/.zshrc`` file and activate it by running ``source ~/.bashrc`` or ``source ~/.zshrc``:
 
     .. code-block:: bash
@@ -827,7 +826,6 @@ Add a description of the edits made in this PR. This should be a user-facing hig
 .. seealso::
 
       How do I write good news items? What if the changes in the PR are trivial and no news is needed? Please read our guide provided in :ref:`news-item-practice`.
-
 
 
 Maintaining ``scikit-package``

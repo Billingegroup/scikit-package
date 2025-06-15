@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 
 from scikit_package.cli import add, create
+from scikit_package.cli.build import api_doc
 from scikit_package.cli.update import cf
 
 SKPKG_GITHUB_URL = "https://github.com/scikit-package/scikit-package"
@@ -74,6 +75,18 @@ def setup_subparsers(parser):
         ),
     ]
     _add_subcommands(subparsers_update, update_commands, cf.update)
+    # "build" subparser
+    parser_build = parser.add_parser("build", help="Build API docs")
+    subparsers_build = parser_build.add_subparsers(
+        dest="subcommand", required=True
+    )
+    build_commands = [
+        (
+            "api-doc",
+            "Generate API in doc/source/api for namespace import package.",
+        ),
+    ]
+    _add_subcommands(subparsers_build, build_commands, api_doc.build)
 
 
 def main():

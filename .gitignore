@@ -30,6 +30,9 @@ temp/
 tags/
 errors.err
 
+# Include our source CLI build module
+!src/scikit_package/cli/build/
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.

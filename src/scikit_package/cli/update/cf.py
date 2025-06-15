@@ -3,7 +3,7 @@ import subprocess
 
 import click
 
-from scikit_package.utils import api, auth, io
+from scikit_package.utils import auth, io, pypi
 from scikit_package.utils.shell import run
 
 
@@ -110,7 +110,7 @@ def update(args):
     version_map = {}
     for i, feedstock_name in enumerate(feedstock_names, start=1):
         pkg_name = feedstock_name.replace("-feedstock", "")
-        pkg_pypi_data = api.get_pypi_version_sha(pkg_name, count=1)
+        pkg_pypi_data = pypi.get_pypi_version_sha(pkg_name, count=1)
         pkg_version, pkg_sha256 = next(iter(pkg_pypi_data.items()))
         version_map[i] = {
             "package_name": pkg_name,
