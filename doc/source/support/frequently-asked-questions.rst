@@ -44,12 +44,12 @@ Here is a recommended setup and hooks for ``pre-commit`` for each level:
 How do I modify line-width limits?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Three files need to be modified:
+The following files need to be modified:
 
-1. In ``.isort.cfg``, modify ``line_length``.
-2. In ``.flake8``, modify ``max-line-length``.
-3. In ``pyproject.toml``, modify ``line-length`` under ``[tool.black]``.
-
+#. In ``.isort.cfg``, modify ``line_length``.
+#. In ``.flake8``, modify ``max-line-length``.
+#. In ``pyproject.toml``, modify ``line-length`` under ``[tool.black]``.
+#. In ``pyproject.toml``, modify ``wrap-summaries`` and ``wrap-descriptions`` under ``[tool.docformatter]``.
 
 How do I skip a specific file for ``flake8`` and ``black``?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

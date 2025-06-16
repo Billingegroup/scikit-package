@@ -14,9 +14,9 @@
 ##############################################################################
 """A Python package standard and generator for scientific code.
 
-Use scikit-package to launch a new project or migrate existing ones to
-support the latest Python versions and streamline the process of
-distributing and maintaining your software package.
+Use scikit-package to launch a new project or migrate existing ones to support
+the latest Python versions and streamline the process of distributing and
+maintaining your software package.
 """
 
 # package version
